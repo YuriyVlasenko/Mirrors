@@ -1,0 +1,46 @@
+<md-dialog layout="column" class="dialog--sale-item">
+    <md-content flex>
+        <header class="dialog_header">
+            <h2>{{titleText}}</h2>
+        </header>
+        <div class="dialog_content">
+            <ng-form name="itemForm" novalidate layout="row">
+                <div flex>
+                    <md-input-container>
+                        <label>Название</label>
+                        <input type="text" name="name" ng-model="modelData.name" required>
+                    </md-input-container>
+                    <div layout="column" layout-align="start start" class="form-element">
+                        <label>Категория</label>
+                        <md-select ng-model="modelData.categoryId" placeholder="Выберите категорию">
+                            <md-option ng-selected="category.id==modelData.categoryId" value="{{category.id}}"
+                                       ng-repeat="category in categories track by $index">{{category.name}}</md-option>
+                        </md-select>
+                    </div>
+                    <div layout="column" layout-align="start start" class="form-element">
+                        <label>Содержит коплект</label>
+                        <md-select ng-model="modelData.setId" placeholder="Выберите комплект">
+                            <md-option value="">Пусто</md-option>
+                            <md-option ng-selected="set.id==modelData.setId" value="{{set.id}}"
+                                       ng-repeat="set in sets track by $index">{{set.name}}</md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div flex>
+                    <md-input-container>
+                        <label>Код</label>
+                        <input type="text" name="code" ng-model="modelData.code">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Комментарий</label>
+                        <input type="text" name="comment" ng-model="modelData.comment">
+                    </md-input-container>
+                </div>
+            </ng-form>
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button data-ng-disabled="itemForm.$invalid" class="md-primary" ng-click="save()">Сохранить</md-button>
+        <md-button ng-click="cancel()">Отмена</md-button>
+    </footer>
+</md-dialog>

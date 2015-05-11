@@ -1,0 +1,44 @@
+<md-dialog layout="column" class="dialog--user">
+    <md-content flex>
+        <header class="dialog_header">
+            <h2>{{titleText}}</h2>
+        </header>
+        <div class="dialog_content">
+            <ng-form name="itemForm" novalidate layout="row">
+                <div flex>
+                    <md-input-container ng-disabled="isEdit">
+                        <label>Логин</label>
+                        <input type="text" name="login" ng-model="modelData.login" required>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>ФИО</label>
+                        <input type="text" name="fio" ng-model="modelData.fio" required>
+                    </md-input-container>
+                    <md-checkbox md-no-ink aria-label="Is user active" ng-model="modelData.isActive" class="md-primary">
+                        Активный
+                    </md-checkbox>
+                </div>
+                <div flex>
+                    <md-input-container ng-if="!isEdit">
+                        <label>Пароль</label>
+                        <input type="password" name="password" ng-model="modelData.password" required>
+                    </md-input-container>
+                    <div layout="column" layout-align="start start" class="form-element">
+                        <label>Роль</label>
+                        <md-select ng-model="modelData.roleId" placeholder="Выберите роль">
+                            <md-option ng-selected="role.id==modelData.roleId" value="{{role.id}}" ng-repeat="role in roles track by $index">{{role.name}}</md-option>
+                        </md-select>
+                    </div>
+                    <md-input-container>
+                        <label>Комментарий</label>
+                        <input type="text" name="comment" ng-model="modelData.comment" required>
+                    </md-input-container>
+                </div>
+            </ng-form>
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button data-ng-disabled="itemForm.$invalid" class="md-primary" ng-click="save()">Сохранить</md-button>
+        <md-button ng-click="cancel()">Отмена</md-button>
+    </footer>
+</md-dialog>

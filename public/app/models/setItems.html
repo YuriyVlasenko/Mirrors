@@ -1,0 +1,20 @@
+<md-dialog layout="column" class="dialog--set-items">
+    <md-content flex layout="column">
+        <header class="dialog_header">
+            <h2>{{titleText}}: <b>{{setName}}</b> </h2>
+        </header>
+        <div class="dialog_content" layout="row" layout-align="start start" flex>
+            <div layout="column" layout-align="start start" flex layout-padding>
+                <h3>Товары в комплекте:</h3>
+                <div id="gridSetItems" ui-grid="vm.setItemsGridOptions" class="grid" ui-grid-auto-resize layout-fill flex></div>
+            </div>
+            <div layout="column" layout-align="start start" flex layout-padding>
+                <h3>Все товары:</h3>
+                <div id="gridSaleItems" ui-grid="vm.saleItemsGridOptions" class="grid" ui-grid-auto-resize layout-fill flex></div>
+            </div>
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button ng-click="close()">Закрыть</md-button>
+    </footer>
+</md-dialog>

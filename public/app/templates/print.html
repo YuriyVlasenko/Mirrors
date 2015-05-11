@@ -1,0 +1,113 @@
+<div class="print">
+    <div class="no-print">
+            <input type="checkbox" ng-model="showPrices" ng-checked="showPrices"/>
+            <span>показывать цены</span>
+            <br/>
+            <span>группировка</span>
+            <select ng-model="accessoryId">
+                <option value="null">нет</option>
+                <option value="{{category.id}}" ng-repeat="category in categories"
+                        ng-selected="category.id == accessoryId">{{category.name}}</option>
+            </select>
+    </div>
+    <h1>
+        Накладная № {{order.id.substr(0,6)}} от {{order.date | date:'dd-MM-yyyy hh-mm-ss'}}
+    </h1>
+    <table>
+        <tr>
+            <td class="td_30">Поставщик</td>
+            <td class="td_70">{{order._saleOrderHeader.supplier}}</td>
+        <tr>
+            <td class="td_30">Кому</td>
+            <td class="td_70">{{order._saleOrderHeader.whom}}</td>
+        </tr>
+        <tr>
+            <td class="td_30">Через кого</td>
+            <td class="td_70">{{order._saleOrderHeader.overWhom}}</td>
+        </tr>
+        <tr>
+            <td class="td_30"> Доверенность</td>
+            <td class="td_70">{{order._saleOrderHeader.attornay}}</td>
+        </tr>
+        <tr>
+            <td class="td_30">На основании</td>
+            <td class="td_70">{{order._saleOrderHeader.cause}}</td>
+        </tr>
+    </table>
+    <table ng-if="saleOrderDtl && saleOrderDtl.length > 0">
+        <tr>
+            <th class="td_5">№</th>
+            <th>Наименование товара</th>
+            <th class="td_10">Код</th>
+            <th class="td_10 number-field">К-во</th>
+            <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
+            <th class="td_20 number-field" ng-show="showPrices">Сумма</th>
+        </tr>
+    </table>
+    <table>
+        <tr ng-repeat="detailItem in saleOrderDtl">
+            <td class="td_5">{{$index + 1}}</td>
+            <td>{{detailItem._saleItem.name}}</td>
+            <td class="td_10">{{detailItem._saleItem.code}}</td>
+            <td class="td_10 number-field">{{detailItem.count}}</td>
+            <td class="td_15 number-field" ng-show="showPrices">{{detailItem._saleItem._price.cost}} {{detailItem._saleItem._price.currency}}</td>
+            <td class="td_20 number-field" ng-show="showPrices">{{detailItem._saleItem._price.cost * detailItem.count}} {{detailItem._saleItem._price.currency}}</td>
+        </tr>
+    </table>
+    <table ng-if="saleOrderDtlAcc && saleOrderDtlAcc.length > 0">
+        <tr>
+            <th class="td_5">№</th>
+            <th>Наименование</th>
+            <th class="td_10">Код</th>
+            <th class="td_10 number-field">К-во</th>
+            <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
+            <th class="td_20 number-field" ng-show="showPrices">Сумма</th>
+        </tr>
+    </table>
+    <table>
+        <tr ng-repeat="detailItem in saleOrderDtlAcc">
+            <td class="td_5">{{$index + 1}}</td>
+            <td>{{detailItem._saleItem.name}}</td>
+            <td class="td_10">{{detailItem._saleItem.code}}</td>
+            <td class="td_10 number-field">{{detailItem.count}}</td>
+            <td class="td_15 number-field" ng-show="showPrices">{{detailItem._saleItem._price.cost}} {{detailItem._saleItem._price.currency}}</td>
+            <td class="td_20 number-field" ng-show="showPrices">{{detailItem._saleItem._price.cost * detailItem.count}} {{detailItem._saleItem._price.currency}}</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Вместе с ПДВ прописью:</td>
+            <td class="td_20">Всего, грн.</td>
+            <td class="td_30 input-field number-field">
+                <span ng-show="showPrices">{{order.price}} грн.</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_20">ПДВ ___ %</td>
+            <td class="td_30 input-field">
+                <span ng-show="showPrices"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_20">Вместе с ПДВ:</td>
+            <td class="td_30 input-field" >
+                <span ng-show="showPrices"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_10"><b>Директор:</b></td>
+            <td class="td_40 input-field"></td>
+            <td class="td_10"><b>Бухгалтер:</b></td>
+            <td class="td_40 input-field"></td>
+        </tr>
+        <tr>
+            <td class="td_10"><b>Сдал:</b></td>
+            <td class="td_40 input-field"></td>
+            <td class="td_10"><b>Принял:</b></td>
+            <td class="td_40 input-field"></td>
+        </tr>
+    </table>
+</div>
+
+

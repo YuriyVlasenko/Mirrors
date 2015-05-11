@@ -1,0 +1,60 @@
+/*Styles for material components*/
+/* dialog */
+md-dialog {
+  min-width: 400px;
+  min-height: 300px; }
+
+/* select elements */
+md-select {
+  margin: 0; }
+
+/* button */
+.md-button {
+  border: 0; }
+  .md-button.md-primary {
+    background-color: lightgreen;
+    padding-left: 5px;
+    padding-right: 5px; }
+    .md-button.md-primary:hover {
+      background-color: lightgreen !important;
+      color: #fff !important; }
+  .md-button[disabled] {
+    cursor: default !important;
+    background-color: lightgray !important; }
+  .md-button.md-warn {
+    background-color: lightcoral;
+    color: #ffffff !important;
+    border: 1px solid #ffffff; }
+    .md-button.md-warn:hover {
+      border: 1px solid red;
+      background-color: transparent !important;
+      color: red !important; }
+
+md-checkbox[disabled] {
+  cursor: default !important; }
+md-checkbox .md-icon {
+  background-color: transparent !important; }
+md-checkbox.md-checked .md-icon {
+  background-color: deepskyblue !important; }
+
+/*toasts*/
+md-toast.success {
+  background-color: green;
+  color: white; }
+md-toast.information {
+  background-color: blue;
+  color: #ffffff; }
+md-toast.error {
+  background-color: red;
+  color: #ffffff; }
+
+/*tabs*/
+md-tabs {
+  margin-top: 5px; }
+  md-tabs md-tabs-ink-bar {
+    color: #0040D0 !important;
+    background-color: #0040D0 !important; }
+  md-tabs .md-header-items-container {
+    background-color: lightskyblue; }
+
+/*# sourceMappingURL=material.css.map */

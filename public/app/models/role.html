@@ -1,0 +1,19 @@
+<md-dialog layout="column" class="dialog--role">
+    <md-content flex>
+        <header class="dialog_header">
+            <h2>{{titleText}}</h2>
+        </header>
+        <div class="dialog_content">
+            <ng-form name="itemForm" novalidate>
+                <md-input-container>
+                    <label>Роль</label>
+                    <input type="text" name="name" ng-model="modelData.name" required>
+                </md-input-container>
+            </ng-form>
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button data-ng-disabled="itemForm.$invalid" class="md-primary" ng-click="save()">Сохранить</md-button>
+        <md-button ng-click="cancel()">Отмена</md-button>
+    </footer>
+</md-dialog>

@@ -1,0 +1,131 @@
+<div class="orders" layout="column" flex>
+    <div layout="row" layout-align="space-between center">
+        <div class="actions">
+            <md-button class="action-button md-primary" ng-click="addItem();">Создать</md-button>
+            <md-button class="action-button md-primary" ng-click="">Изменить</md-button>
+            <md-button class="action-button md-primary" ng-click="print();">Печать</md-button>
+            <md-button class="action-button md-warn" ng-click="">Удалить</md-button>
+        </div>
+        <div class="actions" >
+            <md-button class="action-button md-primary" ng-click="">Подтвердить</md-button>
+            <md-button class="action-button md-primary" ng-click="">Отгрузить</md-button>
+        </div>
+    </div>
+
+    <div class="order-items">
+        <div class="order-item--header">
+            <table class="order-item">
+                <tr>
+                    <th class="td_5">Код</th>
+                    <th class="td_10">Дата</th>
+                    <th class="td_20">Кто/Кому</th>
+                    <th class="td_10">Стоимость</th>
+                    <th class="td_10">Подтв.</th>
+                    <th class="td_25">Комментарий/Отзыв</th>
+                    <th class="td_10">Доставка</th>
+                    <th class="td_15">Выполнен</th>
+                </tr>
+            </table>
+        </div>
+        <div class="order-item--content">
+            <table class="order-item">
+                <tr ng-repeat="order in saleOrders | orderBy:'date':true" ng-click="setCurrentOrder(order);" ng-class="{'is-selected':selectedOrder.id == order.id}">
+                    <td class="td_5">{{order.id.substr(0,6)}} </td>
+                    <td class="td_10">{{order.date |date:'dd-MM-yyyy'}} <br/> {{order.date |date:'hh-mm-ss'}} </td>
+                    <td class="td_20">{{order._user.fio}}</td>
+                    <td class="td_10">{{order.price}} грн. <br/> {{order.priceDollars}} usd.</td>
+                    <td class="td_10"><md-checkbox aria-label="is Approved" ng-disabled="true" ng-model="order.isApproved" /></td>
+                    <td class="td_25">{{order.comment|limitTo:25}} <br/> {{order.response|limitTo:25}}</td>
+                    <td class="td_10">{{order.deliveryCost}}</td>
+                    <td class="td_15"><md-checkbox aria-label="is Completed" ng-disabled="true" ng-model="order.isCompleted" /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <md-tabs md-dynamic-height md-border-bottom ng-if="selectedOrder">
+        <md-tab label="товары">
+            <md-content>
+                <div class="order-item-details" ng-if="selectedOrder._saleOrderDtl">
+                    <div class="order-item-details-header">
+                        <table class="order-item-details">
+                            <tr>
+                                <th class="order-item-details__sale-item__preview"></th>
+                                <th class="order-item-details__sale-item__name">Товар</th>
+                                <th class="order-item-details__sale-item__category">Категория</th>
+                                <th class="order-item-details__count">К-во</th>
+                                <th class="order-item-details__sale-item__price">Цена</th>
+                                <th class="order-item-details__sale-item__total">Сумма</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="order-item-details-content">
+                        <table class="order-item-details">
+                            <tr ng-repeat="orderDetail in selectedOrder._saleOrderDtl">
+                                <td class="order-item-details__sale-item__preview">
+                                    <img class="order-item-details__small-img" ng-src="{{orderDetail._saleItem.pictureSrc}}" />
+                                </td>
+                                <td class="order-item-details__sale-item__name">{{orderDetail._saleItem.name}}</td>
+                                <td class="order-item-details__sale-item__category">{{orderDetail._saleItem._category.name}}</td>
+                                <td class="order-item-details__count">{{orderDetail.count}}</td>
+                                <td class="order-item-details__sale-item__price">{{orderDetail._saleItem._price.cost}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="order-item-details__sale-item__total">{{orderDetail._saleItem._price.cost * orderDetail.count}} {{orderDetail._saleItem._price.currency}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="детали">
+            <md-content>
+                    <ng-form name="itemForm" novalidate>
+                            <md-input-container>
+                                <label>Поставщик</label>
+                                <input type="text" name="supplier" ng-model="selectedOrder._saleOrderHeader.supplier">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Кому</label>
+                                <input type="text" name="whom" ng-model="selectedOrder._saleOrderHeader.whom">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Через кого</label>
+                                <input type="text" name="overWhom" ng-model="selectedOrder._saleOrderHeader.overWhom">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Довепенность</label>
+                                <input type="text" name="attornay" ng-model="selectedOrder._saleOrderHeader.attornay">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>На основании</label>
+                                <input type="text" name="cause" ng-model="selectedOrder._saleOrderHeader.cause">
+                            </md-input-container>
+                    </ng-form>
+                <md-button class="md-primary" ng-click="saveHeader();">Сохранить</md-button>
+            </md-content>
+        </md-tab>
+        <md-tab label="примечания">
+            <md-content>
+                    <md-input-container>
+                        <label>Коментарий</label>
+                        <input type="text" name="supplier" ng-model="selectedOrder.comment">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Отзыв</label>
+                        <input type="text" name="response" ng-model="selectedOrder.response">
+                    </md-input-container>
+                <md-button class="md-primary" ng-click="saveComments();">Сохранить</md-button>
+            </md-content>
+        </md-tab>
+        <md-tab label="управление">
+            <md-content>
+                <md-input-container>
+                    <label>Доставка</label>
+                    <input type="text" name="whom" ng-model="selectedOrder.deliveryCost">
+                </md-input-container>
+
+                <md-button class="md-primary" ng-click="saveManagement();">Сохранить</md-button>
+                </md-content>
+        </md-tab>
+    </md-tabs>
+
+</div>

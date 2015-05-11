@@ -1,0 +1,92 @@
+
+/*Styles for material components*/
+
+/* dialog */
+md-dialog{
+  min-width: 400px;
+  min-height: 300px;
+}
+
+/* select elements */
+md-select{
+  margin: 0;
+}
+
+
+
+/* button */
+.md-button{
+  border: 0;
+
+  &.md-primary{
+    background-color: lightgreen;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    &:hover{
+      background-color:lightgreen !important;
+      color: #fff !important;
+    }
+  }
+
+  &[disabled]{
+    cursor: default !important;
+    background-color: lightgray !important;
+  }
+
+  &.md-warn{
+    background-color: lightcoral;
+    color: #ffffff !important;
+    border: 1px solid #ffffff;
+
+    &:hover{
+      border: 1px solid red;
+      background-color: transparent !important;
+      color: red !important;
+    }
+  }
+}
+
+md-checkbox{
+  &[disabled]{
+    cursor: default !important;
+  }
+  .md-icon{
+    background-color: transparent !important;
+
+  }
+  &.md-checked .md-icon{
+    background-color: deepskyblue !important;
+  }
+}
+
+/*toasts*/
+md-toast{
+  &.success{
+    background-color: green;
+    color: white;
+  }
+
+  &.information{
+    background-color: blue;
+    color: #ffffff;
+  }
+
+  &.error{
+    background-color: red;
+    color: #ffffff;
+  }
+}
+
+/*tabs*/
+md-tabs{
+  margin-top: 5px;
+
+  md-tabs-ink-bar{
+    color: #0040D0 !important;
+    background-color: #0040D0 !important;
+  }
+  .md-header-items-container{
+    background-color: lightskyblue;
+  }
+}

@@ -1,0 +1,13 @@
+<md-dialog layout="column" class="dialog--picture-preview">
+    <md-content flex>
+        <header class="dialog_header">
+            <h2>{{item.title}}</h2>
+        </header>
+        <div class="dialog_content" layout="row" layout-align="center center" flex>
+            <img ng-src="{{item.photoSrc}}">
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button ng-click="closeDialog()">Закрыть</md-button>
+    </footer>
+</md-dialog>

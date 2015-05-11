@@ -1,0 +1,36 @@
+<md-dialog layout="column" class="dialog--category">
+    <md-content flex>
+        <header class="dialog_header">
+            <h2>{{titleText}}</h2>
+        </header>
+        <div class="dialog_content">
+            <ng-form name="itemForm" novalidate layout="row">
+                <div flex>
+                    <md-input-container>
+                        <label>Название</label>
+                        <input type="text" name="name" ng-model="modelData.name" required>
+                    </md-input-container>
+                    <div layout="column" layout-align="start start" class="form-element">
+                        <label>Принадлежит категории</label>
+                        <md-select ng-model="modelData.parentId" placeholder="Выберите категорию">
+                            <md-option value="">Пусто</md-option>
+                            <md-option ng-selected="category.id==modelData.parentId" value="{{category.id}}"
+                                       ng-repeat="category in categories track by $index">{{category.name}}</md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div flex>
+                    <div layout="row" flex layout-align="center start">
+                        <img ng-src="{{pictureSrc}}" />
+                        <md-button class="md-primary action-button" ng-click="editPhoto()">
+                            <span class="glyphicon glyphicon-edit" aria-label="Work with photo"></span></md-button>
+                    </div>
+                </div>
+            </ng-form>
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button data-ng-disabled="itemForm.$invalid" class="md-primary" ng-click="save()">Сохранить</md-button>
+        <md-button ng-click="cancel()">Отмена</md-button>
+    </footer>
+</md-dialog>

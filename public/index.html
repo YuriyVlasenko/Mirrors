@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="styles/bootstrap.css" />
+    <link rel="stylesheet" href="vendors/angular/angular-material.css" />
+
+    <link rel="stylesheet" href="vendors/uiGrid/ui-grid.css" />
+
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/material.css" />
+
+    <script src="vendors/jquery-1.11.2.js"></script>
+
+    <script src="vendors/angular/angular.js"></script>
+    <script src="vendors/angular/angular-file-upload.js"></script>
+    <script src="vendors/angular/angular-aria.js"></script>
+    <script src="vendors/angular/angular-animate.js"></script>
+    <script src="vendors/angular/common.js"></script>
+    <script src="vendors/angular/angular-ui-router.js"></script>
+    <script src="vendors/angular/angular-local-storage.js"></script>
+    <script src="vendors/angular/angular-material.js"></script>
+    <script src="vendors/uiGrid/ui-grid.js"></script>
+    <script src="dist/mirrors.js"> </script>
+
+    <meta charset="UTF-8">
+    <title> index </title>
+</head>
+<body ng-app="app" ng-controller="appController" layout="column" layout-align="center center">
+    <div class="l-main" layout-fill layout="column">
+        <header class="l-main__header no-print" layout="row" layout-align="space-between center">
+            <ul class="menu">
+                <li class="menu-item" ui-sref-active="menu-item--active">
+                    <a href ui-sref="main">Главная</a>
+                </li>
+                <li class="menu-item" ui-sref-active="menu-item--active">
+                    <a href ui-sref="orders">Заказы</a>
+                </li>
+                <li class="menu-item" ui-sref-active="menu-item--active">
+                    <a href ui-sref="roles">Роли</a>
+                </li>
+                <li class="menu-item" ui-sref-active="menu-item--active">
+                    <a href ui-sref="users">Пользователи</a>
+                </li>
+                <li class="menu-item" ui-sref-active="menu-item--active">
+                    <a href ui-sref="categories">Категории</a>
+                </li>
+                <li class="menu-item" ui-sref-active="menu-item--active">
+                    <a href ui-sref="saleItems">Товары</a>
+                </li>
+                <li class="menu-item" ui-sref-active="menu-item--active">
+                    <a href ui-sref="sets">Комплекты</a>
+                </li>
+            </ul>
+            <div class="basket-container" layout="row" layout-align="center center">
+                <span class="glyphicon glyphicon-shopping-cart basket-icon" ng-click="openBasket();"></span>
+                <div layout="column" layout-align="center start" class="basket-info">
+                    <div><span>Товаров:</span><span><b>{{basketInfo.itemsCount}}</b></span></div>
+                    <div><span>Сумма: </span><span><b>{{basketInfo.cost}} грн.
+                        <span ng-if="basketInfo.costInDollars">(+{{basketInfo.costInDollars}}$)</span></b>
+                    </span></div>
+                </div>
+            </div>
+        </header>
+        <div class="l-main__content" ui-view layout="column" flex></div>
+        <footer class="l-main__footer no-print" >footer</footer>
+    </div>
+</body>
+</html>

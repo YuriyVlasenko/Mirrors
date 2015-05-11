@@ -1,0 +1,34 @@
+<md-dialog layout="column" class="dialog--price">
+    <md-content flex>
+        <header class="dialog_header">
+            <h2>{{titleText}}</h2>
+        </header>
+        <div class="dialog_content" layout="column" layout-align="start start">
+            <div id="grid" ui-grid="gridOptions" class="grid" ui-grid-auto-resize flex></div>
+            <div class="edit-block" flex layout-fill>
+                <ng-form name="itemForm" novalidate layout="row" flex>
+                    <div flex>
+                        <md-input-container>
+                            <label>Действует с</label>
+                            <input type="date" name="fromDate" ng-model="modelData.fromDate" required>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Цена</label>
+                            <input type="number" name="cost" ng-model="modelData.cost" required>
+                        </md-input-container>
+                    </div>
+                    <div flex>
+                        <md-checkbox md-no-ink aria-label="Is cost in dollars" ng-model="modelData.inDollars" class="md-primary">
+                            В долларах
+                        </md-checkbox>
+                        <md-button ng-click="addItem();">Добавить</md-button>
+                        <md-button ng-click="saveItem();">Сохранить</md-button>
+                    </div>
+                </ng-form>
+            </div>
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button ng-click="cancel()">Закрыть</md-button>
+    </footer>
+</md-dialog>

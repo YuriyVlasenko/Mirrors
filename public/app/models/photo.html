@@ -1,0 +1,20 @@
+<md-dialog layout="column" class="dialog--photo">
+    <md-content flex>
+        <header class="dialog_header">
+            <h2>{{titleText}}</h2>
+        </header>
+        <div class="dialog_content" flex layout="column" layout-align="start center">
+            <div class="photo-operations" layout="row">
+                <input type="file" nv-file-select uploader="uploader" ng-disabled="isFileSelected"/>
+                <md-button class="action-button md-primary" ng-click="uploadItem();"><span class="glyphicon glyphicon-cloud-upload"></span></md-button>
+                <md-button class="action-button md-warn" ng-click="removeItem();"><span class="glyphicon glyphicon-remove"></span></md-button>
+            </div>
+            <div class="photo-preview">
+                <img ng-src="{{pictureSrc}}"/>
+            </div>
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button ng-click="cancel()">Закрыть</md-button>
+    </footer>
+</md-dialog>

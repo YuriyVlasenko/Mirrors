@@ -1,0 +1,35 @@
+<md-dialog layout="column" class="dialog--sales-item__dtl">
+    <md-content flex>
+        <header class="dialog_header">
+            <h2>{{titleText}} ({{saleItem.name}} {{saleItem.code}})</h2>
+        </header>
+        <div class="dialog_content">
+            <ng-form name="itemForm" novalidate layout="row">
+                <div flex>
+                    <md-input-container>
+                        <label>Высота</label>
+                        <input type="text" name="height" ng-model="modelData.height" required>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Ширина</label>
+                        <input type="text" name="width" ng-model="modelData.width" required>
+                    </md-input-container>
+                </div>
+                <div flex>
+                    <md-input-container>
+                        <label>Цвет</label>
+                        <input type="text" name="color" ng-model="modelData.color">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Описание</label>
+                        <input type="text" name="other" ng-model="modelData.other">
+                    </md-input-container>
+                </div>
+            </ng-form>
+        </div>
+    </md-content>
+    <footer class="md-actions dialog_footer">
+        <md-button data-ng-disabled="itemForm.$invalid" class="md-primary" ng-click="save()">Сохранить</md-button>
+        <md-button ng-click="cancel()">Отмена</md-button>
+    </footer>
+</md-dialog>
