@@ -98,11 +98,16 @@ h1, h2, h3 {
     margin-right: 10px;
     font-size: 26px; }
 
-.basket-comment-container {
+.basket-info-container {
   margin-bottom: 10px; }
-  .basket-comment-container .basket-comment {
+  .basket-info-container .basket-comment {
     min-height: 70px;
-    width: 100%; }
+    max-height: 170px;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%; }
+  .basket-info-container .basket-details md-input-container {
+    padding-bottom: 0px; }
 
 /* components styles*/
 .menu {

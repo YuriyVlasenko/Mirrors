@@ -5,8 +5,8 @@
 (function(angular) {
     angular.module('app').controller('ordersController', OrdersController);
 
-    OrdersController.$inject = ['$scope','$mdDialog','toastsPresenter','repository','modelNames', 'utils','$state', 'print'];
-    function OrdersController($scope, $mdDialog ,toastsPresenter,repository,modelNames, utils, $state, print){
+    OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print'];
+    function OrdersController($scope, toastsPresenter,repository,modelNames, print){
 
         var saleOrderDtl = [];
         $scope.saleOrders = [];
@@ -15,13 +15,29 @@
         $scope.saveHeader = saveHeader;
         $scope.setCurrentOrder = setCurrentOrder;
         $scope.saveComments = saveComments;
-
+        $scope.saveManagement = saveManagement;
 
         function printOrder(){
             if (!$scope.selectedOrder){
                 toastsPresenter.info('Выберите заказ');
             }
             print.printOrder($scope.selectedOrder);
+        };
+
+        function saveManagement(){
+            var updateData = {
+                isApproved: $scope.selectedOrder.isApproved,
+                isCompleted: $scope.selectedOrder.isCompleted,
+                deliveryCost: $scope.selectedOrder.deliveryCost
+            };
+            var orderId = $scope.selectedOrder.id;
+            repository.updateModelItem(modelNames.SALE_ORDER, orderId, updateData).then(function(){
+                toastsPresenter.info('Информация сохранена.');
+            }, function(error){
+                console.error('SALE_ORDER');
+                console.error(error);
+            });
+
         };
 
         function saveHeader(){

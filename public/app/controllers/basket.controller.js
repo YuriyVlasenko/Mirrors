@@ -14,6 +14,13 @@
 
         $scope.comment = '';
         $scope.basketItems = [];
+        $scope.details = {
+            supplier:'',
+            whom:'',
+            overWhom:'',
+            attornay:'',
+            cause:''
+        };
         $scope.total = 0;
         $scope.totalUsd = 0;
 
@@ -82,7 +89,6 @@
                         resultItem.childrens.push(childResultItem);
                     }
                 }
-
                 $scope.basketItems.push(resultItem);
             }
             calculateTotalValues();
@@ -167,6 +173,15 @@
         $scope.clearBasket = function(){
             basket.clear();
             $mdDialog.cancel();
+
+            $scope.details = {
+                supplier:'',
+                whom:'',
+                overWhom:'',
+                attornay:'',
+                cause:''
+            };
+            $scope.comment = '';
         };
 
         $scope.orderItems = function(){
@@ -247,16 +262,9 @@
 
                 if (saleOrderDtlCreateCompleted){
 
-                    var headerData = {
-                        id: orderId,
-                        supplier:'',
-                        whom:'',
-                        overWhom:'',
-                        attornay:'',
-                        cause:''
-                    };
+                    $scope.details.id = orderId;
 
-                    repository.createModelItem(modelNames.SALE_ORDER_HEADER, headerData).catch(function (error) {
+                    repository.createModelItem(modelNames.SALE_ORDER_HEADER, $scope.details).catch(function (error) {
                         console.log('SALE_ORDER_HEADER');
                         console.error(error);
                     });

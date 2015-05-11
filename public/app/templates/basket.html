@@ -8,64 +8,88 @@
                 <md-button ng-click="clearBasket();">Очистить</md-button>
                 <md-button ng-click="saveToBasket();">Применить</md-button>
             </div>
-            <table class="basket-items">
-                <tr>
-                    <th class="basket-item__name">Название</th>
-                    <th class="basket-item__code">Код</th>
-                    <th class="basket-item__cost">Цена</th>
-                    <th class="basket-item__count">К-во</th>
-                    <th class="basket-item__action">Действие</th>
-                    <th class="basket-item__total">Стоимость</th>
-                </tr>
-            </table>
-            <table class="basket-items" ng-repeat="item in basketItems">
-                <tr class="basket-item">
-                    <td class="basket-item__name">{{item.name}}</td>
-                    <td class="basket-item__code">{{item.code}}</td>
-                    <td class="basket-item__cost">{{item.price.cost}} {{item.price.currency}}</td>
-                    <td class="basket-item__count">{{item.count}}</td>
-                    <td class="basket-item__action">
-                        <md-button class="md-primary action-button" ng-click="incrementCount(item)">
-                            <span class="glyphicon glyphicon-plus" aria-label="Increment items count"></span></md-button>
-                        <md-button class="md-primary action-button" ng-click="decrementCount(item)">
-                            <span class="glyphicon glyphicon-minus" aria-label="Decrement items count"></span></md-button>
-                        <md-button class="md-warn action-button" aria-label="Remove item from set" ng-click="removeItem(item)">
-                            <span class="glyphicon glyphicon-remove"></span></md-button>
-                    </td>
-                    <td class="basket-item__total">{{item.price.cost*item.count}} {{item.price.currency}}</td>
-                </tr>
-                <tr class="basket-items basket-items--children" ng-repeat="childitem in item.childrens">
-                    <td class="basket-item__name">{{childitem.name}}</td>
-                    <td class="basket-item__code">{{childitem.code}}</td>
-                    <td class="basket-item__cost">{{childitem.price.cost}} {{childitem.price.currency}}</td>
-                    <td class="basket-item__count">{{childitem.count}}</td>
-                    <td class="basket-item__action">
-                        <md-button class="md-primary action-button" ng-click="incrementCount(childitem)">
-                            <span class="glyphicon glyphicon-plus" aria-label="Increment items count"></span></md-button>
-                        <md-button class="md-primary action-button" ng-click="decrementCount(childitem)">
-                            <span class="glyphicon glyphicon-minus" aria-label="Decrement items count"></span></md-button>
-                        <md-button class="md-warn action-button" ari a-label="Remove item from set" ng-click="removeItem(childitem, item)">
-                            <span class="glyphicon glyphicon-remove"></span></md-button>
-                    </td>
-                    <td class="basket-item__total">{{childitem.price.cost*childitem.count}} {{childitem.price.currency}}</td>
-                </tr>
-            </table>
-            <div layout="row" layout-align="end center" layout-fill class="basket-total">
-                <span>Итого:</span>
-                <span><b>{{total}} грн.</b></span>
-                <span><b>+ {{totalUsd}} usd.</b></span>
-            </div>
-            <div layout="column" layout-fill class="basket-comment-container">
-                <span>Комментарий:</span>
-                <textarea class="basket-comment" ng-model="comment"></textarea>
-            </div>
-
-            <div layout="row" layout-align="end center" layout-fill>
-                <md-button class="md-primary" ng-click="orderItems();">Оформить заказ</md-button>
-            </div>
+            <md-tabs md-dynamic-height md-border-bottom class="basket-info-container">
+                <md-tab label="Товары">
+                    <table class="basket-items">
+                        <tr>
+                            <th class="basket-item__name">Название</th>
+                            <th class="basket-item__code">Код</th>
+                            <th class="basket-item__cost">Цена</th>
+                            <th class="basket-item__count">К-во</th>
+                            <th class="basket-item__action">Действие</th>
+                            <th class="basket-item__total">Стоимость</th>
+                        </tr>
+                    </table>
+                    <table class="basket-items" ng-repeat="item in basketItems">
+                        <tr class="basket-item">
+                            <td class="basket-item__name">{{item.name}}</td>
+                            <td class="basket-item__code">{{item.code}}</td>
+                            <td class="basket-item__cost">{{item.price.cost}} {{item.price.currency}}</td>
+                            <td class="basket-item__count">{{item.count}}</td>
+                            <td class="basket-item__action">
+                                <md-button class="md-primary action-button" ng-click="incrementCount(item)">
+                                    <span class="glyphicon glyphicon-plus" aria-label="Increment items count"></span></md-button>
+                                <md-button class="md-primary action-button" ng-click="decrementCount(item)">
+                                    <span class="glyphicon glyphicon-minus" aria-label="Decrement items count"></span></md-button>
+                                <md-button class="md-warn action-button" aria-label="Remove item from set" ng-click="removeItem(item)">
+                                    <span class="glyphicon glyphicon-remove"></span></md-button>
+                            </td>
+                            <td class="basket-item__total">{{item.price.cost*item.count}} {{item.price.currency}}</td>
+                        </tr>
+                        <tr class="basket-items basket-items--children" ng-repeat="childitem in item.childrens">
+                            <td class="basket-item__name">{{childitem.name}}</td>
+                            <td class="basket-item__code">{{childitem.code}}</td>
+                            <td class="basket-item__cost">{{childitem.price.cost}} {{childitem.price.currency}}</td>
+                            <td class="basket-item__count">{{childitem.count}}</td>
+                            <td class="basket-item__action">
+                                <md-button class="md-primary action-button" ng-click="incrementCount(childitem)">
+                                    <span class="glyphicon glyphicon-plus" aria-label="Increment items count"></span></md-button>
+                                <md-button class="md-primary action-button" ng-click="decrementCount(childitem)">
+                                    <span class="glyphicon glyphicon-minus" aria-label="Decrement items count"></span></md-button>
+                                <md-button class="md-warn action-button" ari a-label="Remove item from set" ng-click="removeItem(childitem, item)">
+                                    <span class="glyphicon glyphicon-remove"></span></md-button>
+                            </td>
+                            <td class="basket-item__total">{{childitem.price.cost*childitem.count}} {{childitem.price.currency}}</td>
+                        </tr>
+                    </table>
+                    <div layout="row" layout-align="end center" layout-fill class="basket-total">
+                        <span>Итого:</span>
+                        <span><b>{{total}} грн.</b></span>
+                        <span><b>+ {{totalUsd}} usd.</b></span>
+                    </div>
+                </md-tab>
+                <md-tab label="Коммментарий">
+                        <textarea class="basket-comment" ng-model="comment"></textarea>
+                </md-tab>
+                <md-tab label="Детали">
+                        <ng-form name="itemForm" novalidate class="basket-details">
+                            <md-input-container>
+                                <label>Поставщик</label>
+                                <input type="text" name="supplier" ng-model="details.supplier">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Кому</label>
+                                <input type="text" name="whom" ng-model="details.whom">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Через кого</label>
+                                <input type="text" name="overWhom" ng-model="details.overWhom">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Довепенность</label>
+                                <input type="text" name="attornay" ng-model="details.attornay">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>На основании</label>
+                                <input type="text" name="cause" ng-model="details.cause">
+                            </md-input-container>
+                        </ng-form>
+                </md-tab>
+            </md-tabs>
         </div>
     </md-content>
     <footer class="md-actions dialog_footer">
+        <md-button class="md-primary" ng-click="orderItems();">Оформить</md-button>
         <md-button ng-click="cancel()">Закрыть</md-button>
     </footer>
 </md-dialog>

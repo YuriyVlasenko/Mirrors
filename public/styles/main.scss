@@ -195,12 +195,20 @@ $sale-item-width: 280px;
   }
 }
 
-.basket-comment-container{
-
+.basket-info-container{
   margin-bottom: 10px;
+
   .basket-comment{
     min-height: 70px;
+    max-height: 170px;
     width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+  .basket-details{
+      md-input-container{
+        padding-bottom: 0px;
+      }
   }
 }
 

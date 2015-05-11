@@ -6,10 +6,6 @@
             <md-button class="action-button md-primary" ng-click="print();">Печать</md-button>
             <md-button class="action-button md-warn" ng-click="">Удалить</md-button>
         </div>
-        <div class="actions" >
-            <md-button class="action-button md-primary" ng-click="">Подтвердить</md-button>
-            <md-button class="action-button md-primary" ng-click="">Отгрузить</md-button>
-        </div>
     </div>
 
     <div class="order-items">
@@ -34,7 +30,9 @@
                     <td class="td_10">{{order.date |date:'dd-MM-yyyy'}} <br/> {{order.date |date:'hh-mm-ss'}} </td>
                     <td class="td_20">{{order._user.fio}}</td>
                     <td class="td_10">{{order.price}} грн. <br/> {{order.priceDollars}} usd.</td>
-                    <td class="td_10"><md-checkbox aria-label="is Approved" ng-disabled="true" ng-model="order.isApproved" /></td>
+                    <td class="td_10">
+                        <md-checkbox aria-label="is Approved" ng-disabled="true" ng-model="order.isApproved" />
+                    </td>
                     <td class="td_25">{{order.comment|limitTo:25}} <br/> {{order.response|limitTo:25}}</td>
                     <td class="td_10">{{order.deliveryCost}}</td>
                     <td class="td_15"><md-checkbox aria-label="is Completed" ng-disabled="true" ng-model="order.isCompleted" /></td>
@@ -120,8 +118,17 @@
             <md-content>
                 <md-input-container>
                     <label>Доставка</label>
-                    <input type="text" name="whom" ng-model="selectedOrder.deliveryCost">
+                    <input type="text" name="deliveryCost" ng-model="selectedOrder.deliveryCost">
                 </md-input-container>
+
+                <div>
+                    <md-checkbox aria-label="is Approved"  ng-model="selectedOrder.isApproved" ng-checked="selectedOrder.isApproved"/>
+                    <label>Подтвержден</label>
+                </div>
+                <div>
+                    <md-checkbox aria-label="is Completed"  ng-model="selectedOrder.isCompleted" ng-checked="selectedOrder.isCompleted"/>
+                    <label>Выполнен</label>
+                </div>
 
                 <md-button class="md-primary" ng-click="saveManagement();">Сохранить</md-button>
                 </md-content>
