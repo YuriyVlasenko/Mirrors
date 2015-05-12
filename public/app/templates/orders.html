@@ -77,26 +77,33 @@
         <md-tab label="детали">
             <md-content>
                     <ng-form name="itemForm" novalidate>
-                            <md-input-container>
+                        <div layout="row" layout-align="start center">
+                            <md-input-container flex>
                                 <label>Поставщик</label>
                                 <input type="text" name="supplier" ng-model="selectedOrder._saleOrderHeader.supplier">
                             </md-input-container>
-                            <md-input-container>
+                            <md-input-container flex>
                                 <label>Кому</label>
                                 <input type="text" name="whom" ng-model="selectedOrder._saleOrderHeader.whom">
                             </md-input-container>
-                            <md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start center">
+                            <md-input-container flex>
                                 <label>Через кого</label>
                                 <input type="text" name="overWhom" ng-model="selectedOrder._saleOrderHeader.overWhom">
                             </md-input-container>
-                            <md-input-container>
-                                <label>Довепенность</label>
+                            <md-input-container flex>
+                                <label>Доверенность</label>
                                 <input type="text" name="attornay" ng-model="selectedOrder._saleOrderHeader.attornay">
                             </md-input-container>
-                            <md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start center">
+                            <md-input-container flex>
                                 <label>На основании</label>
                                 <input type="text" name="cause" ng-model="selectedOrder._saleOrderHeader.cause">
                             </md-input-container>
+                        </div>
+
                     </ng-form>
                 <md-button class="md-primary" ng-click="saveHeader();">Сохранить</md-button>
             </md-content>
@@ -116,20 +123,21 @@
         </md-tab>
         <md-tab label="управление">
             <md-content>
-                <md-input-container>
-                    <label>Доставка</label>
-                    <input type="text" name="deliveryCost" ng-model="selectedOrder.deliveryCost">
-                </md-input-container>
+                <div layout="row" layout-align="start center">
+                    <md-input-container flex>
+                        <label>Доставка</label>
+                        <input type="text" name="deliveryCost" ng-model="selectedOrder.deliveryCost">
+                    </md-input-container>
 
-                <div>
-                    <md-checkbox aria-label="is Approved"  ng-model="selectedOrder.isApproved" ng-checked="selectedOrder.isApproved"/>
-                    <label>Подтвержден</label>
+                    <div flex>
+                        <md-checkbox aria-label="is Approved"  ng-model="selectedOrder.isApproved" ng-checked="selectedOrder.isApproved"/>
+                        <label>Подтвержден</label>
+                    </div>
+                    <div flex>
+                        <md-checkbox aria-label="is Completed"  ng-model="selectedOrder.isCompleted" ng-checked="selectedOrder.isCompleted"/>
+                        <label>Выполнен</label>
+                    </div>
                 </div>
-                <div>
-                    <md-checkbox aria-label="is Completed"  ng-model="selectedOrder.isCompleted" ng-checked="selectedOrder.isCompleted"/>
-                    <label>Выполнен</label>
-                </div>
-
                 <md-button class="md-primary" ng-click="saveManagement();">Сохранить</md-button>
                 </md-content>
         </md-tab>

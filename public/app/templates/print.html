@@ -80,7 +80,8 @@
             <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Вместе с ПДВ прописью:</td>
             <td class="td_20">Всего, грн.</td>
             <td class="td_30 input-field number-field">
-                <span ng-show="showPrices">{{order.price}} грн.</span>
+                <span ng-show="showPrices">{{order.price}} грн. </span>
+                <span ng-if="order.priceDollars"> (+{{order.priceDollars}} usd.)</span>
             </td>
         </tr>
         <tr>
