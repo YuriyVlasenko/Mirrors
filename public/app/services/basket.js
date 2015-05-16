@@ -5,15 +5,14 @@
 (function(angular) {
     angular.module('app.services').service('basket', createService);
 
-    createService.$inject = ['localStorageService'];
+    createService.$inject = ['localStorageService', 'storageKeys'];
 
-    function createService(localStorageService) {
+    function createService(localStorageService, storageKeys) {
 
-        var STORAGE_KEY = 'basket';
         var lastUpdateDate;
 
-        if(!localStorageService.get(STORAGE_KEY)){
-            localStorageService.add(STORAGE_KEY,{});
+        if(!localStorageService.get(storageKeys.BASKET)){
+            localStorageService.add(storageKeys.BASKET,{});
         }
 
         return{
@@ -31,12 +30,12 @@
 
         function clear(){
             lastUpdateDate = new Date();
-            localStorageService.set(STORAGE_KEY,{});
+            localStorageService.set(storageKeys.BASKET,{});
         }
 
         function addItem(item){
 
-            var bsk = localStorageService.get(STORAGE_KEY);
+            var bsk = localStorageService.get(storageKeys.BASKET);
             if (!bsk[item.id]){
 
                 bsk[item.id] = {
@@ -44,32 +43,32 @@
                     childItemsMap: item.childItemsMap||{}
                 };
 
-                localStorageService.set(STORAGE_KEY, bsk);
+                localStorageService.set(storageKeys.BASKET, bsk);
                 lastUpdateDate = new Date();
             }
         };
 
         function removeItem(id){
-            var bsk = localStorageService.get(STORAGE_KEY);
+            var bsk = localStorageService.get(storageKeys.BASKET);
             if(bsk[id]){
                 bsk[id] = undefined;
-                localStorageService.set(STORAGE_KEY, bsk);
+                localStorageService.set(storageKeys.BASKET, bsk);
                 lastUpdateDate = new Date();
             }
         };
 
         function updateItemCount(id, count) {
-            var bsk = localStorageService.get(STORAGE_KEY);
+            var bsk = localStorageService.get(storageKeys.BASKET);
             if (bsk[id]) {
                 bsk[id].count = count;
-                localStorageService.set(STORAGE_KEY, bsk);
+                localStorageService.set(storageKeys.BASKET, bsk);
                 lastUpdateDate = new Date();
             }
         };
 
         function getBasketInfo(){
             var allCount = 0;
-            var bsk = localStorageService.get(STORAGE_KEY);
+            var bsk = localStorageService.get(storageKeys.BASKET);
             for(var prop in bsk){
                 allCount+= bsk[prop].count;
             }

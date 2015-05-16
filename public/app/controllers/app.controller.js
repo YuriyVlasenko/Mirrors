@@ -5,12 +5,28 @@
 (function(angular) {
     angular.module('app').controller('appController', AppController);
 
-    AppController.$inject = ['$scope','basket','repository','modelNames','utils','$mdDialog','toastsPresenter'];
-    function AppController($scope,basket, repository, modelNames, utils,$mdDialog,toastsPresenter){
+    AppController.$inject = ['$scope','basket','repository','modelNames','utils','$mdDialog','toastsPresenter', 'signIn'];
+    function AppController($scope,basket, repository, modelNames, utils,$mdDialog,toastsPresenter, signIn){
+
+        $scope.vm = {
+            userData: null
+        };
 
         var saleItems = [];
         var saleItemsMap = {};
         var basketInfo = {};
+
+        $scope.$watch(function(){
+            return signIn.getUserData();
+        }, function(value){
+            $scope.vm.userData = value;
+        });
+
+        $scope.logout = logout;
+
+        function logout(){
+            signIn.logout();
+        }
 
         repository.reloadModelItems([modelNames.SALE_ITEM, modelNames.PRICE]).then(function(){
             saleItems = repository.getModelItems(modelNames.SALE_ITEM);

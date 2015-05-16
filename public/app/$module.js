@@ -6,14 +6,14 @@
 
     angular.module('app', ['ui.router','ui.grid','ui.grid.autoResize','ngMaterial',
         'app.services','app.models','angularFileUpload','LocalStorageModule']
-    ).config(configure);
+    ).config(configure).run(run);
 
     // Configure routes.
     configure.$inject = ['$stateProvider','$urlRouterProvider'];
     function configure($stateProvider,$urlRouterProvider){
 
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise("/main");
+        $urlRouterProvider.otherwise("/signIn");
 
         $stateProvider.state('main', {
             url: "/main",
@@ -47,8 +47,42 @@
             url: "/print",
             templateUrl:'app/templates/print.html',
             controller:'printController'
+        }).state('signIn', {
+            url: "/signIn",
+            templateUrl:'app/templates/signIn.html',
+            controller:'signInController'
+        });
+    }
+
+    // run block
+
+    run,$inject = ['$rootScope', 'signIn', '$state', 'storageKeys', 'localStorageService'];
+    function run($rootScope, signIn, $state){
+        $rootScope.$on('$stateChangeStart', function (event, next) {
+
+            signIn.loadUserData();
+
+            // check authorize
+            if (next.name === 'signIn'){
+                if (signIn.getUserData()){
+                    event.preventDefault();
+                    $state.go('main')
+                }
+            }
+            else{
+                if(!signIn.getUserData() && next.name !== 'main'){
+                    event.preventDefault();
+                    $state.go('signIn')
+                }
+            }
         });
 
+        $rootScope.$watch(function(){
+        return signIn.getUserData();}, function(value){
+            if (!value){
+                $state.go('signIn')
+            }
+        });
 
-    }
+    };
 })(angular);

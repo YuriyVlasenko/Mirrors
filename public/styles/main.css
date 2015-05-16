@@ -20,6 +20,11 @@ h1, h2, h3 {
 .l-main__header {
   border-bottom: 1px solid lightgray;
   padding: 5px 0; }
+  .l-main__header .user-data {
+    width: 130px;
+    text-align: right; }
+    .l-main__header .user-data .user-data__name {
+      font-weight: 700; }
 
 .l-main__content {
   overflow: hidden; }
@@ -92,7 +97,7 @@ h1, h2, h3 {
       border: 1px solid lightgray; }
 
 .basket-container {
-  width: 250px; }
+  margin-left: 20px; }
   .basket-container .basket-icon {
     cursor: pointer;
     margin-right: 10px;
@@ -196,6 +201,17 @@ table {
     border-bottom: 1px solid #000000; }
   table .number-field {
     text-align: right; }
+
+.sign-in-form {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid lightgray; }
+  .sign-in-form .sign-in-form__submit {
+    width: 100%; }
+  .sign-in-form .sign-in-form__guest {
+    display: block;
+    margin: 10px;
+    float: right; }
 
 .dialog--basket {
   width: 700px;

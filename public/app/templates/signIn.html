@@ -1,0 +1,15 @@
+<div layout="column" layout-align="center center" flex >
+<form ng-submit="login();" name="signInForm" class="sign-in-form">
+    <md-input-container>
+        <label>Логин</label>
+        <md-input ng-model="vm.username" name="username" required></md-input>
+    </md-input-container>
+    <md-input-container>
+        <label>Пароль</label>
+        <md-input type="password" ng-model="vm.password" name="password" required></md-input>
+    </md-input-container>
+    <a class="sign-in-form__guest" href="" ng-click="loginAsGuest();">я гость</a>
+    <md-button type="submit" class="md-primary sign-in-form__submit">Войти</md-button>
+</form>
+</div>
+

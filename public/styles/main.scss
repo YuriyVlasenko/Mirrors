@@ -42,6 +42,15 @@ h1, h2, h3{
 .l-main__header {
   border-bottom: 1px solid lightgray;
   padding: 5px 0;
+
+  .user-data{
+    width: 130px;
+    text-align: right;
+
+    .user-data__name{
+      font-weight: 700;
+    }
+  }
 }
 
 .l-main__content {
@@ -186,7 +195,7 @@ $sale-item-width: 280px;
 }
 
 .basket-container{
-  width: 250px;
+  margin-left: 20px;
 
   .basket-icon{
     cursor: pointer;
@@ -349,6 +358,23 @@ table{
     text-align: right;
   }
 }
+
+.sign-in-form{
+  width: 300px;
+  padding: 10px;
+  border: 1px solid lightgray;
+
+  .sign-in-form__submit{
+    width: 100%;
+  }
+
+  .sign-in-form__guest{
+    display: block;
+    margin: 10px;
+    float: right;
+  }
+}
+
 
 // set dialog size for entities
 .dialog--basket{
