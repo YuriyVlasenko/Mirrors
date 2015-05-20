@@ -2,9 +2,11 @@
     <div layout="row" layout-align="space-between center">
         <div class="actions">
             <md-button class="action-button md-primary" ng-click="addItem();">Создать</md-button>
-            <md-button class="action-button md-primary" ng-click="">Изменить</md-button>
+            <md-button class="action-button md-primary" ng-click="editOrder()">Изменить</md-button>
             <md-button class="action-button md-primary" ng-click="print();">Печать</md-button>
-            <md-button class="action-button md-warn" ng-click="">Удалить</md-button>
+        </div>
+        <div class="actions">
+            <md-button class="action-button md-warn" ng-click="removeOrder();">Удалить</md-button>
         </div>
     </div>
 

@@ -14,12 +14,20 @@
             ERROR: 'error'
         };
 
+        this.handlePromise = function(promise){
+            promise.then(this.operationSucceeded, this.operationError);
+        };
+
         this.operationSucceeded = function(){
             showCustom(operationResultClasses.SUCCESS, 'Операция выполнена успешно.');
         };
 
         this.operationCanceled = function(){
             showCustom(operationResultClasses.INFORMATION, 'Операция отменена');
+        };
+
+        this.operationError = function(){
+            showCustom(operationResultClasses.ERROR, 'Ошибка выполнения операции');
         };
 
         this.success = function(text){

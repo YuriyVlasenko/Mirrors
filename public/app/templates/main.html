@@ -20,23 +20,27 @@
             </div>
         </div>
     </div>
-
-    <div layout="row" layout-align="center center" layout-wrap>
-        <div class="sale-item" layout="column" layout-align="center center"
-             ng-repeat="saleItem in saleItems| name:filterValue">
-            <div class="sale-item__header" layout="row" layout-align="space-between center">
-                <div>{{saleItem.name}}</div>
-                    <span class="glyphicon glyphicon-zoom-in" ng-click="showPhoto(saleItem);"></span>
-            </div>
-            <div class="sale-item__photo" flex>
-                <img ng-src="{{saleItem.pictureSrc}}">
-            </div>
-            <div class="sale-item__footer" layout="row" layout-align="space-between center">
-                <div class="sale-item__price"> {{saleItem.price.cost}} <span class="sale-item__currency">{{saleItem.price.currency}}.</span></div>
-
-                <md-button ng-click="addToBasket(saleItem);">В корзину
-                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                </md-button>
+    <div>
+        <div layout="row" layout-align="center center" layout-wrap layout-fill>
+            <div class="sale-item" layout="column" layout-align="center center"
+                 ng-repeat="saleItem in saleItems| name:filterValue">
+                <div class="sale-item__header" layout="row" layout-align="space-between center">
+                    <div>{{saleItem.name}}</div>
+                        <span class="glyphicon glyphicon-zoom-in" ng-click="showPhoto(saleItem);"></span>
+                </div>
+                <div class="sale-item__photo" flex>
+                    <img ng-src="{{saleItem.pictureSrc}}">
+                </div>
+                <div class="sale-item__footer" layout="row" layout-align="space-between center">
+                    <div class="sale-item__price">
+                        <span ng-if="saleItem._price.cost">
+                            {{saleItem._price.cost}} <span class="sale-item__currency">{{saleItem._price.currency}}</span>
+                        </span>
+                    </div>
+                    <md-button ng-click="addToBasket(saleItem);">В корзину
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                    </md-button>
+                </div>
             </div>
         </div>
     </div>

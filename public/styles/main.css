@@ -27,7 +27,7 @@ h1, h2, h3 {
       font-weight: 700; }
 
 .l-main__content {
-  overflow: hidden; }
+  overflow: auto; }
 
 .l-main__footer {
   border-top: 1px solid lightgray;

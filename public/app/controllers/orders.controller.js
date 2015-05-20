@@ -5,8 +5,8 @@
 (function(angular) {
     angular.module('app').controller('ordersController', OrdersController);
 
-    OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print'];
-    function OrdersController($scope, toastsPresenter,repository,modelNames, print){
+    OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print', '$q', 'utils'];
+    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils){
 
         var saleOrderDtl = [];
         $scope.saleOrders = [];
@@ -16,6 +16,7 @@
         $scope.setCurrentOrder = setCurrentOrder;
         $scope.saveComments = saveComments;
         $scope.saveManagement = saveManagement;
+        $scope.removeOrder = removeOrder;
 
         function printOrder(){
             if (!$scope.selectedOrder){
@@ -23,6 +24,37 @@
             }
             print.printOrder($scope.selectedOrder);
         };
+
+        function removeOrder(){
+            if (!$scope.selectedOrder){
+                toastsPresenter.info('Выберите заказ');
+            }
+
+            var removePromises = [];
+
+            for(var i=0; i <$scope.selectedOrder._saleOrderDtl.length; i++ )
+            {
+                var detail = $scope.selectedOrder._saleOrderDtl[i];
+                removePromises.push(repository.removeModelItem(modelNames.SALE_ORDER_DTL, detail.id));
+            }
+
+            removePromises.push(repository.removeModelItem(modelNames.SALE_ORDER_HEADER, $scope.selectedOrder.id));
+            removePromises.push(repository.removeModelItem(modelNames.SALE_ORDER, $scope.selectedOrder.id));
+
+            $q.all(removePromises).then(function(data){
+                toastsPresenter.info('Заказ удален');
+
+                // TODO:
+                var index =  utils.findIndexById($scope.saleOrders, $scope.selectedOrder.id, 'id');
+                $scope.saleOrders.splice(index, 1);
+                $scope.selectedOrder = {};
+
+            }, function(error){
+                toastsPresenter.error('Ошибка удаления заказа');
+                console.log(error);
+            });
+
+        }
 
         function saveManagement(){
             var updateData = {
@@ -66,18 +98,6 @@
                 console.error(error);
             });
         }
-
-        // TODO: remove
-        $scope.removeAll = function () {
-
-            angular.forEach(saleOrderDtl, function(item){
-                repository.removeModelItem(modelNames.SALE_ORDER_DTL, item.id);
-            });
-
-            angular.forEach($scope.saleOrders, function (item) {
-                repository.removeModelItem(modelNames.SALE_ORDER, item.id);
-            });
-        };
 
         function setCurrentOrder(order){
             $scope.selectedOrder = order;
