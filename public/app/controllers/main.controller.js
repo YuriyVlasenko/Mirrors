@@ -44,7 +44,7 @@
             repository.buildModelItemData(modelNames.CATEGORY);
 
             // Load root categories.
-            $scope.categories = getChildCategories(undefined, true);
+            $scope.categories = getChildCategories(undefined);
 
             allSaleItems = repository.getModelItems(modelNames.SALE_ITEM);
 
@@ -60,9 +60,7 @@
         });
 
         function addToBasket(item){
-
             console.log(allSetItems);
-
             if (!item){
                 return;
             }
@@ -122,11 +120,11 @@
             $scope.categories = getChildCategories(categoryItem.id);
         }
 
-        function getChildCategories(rootId, orEmpty){
+        function getChildCategories(rootId){
             return allCategories.filter(function(item){
                 var result = item.parentId === rootId;
-                if (orEmpty){
-                    return  result || item.parentId === '';
+                if (!rootId){
+                    return  result || item.parentId === '' || item.parentId === undefined;
                 }
                 return result;
             });
