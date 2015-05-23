@@ -12,15 +12,12 @@
         var saleItemsMap = {};
         var allPrices = [];
 
-        $scope.comment = '';
+        $scope.vm = {};
+
+        $scope.vm.details = basket.getBasketDetails();
+        $scope.vm.comment = basket.getBasketComment();
+
         $scope.basketItems = [];
-        $scope.details = {
-            supplier:'',
-            whom:'',
-            overWhom:'',
-            attornay:'',
-            cause:''
-        };
         $scope.total = 0;
         $scope.totalUsd = 0;
 
@@ -147,6 +144,7 @@
         };
 
         $scope.saveToBasket = function(){
+            debugger;
             basket.clear();
             for(var i=0; i<$scope.basketItems.length; i++)
             {
@@ -166,6 +164,10 @@
                 }
                 basket.addItem(basketItem);
             }
+
+            basket.setBasketDetails($scope.vm.details);
+            basket.setBasketComment($scope.vm.comment);
+
             toastsPresenter.info('Корзина обновлена');
             $mdDialog.cancel();
         };
@@ -174,14 +176,8 @@
             basket.clear();
             $mdDialog.cancel();
 
-            $scope.details = {
-                supplier:'',
-                whom:'',
-                overWhom:'',
-                attornay:'',
-                cause:''
-            };
-            $scope.comment = '';
+            $scope.vm.details = basket.getBasketDetails();
+            $scope.vm.comment = basket.getBasketComment();
         };
 
         $scope.orderItems = function(){
@@ -199,7 +195,7 @@
                 priceDollars: $scope.totalUsd,
                 isApproved: false,
                 isCompleted: false,
-                comment: $scope.comment,
+                comment: $scope.vm.comment,
                 response:'',
                 deliveryCost: 0
             };
@@ -262,9 +258,8 @@
 
                 if (saleOrderDtlCreateCompleted){
 
-                    $scope.details.id = orderId;
-
-                    repository.createModelItem(modelNames.SALE_ORDER_HEADER, $scope.details).catch(function (error) {
+                    $scope.vm.details.id = orderId;
+                    repository.createModelItem(modelNames.SALE_ORDER_HEADER, $scope.vm.details).catch(function (error) {
                         console.log('SALE_ORDER_HEADER');
                         console.error(error);
                     });

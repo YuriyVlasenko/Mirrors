@@ -19,7 +19,11 @@
             getLastUpdateDate:getLastUpdateDate,
             addItem:addItem,
             removeItem:removeItem,
+            setBasketDetails:setBasketDetails,
+            setBasketComment: setBasketComment,
             getBasketInfo:getBasketInfo,
+            getBasketDetails:getBasketDetails,
+            getBasketComment:getBasketComment,
             updateItemCount:updateItemCount,
             clear: clear
         };
@@ -28,9 +32,33 @@
             return lastUpdateDate;
         };
 
+        function setBasketDetails(data){
+            localStorageService.set(storageKeys.BASKET_DETAILS, data);
+        }
+
+        function setBasketComment(comment){
+            return localStorageService.set(storageKeys.BASKET_COMMENT, comment);
+        };
+
+        function getBasketDetails(){
+            return localStorageService.get(storageKeys.BASKET_DETAILS) || {
+                    supplier:'',
+                    whom:'',
+                    overWhom:'',
+                    attornay:'',
+                    cause:''
+                };
+        };
+
+        function getBasketComment(){
+            return localStorageService.get(storageKeys.BASKET_COMMENT) || '';
+        };
+
         function clear(){
             lastUpdateDate = new Date();
             localStorageService.set(storageKeys.BASKET,{});
+            localStorageService.set(storageKeys.BASKET_COMMENT,{});
+            localStorageService.set(storageKeys.BASKET_DETAILS,{});
         }
 
         function addItem(item){

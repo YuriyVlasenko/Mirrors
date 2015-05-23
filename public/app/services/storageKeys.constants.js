@@ -6,6 +6,8 @@
 (function (angular) {
     angular.module('app.services').constant('storageKeys', {
         BASKET: 'basket',
+        BASKET_COMMENT: 'basket_comment',
+        BASKET_DETAILS: 'basket_details',
         USER_DATA: 'userData'
     });
 })(angular);

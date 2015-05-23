@@ -59,29 +59,29 @@
                     </div>
                 </md-tab>
                 <md-tab label="Коммментарий">
-                        <textarea class="basket-comment" ng-model="comment"></textarea>
+                        <textarea class="basket-comment" ng-model="vm.comment"></textarea>
                 </md-tab>
                 <md-tab label="Детали">
                         <ng-form name="itemForm" novalidate class="basket-details">
                             <md-input-container>
                                 <label>Поставщик</label>
-                                <input type="text" name="supplier" ng-model="details.supplier">
+                                <input type="text" name="supplier" ng-model="vm.details.supplier">
                             </md-input-container>
                             <md-input-container>
                                 <label>Кому</label>
-                                <input type="text" name="whom" ng-model="details.whom">
+                                <input type="text" name="whom" ng-model="vm.details.whom">
                             </md-input-container>
                             <md-input-container>
                                 <label>Через кого</label>
-                                <input type="text" name="overWhom" ng-model="details.overWhom">
+                                <input type="text" name="overWhom" ng-model="vm.details.overWhom">
                             </md-input-container>
                             <md-input-container>
                                 <label>Довепенность</label>
-                                <input type="text" name="attornay" ng-model="details.attornay">
+                                <input type="text" name="attornay" ng-model="vm.details.attornay">
                             </md-input-container>
                             <md-input-container>
                                 <label>На основании</label>
-                                <input type="text" name="cause" ng-model="details.cause">
+                                <input type="text" name="cause" ng-model="vm.details.cause">
                             </md-input-container>
                         </ng-form>
                 </md-tab>
