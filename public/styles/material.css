@@ -17,7 +17,7 @@ md-select {
     padding-right: 5px; }
     .md-button.md-primary:hover {
       background-color: lightgreen !important;
-      color: #fff !important; }
+      color: #000 !important; }
   .md-button[disabled] {
     cursor: default !important;
     background-color: lightgray !important; }

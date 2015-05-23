@@ -51,13 +51,13 @@
         };
 
         function getBasketComment(){
-            return localStorageService.get(storageKeys.BASKET_COMMENT) || '';
+            return localStorageService.get(storageKeys.BASKET_COMMENT)|| '';
         };
 
         function clear(){
             lastUpdateDate = new Date();
             localStorageService.set(storageKeys.BASKET,{});
-            localStorageService.set(storageKeys.BASKET_COMMENT,{});
+            localStorageService.set(storageKeys.BASKET_COMMENT,'');
             localStorageService.set(storageKeys.BASKET_DETAILS,{});
         }
 

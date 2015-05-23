@@ -5,8 +5,8 @@
 (function(angular) {
     angular.module('app').controller('ordersController', OrdersController);
 
-    OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print', '$q', 'utils'];
-    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils){
+    OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print', '$q', 'utils', 'basket'];
+    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils, basket){
 
         var saleOrderDtl = [];
         $scope.saleOrders = [];
@@ -17,6 +17,7 @@
         $scope.saveComments = saveComments;
         $scope.saveManagement = saveManagement;
         $scope.removeOrder = removeOrder;
+        $scope.copyHeader = copyHeader;
 
         function printOrder(){
             if (!$scope.selectedOrder){
@@ -71,6 +72,16 @@
             });
 
         };
+
+        function copyHeader(){
+            if ($scope.selectedOrder._saleOrderHeader){
+                basket.setBasketDetails($scope.selectedOrder._saleOrderHeader);
+                toastsPresenter.info('Информация скопирована.');
+            }
+            else{
+                toastsPresenter.info('Ошибка копирования.');
+            }
+        }
 
         function saveHeader(){
             var headerId = $scope.selectedOrder._saleOrderHeader.id;
