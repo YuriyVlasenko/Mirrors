@@ -56,7 +56,7 @@
             </ul>
             <div layout="row">
                 <div class="user-data">
-                    <span class="user-data__name" ng-if="vm.userData">{{vm.userData.name}}</span>
+                    <span class="user-data__name" ng-if="vm.userData">{{vm.userData.login}}</span>
                     <a href="" ng-click="logout();" ng-if="vm.userData">выйти</a>
                     <a href="" ng-click="login();" ng-if="!vm.userData">войти</a>
                 </div>

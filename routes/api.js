@@ -24,6 +24,12 @@ var saleOrderDtlModel = require('../models/SaleOrderDtl');
 var saleOrderHeaderModel = require('../models/SaleOrderHeader');
 
 module.exports.init = function(app){
+
+    function ensureAuthenticated(req, res, next) {
+        if (req.isAuthenticated()) { return next(); }
+        res.redirect('/#/signIn');
+    };
+
     var ERROR_TEMPLATE = 'Internal error(%d): %s';
 
     // create application/json parser
@@ -81,7 +87,7 @@ module.exports.init = function(app){
                 });
             });
             var apiPathDelete = '/api/upload/delete/'+itemModel.name+'/:id';
-            app.post(apiPathDelete, function (req, res) {
+            app.post(apiPathDelete, ensureAuthenticated, function (req, res) {
                 console.log('delete action');
                 var itemId = req.params.id;
                 var filePathPrefix ="../public/images/"+itemModel.name+'/'+itemId+'.';
@@ -148,7 +154,7 @@ module.exports.init = function(app){
         });
 
         // Create item.
-        app.post(pathManager.buildPath(itemModel.name,'new'),jsonParser, function (req, res) {
+        app.post(pathManager.buildPath(itemModel.name,'new'), ensureAuthenticated, jsonParser, function (req, res) {
 
             if (!req.body) return res.sendStatus(400);
 
@@ -178,7 +184,7 @@ module.exports.init = function(app){
         });
 
         // Delete item
-        app.post(pathManager.buildPath(itemModel.name,'delete'),jsonParser, function (req, res) {
+        app.post(pathManager.buildPath(itemModel.name,'delete'),ensureAuthenticated, jsonParser, function (req, res) {
             if (!req.body || !req.body.id) {
                 return res.sendStatus(400);
             }
@@ -205,7 +211,7 @@ module.exports.init = function(app){
         });
 
         // Update item
-        app.post(pathManager.buildPath(itemModel.name,'update'),jsonParser, function (req, res) {
+        app.post(pathManager.buildPath(itemModel.name,'update'), ensureAuthenticated, jsonParser, function (req, res) {
             console.log('update '+itemModel.name);
             if (!req.body || !req.body.id || !req.body.data) {
                 return res.sendStatus(400);

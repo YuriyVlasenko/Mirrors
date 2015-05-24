@@ -72,8 +72,8 @@ h1, h2, h3 {
   .sale-item .sale-item__header .glyphicon {
     cursor: pointer; }
   .sale-item .sale-item__photo img {
-    height: 230px;
-    width: 230px; }
+    max-height: 230px;
+    max-width: 230px; }
   .sale-item .sale-item__price {
     font-weight: bold; }
 

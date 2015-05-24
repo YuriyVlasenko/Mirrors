@@ -146,8 +146,8 @@ $sale-item-width: 280px;
 
   .sale-item__photo{
     img{
-      height: ($category-item-width)-50;
-      width: ($category-item-width)-50;
+      max-height: ($category-item-width)-50;
+      max-width: ($category-item-width)-50;
     }
   }
 

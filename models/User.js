@@ -24,7 +24,6 @@ module.exports = {
         return {
             id: item.userId,
             login: item.login,
-            password: item.password,
             fio: item.fio,
             roleId: item.roleId,
             comment: item.comment,

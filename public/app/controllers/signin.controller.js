@@ -21,9 +21,7 @@
         }
 
         function login(){
-            console.log('login');
             var promise =  signIn.login($scope.vm.username, $scope.vm.password);
-
             promise.success(function(){
                 $state.go('main');
             });

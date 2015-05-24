@@ -5,8 +5,8 @@
 (function(angular) {
     angular.module('app.services').service('signIn', createService);
 
-    createService.$inject = ['$q', 'localStorageService', 'storageKeys'];
-    function createService($q, localStorageService, storageKeys) {
+    createService.$inject = ['localStorageService', 'storageKeys','$http', 'toastsPresenter'];
+    function createService(localStorageService, storageKeys, $http, toastsPresenter) {
 
         var userData = null;
 
@@ -18,6 +18,7 @@
         function logout(){
             userData = null;
             localStorageService.remove(storageKeys.USER_DATA);
+            $http.get('/signOut');
         }
 
         function loadUserData(){
@@ -29,24 +30,26 @@
         }
 
         function login(username, password){
-            // TODO
-            var fakeData = {
-                data:{
-                    name: username
-                }
+            var parameters = {
+                username: username,
+                password: password
             };
-
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-
-            deferred.resolve(fakeData);
-            //deferred.reject('Wrong credentials.');
+            var promise = $http.post('/signIn', parameters);
 
             promise.then(function(response){
-                userData = response.data;
+                userData = {
+                    login: username
+                };
                 localStorageService.set(storageKeys.USER_DATA, userData);
-            }, function(){
+            }, function(error){
+                if (error.status == 404){
+                    toastsPresenter.error('Ошибка входа. Комбинация логин/пароль указана неверно.')
+                }
+                else{
+                    toastsPresenter.error('Неизвестная ошибка.');
+                }
                 userData = null;
+                localStorageService.set(storageKeys.USER_DATA, userData);
             });
 
 
