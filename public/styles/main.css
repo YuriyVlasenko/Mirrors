@@ -62,7 +62,7 @@ h1, h2, h3 {
 .sale-item {
   margin: 5px;
   width: 280px;
-  height: sale-item-width25;
+  height: 330px;
   border: 1px solid lightblue; }
   .sale-item .sale-item__header, .sale-item .sale-item__footer {
     height: 50px;

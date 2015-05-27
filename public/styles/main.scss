@@ -120,7 +120,7 @@ $sale-item-width: 280px;
 .sale-item{
   margin: 5px;
   width: $sale-item-width;
-  height: sale-item-width+25;
+  height: $sale-item-width + 50;
   border: 1px solid $hover-bg-color;
 
   .sale-item__header, .sale-item__footer{
