@@ -17,7 +17,14 @@
         $scope.loginAsGuest = loginAsGuest;
 
         function loginAsGuest(){
-            $state.go('main');
+            var promise =  signIn.login();
+            promise.success(function(){
+                $state.go('main');
+            });
+
+            promise.error (function(error){
+                $scope.errorData = error;
+            });
         }
 
         function login(){

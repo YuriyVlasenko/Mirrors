@@ -9,8 +9,8 @@
     ).config(configure).run(run);
 
     // Configure routes.
-    configure.$inject = ['$stateProvider','$urlRouterProvider'];
-    function configure($stateProvider,$urlRouterProvider){
+    configure.$inject = ['$stateProvider','$urlRouterProvider','$provide', '$httpProvider'];
+    function configure($stateProvider,$urlRouterProvider, $provide, $httpProvider){
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/signIn");
@@ -52,16 +52,21 @@
             templateUrl:'app/templates/signIn.html',
             controller:'signInController'
         });
+
+        $httpProvider.interceptors.push('responseObserver');
     }
 
     // run block
 
     run,$inject = ['$rootScope', 'signIn', '$state', 'storageKeys', 'localStorageService'];
     function run($rootScope, signIn, $state){
+        signIn.loadUserData();
+        if(!signIn.getUserData()){
+            $state.go('signIn')
+        }
+
         $rootScope.$on('$stateChangeStart', function (event, next) {
-
             signIn.loadUserData();
-
             // check authorize
             if (next.name === 'signIn'){
                 if (signIn.getUserData()){
@@ -70,7 +75,7 @@
                 }
             }
             else{
-                if(!signIn.getUserData() && next.name !== 'main'){
+                if(!signIn.getUserData()){
                     event.preventDefault();
                     $state.go('signIn')
                 }
@@ -83,6 +88,5 @@
                 $state.go('signIn')
             }
         });
-
     };
 })(angular);

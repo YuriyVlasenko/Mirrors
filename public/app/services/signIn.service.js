@@ -31,8 +31,8 @@
 
         function login(username, password){
             var parameters = {
-                username: username,
-                password: password
+                username: username || 'guest',
+                password: password || 'guest'
             };
             var promise = $http.post('/signIn', parameters);
 

@@ -9,17 +9,6 @@
  console.log('server running on port 8080');
  */
 
-
-/*var express= require('express');
-var path = require('path');
-
-var winston = require('winston');
-
-var app = express();
-*/
-
-
-
 var nConf = require('nconf');
 var config = require('./libs/config');
 var favicon = require('serve-favicon');

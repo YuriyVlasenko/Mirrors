@@ -25,9 +25,22 @@ var saleOrderHeaderModel = require('../models/SaleOrderHeader');
 
 module.exports.init = function(app){
 
+    var wellKnownRoles = {
+        admin: '751800e0-06db-11e5-8917-e995f239513c',
+        partner: '210ab950-c51a-11e4-aec7-6b9322d76429',
+        guest: '14d1dad0-06db-11e5-b015-6dc9c9e875e7'
+    };
+
+    function isWellKnownObject(id){
+        if (id === wellKnownRoles.admin || id === wellKnownRoles.partner || id === wellKnownRoles.guest){
+            return true;
+        }
+        return false;
+    };
+
     function ensureAuthenticated(req, res, next) {
         if (req.isAuthenticated()) { return next(); }
-        res.redirect('/#/signIn');
+        res.status(403).end();
     };
 
     var ERROR_TEMPLATE = 'Internal error(%d): %s';
@@ -51,7 +64,6 @@ module.exports.init = function(app){
     createRoutes(saleOrderHeaderModel);
 
     function createRoutes(itemModel){
-
         // Only for photo
         if (itemModel.name === 'category' || itemModel.name === 'saleItem')
         {
@@ -112,7 +124,8 @@ module.exports.init = function(app){
         }
 
         // Get all items route
-        app.get(pathManager.buildPath(itemModel.name), function (req, res) {
+        app.get(pathManager.buildPath(itemModel.name), ensureAuthenticated, function (req, res) {
+
             var url_parts = url.parse(req.url, true);
             var query = url_parts.query;
             var searchConditions = itemModel.searchConditions(query);
@@ -122,15 +135,15 @@ module.exports.init = function(app){
                         return itemModel.clientDataBuilder(item);
                     }));
                 } else {
-                    res.statusCode = 500;
                     //log.error(ERROR_TEMPLATE,res.statusCode,err.message);
+                    res.statusCode = 500;
                     return res.send({ error: 'Server error' });
                 }
             });
         });
 
         // Get one item
-        app.get(pathManager.buildPath(itemModel.name, ':id'), function (req, res) {
+        app.get(pathManager.buildPath(itemModel.name, ':id'), ensureAuthenticated, function (req, res) {
             var itemId = req.params.id;
             if(!itemId) return res.sendStatus(400);
 
@@ -184,12 +197,21 @@ module.exports.init = function(app){
         });
 
         // Delete item
-        app.post(pathManager.buildPath(itemModel.name,'delete'),ensureAuthenticated, jsonParser, function (req, res) {
+        app.post(pathManager.buildPath(itemModel.name,'delete'), ensureAuthenticated, jsonParser, function (req, res) {
+
             if (!req.body || !req.body.id) {
                 return res.sendStatus(400);
             }
 
             var itemId =  req.body.id;
+
+            // If can not delete.
+            if (isWellKnownObject(itemId)){
+                res.statusCode = 500;
+                res.send({error: 'Server error'});
+                res.end();
+                return;
+            }
 
             console.log('remove server:' + itemId);
 
