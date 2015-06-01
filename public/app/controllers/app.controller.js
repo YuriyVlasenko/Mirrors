@@ -96,8 +96,8 @@
                 }
             };
 
-            $scope.basketInfo.cost = cost;
-            $scope.basketInfo.costInDollars = costInDollars;
+            $scope.basketInfo.cost = cost.toFixed(2);
+            $scope.basketInfo.costInDollars = costInDollars.toFixed(2);
         }
 
     }

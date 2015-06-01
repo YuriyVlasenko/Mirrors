@@ -191,8 +191,8 @@
             var salesOrder = {
                 date: new Date(),
                 userId: userData.id,
-                price: $scope.total,
-                priceDollars: $scope.totalUsd,
+                price: $scope.total.toFixed(2),
+                priceDollars: $scope.totalUsd.toFixed(2),
                 isApproved: false,
                 isCompleted: false,
                 comment: $scope.vm.comment,
