@@ -35,12 +35,10 @@ module.exports = {
     },
     searchConditions: function(data){
         var conditions = {};
-
         if (data.setId)
         {
             conditions.setId = data.setId;
         }
-
         return conditions;
     },
     // Add validation.

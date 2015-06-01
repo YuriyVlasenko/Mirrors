@@ -5,8 +5,8 @@
 (function(angular) {
     angular.module('app').controller('mainController', MainController);
 
-    MainController.$inject = ['$scope','$mdDialog','modelNames','toastsPresenter','utils','repository','basket'];
-    function MainController($scope,$mdDialog,modelNames,toastsPresenter,utils,repository,basket) {
+    MainController.$inject = ['$scope','$mdDialog','modelNames','utils','repository','basket'];
+    function MainController($scope,$mdDialog,modelNames,utils,repository,basket) {
 
         var rootBreadcrumb = {
             name:'Все категории',

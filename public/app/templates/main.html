@@ -31,7 +31,7 @@
                 <div class="sale-item__photo" flex>
                     <img ng-src="{{saleItem.pictureSrc}}">
                 </div>
-                <div class="sale-item__footer" layout="row" layout-align="space-between center">
+                <div class="sale-item__footer" layout="row" layout-align="space-between center" ng-if="vm.userData.isAdmin || vm.userData.isPartner">
                     <div class="sale-item__price">
                         <span ng-if="saleItem._price.cost">
                             {{saleItem._price.cost}} <span class="sale-item__currency">{{saleItem._price.currency}}</span>

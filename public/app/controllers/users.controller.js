@@ -121,7 +121,6 @@
                         '<md-button class="md-warn action-button" aria-label="Delete" ng-click="grid.appScope.removeItem(row.entity.id)">' +
                         '<span class="glyphicon glyphicon-remove"></span></md-button>'+
                     '</div>'
-
                 }
             ],
             data: [],

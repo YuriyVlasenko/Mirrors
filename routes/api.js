@@ -31,6 +31,18 @@ module.exports.init = function(app){
         guest: '14d1dad0-06db-11e5-b015-6dc9c9e875e7'
     };
 
+    function isAdminRole(id){
+        return id === wellKnownRoles.admin;
+    };
+
+    function isPartnerRole(id){
+        return id === wellKnownRoles.partner;
+    };
+
+    function isGuestRole(id){
+        return id === wellKnownRoles.guest;
+    };
+
     function isWellKnownObject(id){
         if (id === wellKnownRoles.admin || id === wellKnownRoles.partner || id === wellKnownRoles.guest){
             return true;
@@ -62,6 +74,23 @@ module.exports.init = function(app){
     createRoutes(saleOrderModel);
     createRoutes(saleOrderDtlModel);
     createRoutes(saleOrderHeaderModel);
+
+    function accessFilter(modelName, req, items){
+        // Only current user
+        if (modelName == userModel.name && (isPartnerRole(req.user.roleId) || isGuestRole(req.user.roleId))){
+            return items.filter(function(item){
+                return  item.userId === req.user.userId;
+            });
+        }
+
+        // Only current user sale orders
+        if (modelName == saleOrderModel.name && isPartnerRole(req.user.roleId)){
+            return items.filter(function(item){
+                return  item.userId === req.user.userId;
+            });
+        }
+        return items;
+    }
 
     function createRoutes(itemModel){
         // Only for photo
@@ -126,24 +155,111 @@ module.exports.init = function(app){
         // Get all items route
         app.get(pathManager.buildPath(itemModel.name), ensureAuthenticated, function (req, res) {
 
+            if (isGuestRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case roleModel.name:
+                    case priceModel.name:
+                    case saleOrderModel.name:
+                    case saleOrderDtlModel.name:
+                    case saleOrderHeaderModel.name:
+                        return res.send([]);
+                }
+            }
+
+            if(isPartnerRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case roleModel.name:
+                        return res.send([]);
+                }
+            }
+
             var url_parts = url.parse(req.url, true);
             var query = url_parts.query;
+
             var searchConditions = itemModel.searchConditions(query);
-            return itemModel.dbModel.find(searchConditions, function (err, items) {
-                if (!err) {
-                    return res.send(items.map(function(item){
-                        return itemModel.clientDataBuilder(item);
-                    }));
-                } else {
-                    //log.error(ERROR_TEMPLATE,res.statusCode,err.message);
-                    res.statusCode = 500;
-                    return res.send({ error: 'Server error' });
-                }
-            });
+
+             // Only current user sale orders details
+             if ((itemModel.name == saleOrderDtlModel.name || itemModel.name == saleOrderHeaderModel.name) && isPartnerRole(req.user.roleId)){
+
+                 console.log('access control');
+                 // Access control for only self orders and details.
+
+                return saleOrderModel.dbModel.find({userId: req.user.userId}, function(error, saleOrderItems){
+                     if (error){
+                        return res.send([]);
+                     }
+
+                     var ordersIds = saleOrderItems.map(function(item){
+                        return item.saleOrderId;
+                     });
+
+                     if (ordersIds.length == 0){
+                         return res.send([]);
+                     }
+
+                     return itemModel.dbModel.find(searchConditions, function (err, items) {
+                          if (!err) {
+                              items = accessFilter(itemModel.name, req, items);
+
+                              items = items.filter(function(item){
+                                  return  ordersIds.indexOf(item.saleOrderId) > -1;
+                              });
+
+                              return res.send(items.map(function(item){
+                                  return itemModel.clientDataBuilder(item);
+                              }));
+
+                          } else {
+                              res.statusCode = 500;
+                              return res.send({ error: 'Server error' });
+                          }
+                     });
+                 });
+             }
+             else{
+                 return itemModel.dbModel.find(searchConditions, function (err, items) {
+                     if (!err) {
+
+                         items = accessFilter(itemModel.name, req, items);
+
+                         return res.send(items.map(function(item){
+                             return itemModel.clientDataBuilder(item);
+                         }));
+
+                     } else {
+                         //log.error(ERROR_TEMPLATE,res.statusCode,err.message);
+                         res.statusCode = 500;
+                         return res.send({ error: 'Server error' });
+                     }
+                 });
+             }
         });
 
         // Get one item
         app.get(pathManager.buildPath(itemModel.name, ':id'), ensureAuthenticated, function (req, res) {
+
+            if (isGuestRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case roleModel.name:
+                    case priceModel.name:
+                    case saleOrderModel.name:
+                    case saleOrderDtlModel.name:
+                    case saleOrderHeaderModel.name:
+                        return res.send({});
+                }
+            }
+
+            if(isPartnerRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case roleModel.name:
+                        return res.send({});
+                }
+            }
+
             var itemId = req.params.id;
             if(!itemId) return res.sendStatus(400);
 
@@ -168,6 +284,39 @@ module.exports.init = function(app){
 
         // Create item.
         app.post(pathManager.buildPath(itemModel.name,'new'), ensureAuthenticated, jsonParser, function (req, res) {
+
+            if (isGuestRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case userModel.name:
+                    case setModel.name:
+                    case setItemModel.name:
+                    case roleModel.name:
+                    case categoryModel.name:
+                    case priceModel.name:
+                    case saleItemModel.name:
+                    case saleItemDtlModel.name:
+                    case saleOrderModel.name:
+                    case saleOrderDtlModel.name:
+                    case saleOrderHeaderModel.name:
+                        return res.send({});
+                }
+            }
+
+            if(isPartnerRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case userModel.name:
+                    case setModel.name:
+                    case setItemModel.name:
+                    case roleModel.name:
+                    case categoryModel.name:
+                    case priceModel.name:
+                    case saleItemModel.name:
+                    case saleItemDtlModel.name:
+                        return res.send({});
+                }
+            }
 
             if (!req.body) return res.sendStatus(400);
 
@@ -199,6 +348,40 @@ module.exports.init = function(app){
         // Delete item
         app.post(pathManager.buildPath(itemModel.name,'delete'), ensureAuthenticated, jsonParser, function (req, res) {
 
+            if (isGuestRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case userModel.name:
+                    case setModel.name:
+                    case setItemModel.name:
+                    case roleModel.name:
+                    case categoryModel.name:
+                    case priceModel.name:
+                    case saleItemModel.name:
+                    case saleItemDtlModel.name:
+                    case saleOrderModel.name:
+                    case saleOrderDtlModel.name:
+                    case saleOrderHeaderModel.name:
+                        return res.send({status: 'Access denied'});
+                }
+            }
+
+            if(isPartnerRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case userModel.name:
+                    case setModel.name:
+                    case setItemModel.name:
+                    case roleModel.name:
+                    case categoryModel.name:
+                    case priceModel.name:
+                    case saleItemModel.name:
+                    case saleItemDtlModel.name:
+                        return res.send({status: 'Access denied'});
+                }
+            }
+
+
             if (!req.body || !req.body.id) {
                 return res.sendStatus(400);
             }
@@ -220,21 +403,79 @@ module.exports.init = function(app){
 
             console.log(conditions);
 
-            itemModel.dbModel.remove(conditions, function(err) {
-                if (!err) {
-                    return res.send({status: 'OK'});
-                }
-                else {
-                    res.statusCode = 500;
-                    res.send({error: 'Server error'});
-                    //log.error(ERROR_TEMPLATE, res.statusCode, err.message);
-                }
-            });
+            // Can not remove approved or confirmed orders
+            if(itemModel.name === saleOrderModel.name && (isPartnerRole(req.user.roleId)|| isAdminRole(req.user.roleId))){
+                itemModel.dbModel.find(conditions, function(error, data){
+                   if(error){
+                       res.statusCode = 500;
+                       res.send({error: 'Server error'});
+                   }
+                    var item = data[0];
+                    if(item.isApproved || item.isCompleted){
+                        res.statusCode = 500;
+                        res.send({error: 'Can not remove approved or confirmed orders.'});
+                    }
+                    else{
+                        removeItem();
+                    }
+                });
+            }
+            else{
+                removeItem();
+            }
+
+            function removeItem(){
+                itemModel.dbModel.remove(conditions, function(err) {
+                    if (!err) {
+                        return res.send({status: 'OK'});
+                    }
+                    else {
+                        res.statusCode = 500;
+                        res.send({error: 'Server error'});
+                    }
+                });
+            }
+
         });
 
         // Update item
         app.post(pathManager.buildPath(itemModel.name,'update'), ensureAuthenticated, jsonParser, function (req, res) {
             console.log('update '+itemModel.name);
+
+            if (isGuestRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case userModel.name:
+                    case setModel.name:
+                    case setItemModel.name:
+                    case roleModel.name:
+                    case categoryModel.name:
+                    case priceModel.name:
+                    case saleItemModel.name:
+                    case saleItemDtlModel.name:
+                    case saleOrderModel.name:
+                    case saleOrderDtlModel.name:
+                    case saleOrderHeaderModel.name:
+                        return res.send({status: 'Access denied'});
+                }
+            }
+
+            if(isPartnerRole(req.user.roleId)){
+                switch (itemModel.name)
+                {
+                    case userModel.name:
+                    case setModel.name:
+                    case setItemModel.name:
+                    case roleModel.name:
+                    case categoryModel.name:
+                    case priceModel.name:
+                    case saleItemModel.name:
+                    case saleItemDtlModel.name:
+                        return res.send({status: 'Access denied'});
+                }
+            }
+
+
             if (!req.body || !req.body.id || !req.body.data) {
                 return res.sendStatus(400);
             }

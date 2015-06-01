@@ -15,6 +15,7 @@
         }
 
         $scope.titleText = dialogData.titleText;
+        $scope.isEdit = dialogData.model !== undefined;
         $scope.modelData = dialogData.model || {};
         $scope.roles = dialogData.roles;
 

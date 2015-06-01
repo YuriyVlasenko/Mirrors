@@ -113,7 +113,7 @@
 
         function reloadItems(){
 
-            repository.loadFilteredModelItems(modelNames.SET_ITEM, {params:searchParams}).then(function (data){
+            repository.loadFilteredModelItems(modelNames.SET_ITEM, searchParams).then(function (data){
 
                 repository.buildModelItemData(modelNames.SET_ITEM, data);
 

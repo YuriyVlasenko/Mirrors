@@ -6,9 +6,9 @@
         <div class="dialog_content">
             <ng-form name="itemForm" novalidate layout="row">
                 <div flex>
-                    <md-input-container ng-disabled="isEdit">
+                    <md-input-container>
                         <label>Логин</label>
-                        <input type="text" name="login" ng-model="modelData.login" required>
+                        <input type="text" ng-disabled="isEdit" name="login" ng-model="modelData.login" required>
                     </md-input-container>
                     <md-input-container>
                         <label>ФИО</label>
@@ -21,7 +21,7 @@
                 <div flex>
                     <md-input-container ng-if="!isEdit">
                         <label>Пароль</label>
-                        <input type="password" name="password" ng-model="modelData.password" required>
+                        <input type="password" name="password" ng-model="modelData.password">
                     </md-input-container>
                     <div layout="column" layout-align="start start" class="form-element">
                         <label>Роль</label>

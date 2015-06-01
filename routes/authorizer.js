@@ -6,12 +6,10 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 module.exports.init = function(app, passport){
     passport.serializeUser(function(user, done) {
-        console.log('serializeUser');
         done(null, user.userId);
     });
 
     passport.deserializeUser(function(id, done) {
-        console.log('deserializeUser');
         userModel.findOne({userId: id}, function(err,user){
             err ? done(err) : done(null,user);
         });
@@ -22,7 +20,6 @@ module.exports.init = function(app, passport){
             passwordField: 'password'
         },
         function(username, password, done) {
-            //console.log('username'+username);
             userModel.findOne({ login: username }, function(err, user) {
                 if (err) { return done(err); }
                 if (!user) {
@@ -40,7 +37,6 @@ module.exports.init = function(app, passport){
     ));
 
     app.post('/signIn', function(req, res, next) {
-        console.log('sign in');
         passport.authenticate('local-signup', function(err, user, info) {
             if (err) { return next(err) }
             if (!user) {

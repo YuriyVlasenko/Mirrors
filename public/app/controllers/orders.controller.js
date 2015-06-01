@@ -29,6 +29,11 @@
         function removeOrder(){
             if (!$scope.selectedOrder){
                 toastsPresenter.info('Выберите заказ');
+                return;
+            }
+            if($scope.selectedOrder.isApproved || $scope.selectedOrder.isCompleted){
+                toastsPresenter.error('Невозможно удалить выполненый или подтвержденный заказ.');
+                return;
             }
 
             var removePromises = [];

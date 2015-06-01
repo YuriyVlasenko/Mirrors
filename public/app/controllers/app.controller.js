@@ -20,6 +20,29 @@
             return signIn.getUserData();
         }, function(value){
             $scope.vm.userData = value;
+
+            repository.reloadModelItems([modelNames.SALE_ITEM, modelNames.PRICE]).then(function(){
+                    saleItems = repository.getModelItems(modelNames.SALE_ITEM);
+                    var prices = repository.getModelItems(modelNames.PRICE);
+
+                    angular.forEach(saleItems, function(saleItem){
+                        saleItem.price = utils.getActualPriceForSaleItem(saleItem.id, prices);
+                        saleItem.priceValue =saleItem.price.cost;
+                        saleItem.priceInDollars =saleItem.price.inDollars;
+
+                        saleItemsMap[saleItem.id] = saleItem;
+                    });
+
+                    $scope.$watch(basket.getLastUpdateDate, function(){
+                        basketInfo = basket.getBasketInfo();
+                        $scope.basketInfo = basketInfo;
+                        reloadBasketData();
+                    });
+                },
+                function(){
+
+                });
+
         });
 
         $scope.logout = logout;
@@ -28,27 +51,7 @@
             signIn.logout();
         }
 
-        repository.reloadModelItems([modelNames.SALE_ITEM, modelNames.PRICE]).then(function(){
-            saleItems = repository.getModelItems(modelNames.SALE_ITEM);
-            var prices = repository.getModelItems(modelNames.PRICE);
 
-            angular.forEach(saleItems, function(saleItem){
-                saleItem.price = utils.getActualPriceForSaleItem(saleItem.id, prices);
-                saleItem.priceValue =saleItem.price.cost;
-                saleItem.priceInDollars =saleItem.price.inDollars;
-
-                saleItemsMap[saleItem.id] = saleItem;
-            });
-
-            $scope.$watch(basket.getLastUpdateDate, function(){
-                basketInfo = basket.getBasketInfo();
-                $scope.basketInfo = basketInfo;
-                reloadBasketData();
-            });
-        },
-        function(){
-
-        });
 
         $scope.openBasket = function () {
 
@@ -95,7 +98,6 @@
 
             $scope.basketInfo.cost = cost;
             $scope.basketInfo.costInDollars = costInDollars;
-            //$scope.basketInfo.items
         }
 
     }

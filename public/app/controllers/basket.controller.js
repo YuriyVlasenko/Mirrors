@@ -4,8 +4,8 @@
 
 (function(angular) {
     angular.module('app').controller('basketController', BasketController);
-    BasketController.$inject = ['$scope', 'toastsPresenter','$mdDialog', 'repository', 'modelNames','basket', 'utils'];
-    function BasketController($scope, toastsPresenter, $mdDialog, repository, modelNames,basket,utils) {
+    BasketController.$inject = ['$scope', 'toastsPresenter','$mdDialog', 'repository', 'modelNames','basket', 'utils','signIn'];
+    function BasketController($scope, toastsPresenter, $mdDialog, repository, modelNames,basket,utils, signIn) {
 
         var basketInfo = basket.getBasketInfo();
 
@@ -144,7 +144,6 @@
         };
 
         $scope.saveToBasket = function(){
-            debugger;
             basket.clear();
             for(var i=0; i<$scope.basketItems.length; i++)
             {
@@ -187,10 +186,11 @@
                 return;
             }
 
-            // TODO: modify
+            var userData = signIn.getUserData();
+
             var salesOrder = {
                 date: new Date(),
-                userId: '1d5f2d70-eb2d-11e4-a000-29c1ad076ab3',
+                userId: userData.id,
                 price: $scope.total,
                 priceDollars: $scope.totalUsd,
                 isApproved: false,

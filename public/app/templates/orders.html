@@ -1,7 +1,6 @@
 <div class="orders" layout="column" flex>
     <div layout="row" layout-align="space-between center">
         <div class="actions">
-            <md-button class="action-button md-primary" ng-click="addItem();">Создать</md-button>
             <md-button class="action-button md-primary" ng-click="editOrder()">Изменить</md-button>
             <md-button class="action-button md-primary" ng-click="print();">Печать</md-button>
         </div>
@@ -115,7 +114,7 @@
             <md-content>
                     <md-input-container>
                         <label>Коментарий</label>
-                        <input type="text" name="supplier" ng-model="selectedOrder.comment">
+                        <input type="text" name="supplier" ng-disabled="selectedOrder.isApproved" ng-model="selectedOrder.comment">
                     </md-input-container>
                     <md-input-container>
                         <label>Отзыв</label>
@@ -124,7 +123,7 @@
                 <md-button class="md-primary" ng-click="saveComments();">Сохранить</md-button>
             </md-content>
         </md-tab>
-        <md-tab label="управление">
+        <md-tab label="управление" ng-if="vm.userData.isAdmin">
             <md-content>
                 <div layout="row" layout-align="start center">
                     <md-input-container flex>

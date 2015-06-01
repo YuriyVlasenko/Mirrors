@@ -43,6 +43,11 @@ module.exports = {
     },
     searchConditions: function(data){
         var conditions = {};
+
+        if (data.login){
+            conditions.login =data.login;
+        }
+
         return conditions;
     },
     // Add validation.

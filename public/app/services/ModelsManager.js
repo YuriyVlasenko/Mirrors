@@ -34,13 +34,15 @@
 
             this.getAll =  function (config) {
                 var defer =  $q.defer();
-
-                $http.get(paths.getAll, config).success(function(data){
+                $http({
+                    url: paths.getAll,
+                    method: "GET",
+                    params: config
+                }).success(function(data){
                     defer.resolve(data);
                 }).error(function(error){
                     defer.reject(error);
                 });
-
                 return defer.promise;
             };
 
