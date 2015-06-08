@@ -1,5 +1,5 @@
-<div class="orders" layout="column" flex>
-    <div layout="row" layout-align="space-between center">
+<div class="orders">
+    <div layout="row" layout-align="space-between center" class="actions-block">
         <div class="actions">
             <md-button class="action-button md-primary" ng-click="copyToBasket()">Добавить в корзину</md-button>
             <md-button class="action-button md-primary" ng-click="copyOrderItems()">Изменить заказ</md-button>
@@ -10,7 +10,8 @@
         </div>
     </div>
 
-    <div class="order-items">
+    <div>
+        <div class="order-items">
         <div class="order-item--header">
             <table class="order-item">
                 <tr>
@@ -42,7 +43,7 @@
             </table>
         </div>
     </div>
-    <md-tabs md-dynamic-height md-border-bottom ng-if="selectedOrder">
+        <md-tabs md-dynamic-height md-border-bottom ng-if="selectedOrder">
         <md-tab label="товары">
             <md-content>
                 <div class="order-item-details" ng-if="selectedOrder._saleOrderDtl">
@@ -147,5 +148,5 @@
                 </md-content>
         </md-tab>
     </md-tabs>
-
+    </div>
 </div>

@@ -19,7 +19,9 @@ h1, h2, h3 {
 
 .l-main__header {
   border-bottom: 1px solid lightgray;
-  padding: 5px 0; }
+  padding: 5px 0;
+  min-height: 40px;
+  height: 40px; }
   .l-main__header .user-data {
     width: 130px;
     text-align: right; }
@@ -27,7 +29,7 @@ h1, h2, h3 {
       font-weight: 700; }
 
 .l-main__content {
-  overflow: auto; }
+  overflow: overlay; }
 
 .l-main__footer {
   border-top: 1px solid lightgray;
@@ -246,11 +248,20 @@ table {
 
 .orders md-input-container {
   padding: 2px; }
+.orders .orders__actions-block {
+  min-height: 40px;
+  height: 40px; }
+
+.order-items {
+  max-height: 360px;
+  overflow: auto; }
+
+.order-item--header {
+  height: 25px; }
 
 .order-item--content {
-  max-height: 400px;
-  overflow-y: auto;
-  overflow-x: hidden; }
+  max-height: 325px;
+  overflow: auto; }
 
 .order-item {
   width: 100%;
