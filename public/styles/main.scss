@@ -384,6 +384,12 @@ table{
   width: 700px;
   height: 600px;
 
+  .basket-items__container{
+    max-height: 270px;
+    height: 270px;
+    overflow: auto;
+  }
+
   .basket-items{
 
     max-height: 355px;

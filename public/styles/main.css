@@ -220,6 +220,10 @@ table {
 .dialog--basket {
   width: 700px;
   height: 600px; }
+  .dialog--basket .basket-items__container {
+    max-height: 270px;
+    height: 270px;
+    overflow: auto; }
   .dialog--basket .basket-items {
     max-height: 355px; }
     .dialog--basket .basket-items .basket-items--children {

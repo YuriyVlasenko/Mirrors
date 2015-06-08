@@ -20,7 +20,8 @@
                             <th class="basket-item__total">Стоимость</th>
                         </tr>
                     </table>
-                    <table class="basket-items" ng-repeat="item in basketItems">
+                    <div class="basket-items__container">
+                        <table class="basket-items" ng-repeat="item in basketItems">
                         <tr class="basket-item">
                             <td class="basket-item__name">{{item.name}}</td>
                             <td class="basket-item__code">{{item.code}}</td>
@@ -52,6 +53,7 @@
                             <td class="basket-item__total">{{(childitem.price.cost*childitem.count).toFixed(2)}} {{childitem.price.currency}}</td>
                         </tr>
                     </table>
+                    </div>
                     <div layout="row" layout-align="end center" layout-fill class="basket-total">
                         <span>Итого:</span>
                         <span><b>{{total.toFixed(2)}} грн.</b></span>
