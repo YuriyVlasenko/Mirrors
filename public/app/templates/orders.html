@@ -71,7 +71,7 @@
                                 <td class="td_20">{{orderDetail._saleItem._category.name}}</td>
                                 <td class="td_10">{{orderDetail.count}}</td>
                                 <td class="td_10">{{orderDetail._saleItem._price.cost}} {{orderDetail._saleItem._price.currency}}</td>
-                                <td class="td_10">{{orderDetail._saleItem._price.cost * orderDetail.count}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_10">{{(orderDetail._saleItem._price.cost * orderDetail.count).toFixed(2)}} {{orderDetail._saleItem._price.currency}}</td>
                             </tr>
                         </table>
                     </div>

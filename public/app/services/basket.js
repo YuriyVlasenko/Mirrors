@@ -97,16 +97,24 @@
 
         function addItem(item){
             var bsk = localStorageService.get(storageKeys.BASKET);
-            if (!bsk[item.id]){
 
+            if (bsk[item.id]){
+                // Append items
+                bsk[item.id].count += item.count || 0;
+                if (item.childItemsMap){
+                    bsk[item.id].childItemsMap = angular.extend(bsk[item.id].childItemsMap, item.childItemsMap);
+
+                }
+            }
+            else{
+                // Create items.
                 bsk[item.id] = {
                     count: item.count || 1,
-                    childItemsMap: item.childItemsMap||{}
+                    childItemsMap: item.childItemsMap || {}
                 };
-
-                localStorageService.set(storageKeys.BASKET, bsk);
-                lastUpdateDate = new Date();
             }
+            localStorageService.set(storageKeys.BASKET, bsk);
+            lastUpdateDate = new Date();
         };
 
         function removeItem(id){

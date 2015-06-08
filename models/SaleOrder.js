@@ -59,7 +59,6 @@ module.exports = {
     updateDataBuilder: function(data){
         var updateData = {};
 
-
         if (data.date){
             updateData.date = data.date;
         }

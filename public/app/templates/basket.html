@@ -34,12 +34,12 @@
                                 <md-button class="md-warn action-button" aria-label="Remove item from set" ng-click="removeItem(item)">
                                     <span class="glyphicon glyphicon-remove"></span></md-button>
                             </td>
-                            <td class="basket-item__total">{{item.price.cost*item.count}} {{item.price.currency}}</td>
+                            <td class="basket-item__total">{{(item.price.cost*item.count).toFixed(2)}} {{item.price.currency}}</td>
                         </tr>
                         <tr class="basket-items basket-items--children" ng-repeat="childitem in item.childrens">
                             <td class="basket-item__name">{{childitem.name}}</td>
                             <td class="basket-item__code">{{childitem.code}}</td>
-                            <td class="basket-item__cost">{{childitem.price.cost}} {{childitem.price.currency}}</td>
+                            <td class="basket-item__cost">{{childitem.price.cost.toFixed(2)}} {{childitem.price.currency}}</td>
                             <td class="basket-item__count">{{childitem.count}}</td>
                             <td class="basket-item__action">
                                 <md-button class="md-primary action-button" ng-click="incrementCount(childitem)">
@@ -49,12 +49,12 @@
                                 <md-button class="md-warn action-button" ari a-label="Remove item from set" ng-click="removeItem(childitem, item)">
                                     <span class="glyphicon glyphicon-remove"></span></md-button>
                             </td>
-                            <td class="basket-item__total">{{childitem.price.cost*childitem.count}} {{childitem.price.currency}}</td>
+                            <td class="basket-item__total">{{(childitem.price.cost*childitem.count).toFixed(2)}} {{childitem.price.currency}}</td>
                         </tr>
                     </table>
                     <div layout="row" layout-align="end center" layout-fill class="basket-total">
                         <span>Итого:</span>
-                        <span><b>{{total}} грн.</b></span>
+                        <span><b>{{total.toFixed(2)}} грн.</b></span>
                         <span><b>+ {{totalUsd}} usd.</b></span>
                     </div>
                 </md-tab>

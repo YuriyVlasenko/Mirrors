@@ -184,7 +184,6 @@
                 priceDollars: $scope.totalUsd.toFixed(2),
                 comment: $scope.vm.comment
             };
-
             repository.updateModelItem(modelNames.SALE_ORDER, $scope.vm.order.id, salesOrder).then(
                  function(){
                      var removePromises = [];
@@ -195,6 +194,7 @@
                      }
                      $q.all(removePromises).then(function(data){
                          saveDetails($scope.vm.order.id);
+                         $mdDialog.cancel();
                      }, function(error){
                          toastsPresenter.error('Ошибка удаления заказа');
                          console.log(error);

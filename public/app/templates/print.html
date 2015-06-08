@@ -51,7 +51,7 @@
             <td class="td_10">{{detailItem._saleItem.code}}</td>
             <td class="td_10 number-field">{{detailItem.count}}</td>
             <td class="td_15 number-field" ng-show="showPrices">{{detailItem._saleItem._price.cost}} {{detailItem._saleItem._price.currency}}</td>
-            <td class="td_20 number-field" ng-show="showPrices">{{detailItem._saleItem._price.cost * detailItem.count}} {{detailItem._saleItem._price.currency}}</td>
+            <td class="td_20 number-field" ng-show="showPrices">{{(detailItem._saleItem._price.cost * detailItem.count).toFixed(2)}} {{detailItem._saleItem._price.currency}}</td>
         </tr>
     </table>
     <table ng-if="saleOrderDtlAcc && saleOrderDtlAcc.length > 0">
@@ -71,7 +71,7 @@
             <td class="td_10">{{detailItem._saleItem.code}}</td>
             <td class="td_10 number-field">{{detailItem.count}}</td>
             <td class="td_15 number-field" ng-show="showPrices">{{detailItem._saleItem._price.cost}} {{detailItem._saleItem._price.currency}}</td>
-            <td class="td_20 number-field" ng-show="showPrices">{{detailItem._saleItem._price.cost * detailItem.count}} {{detailItem._saleItem._price.currency}}</td>
+            <td class="td_20 number-field" ng-show="showPrices">{{(detailItem._saleItem._price.cost * detailItem.count).toFixed(2)}} {{detailItem._saleItem._price.currency}}</td>
         </tr>
     </table>
 
@@ -81,7 +81,7 @@
             <td class="td_20">Всего, грн.</td>
             <td class="td_30 input-field number-field">
                 <span ng-show="showPrices">{{order.price}} грн. </span>
-                <span ng-if="order.priceDollars"> (+{{order.priceDollars}} usd.)</span>
+                <span ng-show="showPrices" ng-if="order.priceDollars"> (+{{order.priceDollars}} usd.)</span>
             </td>
         </tr>
         <tr>
