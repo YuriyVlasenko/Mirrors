@@ -54,7 +54,6 @@
 
 
         $scope.openBasket = function () {
-
             if(basket.getBasketInfo().itemsCount == 0){
                 toastsPresenter.info('В корзине отсутствуют товары.');
                 return;

@@ -4,8 +4,8 @@
 
 (function(angular) {
     angular.module('app').controller('basketController', BasketController);
-    BasketController.$inject = ['$scope', 'toastsPresenter','$mdDialog', 'repository', 'modelNames','basket', 'utils','signIn'];
-    function BasketController($scope, toastsPresenter, $mdDialog, repository, modelNames,basket,utils, signIn) {
+    BasketController.$inject = ['$scope','$q', 'toastsPresenter','$mdDialog', 'repository', 'modelNames','basket', 'utils','signIn'];
+    function BasketController($scope,$q, toastsPresenter, $mdDialog, repository, modelNames,basket,utils, signIn) {
 
         var basketInfo = basket.getBasketInfo();
 
@@ -16,6 +16,7 @@
 
         $scope.vm.details = basket.getBasketDetails();
         $scope.vm.comment = basket.getBasketComment();
+        $scope.vm.order = basket.getBasketOrder();
 
         $scope.basketItems = [];
         $scope.total = 0;
@@ -171,13 +172,118 @@
             $mdDialog.cancel();
         };
 
+        $scope.updateItems = function(){
+            if($scope.basketItems.length == 0){
+                toastsPresenter.info('Корзина пуста');
+                return;
+            }
+
+            var salesOrder = {
+                date: new Date(),
+                price: $scope.total.toFixed(2),
+                priceDollars: $scope.totalUsd.toFixed(2),
+                comment: $scope.vm.comment
+            };
+
+            repository.updateModelItem(modelNames.SALE_ORDER, $scope.vm.order.id, salesOrder).then(
+                 function(){
+                     var removePromises = [];
+                     for(var i=0; i <$scope.vm.order._saleOrderDtl.length; i++ )
+                     {
+                         var detail = $scope.vm.order._saleOrderDtl[i];
+                         removePromises.push(repository.removeModelItem(modelNames.SALE_ORDER_DTL, detail.id));
+                     }
+                     $q.all(removePromises).then(function(data){
+                         saveDetails($scope.vm.order.id);
+                     }, function(error){
+                         toastsPresenter.error('Ошибка удаления заказа');
+                         console.log(error);
+                     });
+                 },
+                 function(error){
+                     console.log('error');
+                     console.log(error);
+                 }
+            );
+        };
+
         $scope.clearBasket = function(){
             basket.clear();
             $mdDialog.cancel();
 
             $scope.vm.details = basket.getBasketDetails();
             $scope.vm.comment = basket.getBasketComment();
+            $scope.vm.order = basket.getBasketOrder();
         };
+
+        function saveDetails(orderId){
+            var saleOrderDtlCreateCompleted = true;
+
+            // find all saleOrderItems.
+            var saleOrderItems = [];
+            for(var i=0; i<$scope.basketItems.length; i++){
+                var basketItem = $scope.basketItems[i];
+
+                saleOrderItems.push({
+                    saleItemId: basketItem.id,
+                    count: basketItem.count
+                });
+
+                if(basketItem.childrens){
+                    for(var j=0; j<basketItem.childrens.length; j++)
+                    {
+                        var childItem = basketItem.childrens[j];
+                        saleOrderItems.push({
+                            saleItemId:childItem.id,
+                            count: childItem.count
+                        });
+                    }
+                }
+            }
+
+            var uniqueItemsMap = {};
+            angular.forEach(saleOrderItems, function (item) {
+                if(uniqueItemsMap[item.saleItemId]){
+                    uniqueItemsMap[item.saleItemId].count += item.count;
+                }
+                else{
+                    uniqueItemsMap[item.saleItemId] = {
+                        saleOrderId:orderId,
+                        saleItemId:item.saleItemId,
+                        count: item.count
+                    };
+                }
+            });
+
+            for(var saleItemKey in uniqueItemsMap){
+                var saleItem = uniqueItemsMap[saleItemKey];
+                repository.createModelItem(modelNames.SALE_ORDER_DTL, saleItem).then(function(){
+
+                }, function(error){
+                    console.error(error);
+                    saleOrderDtlCreateCompleted = false;
+                });
+
+                if (!saleOrderDtlCreateCompleted){
+                    break;
+                }
+            }
+
+            if (saleOrderDtlCreateCompleted){
+
+                $scope.vm.details.id = orderId;
+                repository.createModelItem(modelNames.SALE_ORDER_HEADER, $scope.vm.details).catch(function (error) {
+                    console.log('SALE_ORDER_HEADER');
+                    console.error(error);
+                });
+
+                toastsPresenter.info('Заказ оформлен/обновлен');
+            }
+            else{
+                toastsPresenter.info('Ошибка при оформлении/обновлении заказа');
+            }
+
+        }
 
         $scope.orderItems = function(){
 
@@ -202,74 +308,7 @@
 
 
             repository.createModelItem(modelNames.SALE_ORDER, salesOrder).then(function(data){
-
-                var saleOrderDtlCreateCompleted = true;
-                var orderId = data.id;
-
-                // find all saleOrderItems.
-                var saleOrderItems = [];
-                for(var i=0; i<$scope.basketItems.length; i++){
-                    var basketItem = $scope.basketItems[i];
-
-                    saleOrderItems.push({
-                        saleItemId: basketItem.id,
-                        count: basketItem.count
-                    });
-
-                    if(basketItem.childrens){
-                        for(var j=0; j<basketItem.childrens.length; j++)
-                        {
-                            var childItem = basketItem.childrens[j];
-                            saleOrderItems.push({
-                                saleItemId:childItem.id,
-                                count: childItem.count
-                            });
-                        }
-                    }
-                }
-
-                var uniqueItemsMap = {};
-                angular.forEach(saleOrderItems, function (item) {
-                    if(uniqueItemsMap[item.saleItemId]){
-                        uniqueItemsMap[item.saleItemId].count += item.count;
-                    }
-                    else{
-                        uniqueItemsMap[item.saleItemId] = {
-                            saleOrderId:orderId,
-                            saleItemId:item.saleItemId,
-                            count: item.count
-                        };
-                    }
-                });
-
-                for(var saleItemKey in uniqueItemsMap){
-                    var saleItem = uniqueItemsMap[saleItemKey];
-                    repository.createModelItem(modelNames.SALE_ORDER_DTL, saleItem).then(function(){
-
-                    }, function(error){
-                        console.error(error);
-                        saleOrderDtlCreateCompleted = false;
-                    });
-
-                    if (!saleOrderDtlCreateCompleted){
-                        break;
-                    }
-                }
-
-                if (saleOrderDtlCreateCompleted){
-
-                    $scope.vm.details.id = orderId;
-                    repository.createModelItem(modelNames.SALE_ORDER_HEADER, $scope.vm.details).catch(function (error) {
-                        console.log('SALE_ORDER_HEADER');
-                        console.error(error);
-                    });
-
-                    toastsPresenter.info('Заказ оформлен');
-                }
-                else{
-                    toastsPresenter.info('Ошибка при оформлении заказа');
-                }
-
+                saveDetails(data.id);
                 console.log('order created');
                 console.log(data);
                 $scope.clearBasket();

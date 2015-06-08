@@ -1,7 +1,7 @@
 <md-dialog layout="column" class="dialog--basket">
     <md-content flex>
         <header class="dialog_header">
-            <h2>Корзина</h2>
+            <h2>Корзина <span ng-if="vm.order">(заказ {{vm.order.id.substr(0,6)}} от {{vm.order.date |date:'dd-MM-yyyy'}} {{vm.order.date |date:'hh-mm-ss'}})</span></h2>
         </header>
         <div class="dialog_content" layout="column" layout-align="start start">
             <div layout="row" layout-align="end center" layout-fill>
@@ -89,7 +89,8 @@
         </div>
     </md-content>
     <footer class="md-actions dialog_footer">
-        <md-button class="md-primary" ng-click="orderItems();">Оформить</md-button>
+        <md-button class="md-primary" ng-click="updateItems();" ng-if="vm.order">Обновить текущий заказ</md-button>
+        <md-button class="md-primary" ng-click="orderItems();">Оформить новый заказ</md-button>
         <md-button ng-click="cancel()">Закрыть</md-button>
     </footer>
 </md-dialog>

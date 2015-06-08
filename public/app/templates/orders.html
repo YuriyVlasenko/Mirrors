@@ -1,7 +1,8 @@
 <div class="orders" layout="column" flex>
     <div layout="row" layout-align="space-between center">
         <div class="actions">
-            <md-button class="action-button md-primary" ng-click="editOrder()">Изменить</md-button>
+            <md-button class="action-button md-primary" ng-click="copyToBasket()">Добавить в корзину</md-button>
+            <md-button class="action-button md-primary" ng-click="copyOrderItems()">Изменить заказ</md-button>
             <md-button class="action-button md-primary" ng-click="print();">Печать</md-button>
         </div>
         <div class="actions">
@@ -48,26 +49,28 @@
                     <div class="order-item-details-header">
                         <table class="order-item-details">
                             <tr>
-                                <th class="order-item-details__sale-item__preview"></th>
-                                <th class="order-item-details__sale-item__name">Товар</th>
-                                <th class="order-item-details__sale-item__category">Категория</th>
-                                <th class="order-item-details__count">К-во</th>
-                                <th class="order-item-details__sale-item__price">Цена</th>
-                                <th class="order-item-details__sale-item__total">Сумма</th>
+                                <th class="td_5"></th>
+                                <th class="td_30">Товар</th>
+                                <th class="td_15">Код</th>
+                                <th class="td_20">Категория</th>
+                                <th class="td_10">К-во</th>
+                                <th class="td_10">Цена</th>
+                                <th class="td_10">Сумма</th>
                             </tr>
                         </table>
                     </div>
                     <div class="order-item-details-content">
                         <table class="order-item-details">
                             <tr ng-repeat="orderDetail in selectedOrder._saleOrderDtl">
-                                <td class="order-item-details__sale-item__preview">
+                                <td class="td_5">
                                     <img class="order-item-details__small-img" ng-src="{{orderDetail._saleItem.pictureSrc}}" />
                                 </td>
-                                <td class="order-item-details__sale-item__name">{{orderDetail._saleItem.name}}</td>
-                                <td class="order-item-details__sale-item__category">{{orderDetail._saleItem._category.name}}</td>
-                                <td class="order-item-details__count">{{orderDetail.count}}</td>
-                                <td class="order-item-details__sale-item__price">{{orderDetail._saleItem._price.cost}} {{orderDetail._saleItem._price.currency}}</td>
-                                <td class="order-item-details__sale-item__total">{{orderDetail._saleItem._price.cost * orderDetail.count}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_30">{{orderDetail._saleItem.name}}</td>
+                                <td class="td_15">{{orderDetail._saleItem.code}}</td>
+                                <td class="td_20">{{orderDetail._saleItem._category.name}}</td>
+                                <td class="td_10">{{orderDetail.count}}</td>
+                                <td class="td_10">{{orderDetail._saleItem._price.cost}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_10">{{orderDetail._saleItem._price.cost * orderDetail.count}} {{orderDetail._saleItem._price.currency}}</td>
                             </tr>
                         </table>
                     </div>

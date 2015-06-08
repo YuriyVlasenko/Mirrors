@@ -183,9 +183,7 @@ module.exports.init = function(app){
              // Only current user sale orders details
              if ((itemModel.name == saleOrderDtlModel.name || itemModel.name == saleOrderHeaderModel.name) && isPartnerRole(req.user.roleId)){
 
-                 console.log('access control');
                  // Access control for only self orders and details.
-
                 return saleOrderModel.dbModel.find({userId: req.user.userId}, function(error, saleOrderItems){
                      if (error){
                         return res.send([]);
@@ -404,7 +402,7 @@ module.exports.init = function(app){
             console.log(conditions);
 
             // Can not remove approved or confirmed orders
-            if(itemModel.name === saleOrderModel.name && (isPartnerRole(req.user.roleId)|| isAdminRole(req.user.roleId))){
+            if(itemModel.name === saleOrderModel.name){
                 itemModel.dbModel.find(conditions, function(error, data){
                    if(error){
                        res.statusCode = 500;

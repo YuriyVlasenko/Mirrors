@@ -10,6 +10,7 @@
     function createService(localStorageService, storageKeys) {
 
         var lastUpdateDate;
+        var currentOrder;
 
         if(!localStorageService.get(storageKeys.BASKET)){
             localStorageService.add(storageKeys.BASKET,{});
@@ -24,7 +25,10 @@
             getBasketInfo:getBasketInfo,
             getBasketDetails:getBasketDetails,
             getBasketComment:getBasketComment,
+            getBasketOrder:getBasketOrder,
             updateItemCount:updateItemCount,
+            // add as copy from orders ({id, count})
+            fillBasket: fillBasket,
             clear: clear
         };
 
@@ -56,13 +60,42 @@
 
         function clear(){
             lastUpdateDate = new Date();
+            currentOrder = null;
+
             localStorageService.set(storageKeys.BASKET,{});
+            localStorageService.remove(storageKeys.BASKET_ORDER);
             localStorageService.set(storageKeys.BASKET_COMMENT,'');
             localStorageService.set(storageKeys.BASKET_DETAILS,{});
+        };
+
+        function getBasketOrder(){
+            return localStorageService.get(storageKeys.BASKET_ORDER);
         }
 
-        function addItem(item){
+        function fillBasket(order, holdOrder){
+            if (holdOrder){
+                clear();
+                currentOrder = order;
+            }
 
+            lastUpdateDate = new Date();
+
+            localStorageService.set(storageKeys.BASKET_ORDER,currentOrder);
+
+            var orderItems = order._saleOrderDtl.map(function(item){
+                return{
+                    id: item.saleItemId,
+                    count: item.count
+                }
+            });
+            // Add items
+            angular.forEach(orderItems, function(item){
+                addItem(item);
+            });
+            setBasketDetails(order._saleOrderHeader);
+        };
+
+        function addItem(item){
             var bsk = localStorageService.get(storageKeys.BASKET);
             if (!bsk[item.id]){
 

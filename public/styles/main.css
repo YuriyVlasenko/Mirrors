@@ -277,18 +277,6 @@ md-label {
   height: 50px;
   width: 50px;
   padding: 5px; }
-.order-item-details .order-item-details .order-item-details__sale-item__preview {
-  width: 70px; }
-.order-item-details .order-item-details .order-item-details__sale-item__name {
-  width: 200px; }
-.order-item-details .order-item-details .order-item-details__sale-item__category {
-  width: 140px; }
-.order-item-details .order-item-details .order-item-details__sale-item__price {
-  width: 80px; }
-.order-item-details .order-item-details .order-item-details__count {
-  width: 50px; }
-.order-item-details .order-item-details .order-item-details__sale-item__total {
-  width: 80px; }
 
 .dialog--photo {
   width: 400px;

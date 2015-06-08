@@ -59,6 +59,11 @@ module.exports = {
     updateDataBuilder: function(data){
         var updateData = {};
 
+
+        if (data.date){
+            updateData.date = data.date;
+        }
+
         if (data.price){
             updateData.price = data.price;
         }
@@ -67,11 +72,11 @@ module.exports = {
             updateData.priceDollars = data.priceDollars;
         }
 
-        if (data.isApproved){
+        if (data.isApproved !== undefined){
             updateData.isApproved = data.isApproved;
         }
 
-        if (data.isCompleted){
+        if (data.isCompleted !== undefined){
             updateData.isCompleted = data.isCompleted;
         }
 

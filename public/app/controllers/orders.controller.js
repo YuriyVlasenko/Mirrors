@@ -5,8 +5,9 @@
 (function(angular) {
     angular.module('app').controller('ordersController', OrdersController);
 
-    OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print', '$q', 'utils', 'basket'];
-    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils, basket){
+    OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print', '$q', 'utils', 'basket',
+        '$mdDialog'];
+    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils, basket, $mdDialog){
 
         var saleOrderDtl = [];
         $scope.saleOrders = [];
@@ -18,6 +19,8 @@
         $scope.saveManagement = saveManagement;
         $scope.removeOrder = removeOrder;
         $scope.copyHeader = copyHeader;
+        $scope.copyOrderItems = copyOrderItems;
+        $scope.copyToBasket =  copyToBasket;
 
         function printOrder(){
             if (!$scope.selectedOrder){
@@ -25,6 +28,15 @@
             }
             print.printOrder($scope.selectedOrder);
         };
+
+        function copyToBasket(){
+            if (!$scope.selectedOrder){
+                toastsPresenter.info('Выберите заказ');
+                return;
+            }
+            basket.fillBasket($scope.selectedOrder);
+            toastsPresenter.info('Товары добавлены');
+        }
 
         function removeOrder(){
             if (!$scope.selectedOrder){
@@ -61,6 +73,18 @@
             });
 
         }
+
+        function copyOrderItems(){
+            if (!$scope.selectedOrder){
+                toastsPresenter.info('Выберите заказ');
+                return;
+            }
+            basket.fillBasket($scope.selectedOrder, true);
+            $mdDialog.show({
+                templateUrl:'app/templates/basket.html',
+                controller:'basketController'
+            });
+        };
 
         function saveManagement(){
             var updateData = {
