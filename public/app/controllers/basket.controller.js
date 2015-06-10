@@ -22,11 +22,19 @@
         $scope.total = 0;
         $scope.totalUsd = 0;
 
+        $scope.calculateTotalValues = calculateTotalValues;
+
         repository.reloadModelItems([modelNames.SALE_ITEM, modelNames.PRICE]).then(function(){
             saleItemsMap = repository.getModelItemsMap(modelNames.SALE_ITEM);
             allPrices = repository.getModelItems(modelNames.PRICE);
 
             initBasketItems();
+        });
+
+        $scope.$watch(function(){
+            return signIn.getUserData();
+        }, function(value){
+            $scope.vm.userData = value;
         });
 
         function calculateTotalValues(){
@@ -36,10 +44,10 @@
                 var basketItem =  $scope.basketItems[i];
                 // Calculate for root items.
                 if (basketItem.price.inDollars){
-                    $scope.totalUsd+=basketItem.price.cost*basketItem.count;
+                    $scope.totalUsd+=basketItem.customPrice*basketItem.count;
                 }
                 else{
-                    $scope.total+=basketItem.price.cost*basketItem.count;
+                    $scope.total+=basketItem.customPrice*basketItem.count;
                 }
 
                 // Calculate for children items.
@@ -47,10 +55,10 @@
                     for(var j = 0; j < basketItem.childrens.length; j++){
                         var childItem = basketItem.childrens[j];
                         if (childItem.price.inDollars){
-                            $scope.totalUsd+=childItem.price.cost*childItem.count;
+                            $scope.totalUsd += childItem.customPrice*childItem.count;
                         }
                         else{
-                            $scope.total+=childItem.price.cost*childItem.count;
+                            $scope.total += childItem.customPrice*childItem.count;
                         }
                     }
                 }
@@ -61,6 +69,9 @@
             for(var basketItemKey in basketInfo.itemsMap){
                 var basketItem = basketInfo.itemsMap[basketItemKey];
                 var itemInfo = getItemInfo(basketItemKey);
+
+                itemInfo.customPrice = basketItem.customPrice || itemInfo.price.cost;
+
                 if (!itemInfo){
                     toastsPresenter.error('Ошибка при определение товара. Очистите корзину.');
                     return;
@@ -104,7 +115,6 @@
                 code: saleItem.code,
                 price: utils.getActualPriceForSaleItem(saleItem.id, allPrices)
             };
-
             itemInfo.price.currency = itemInfo.price.inDollars?'usd.':'грн.';
             return itemInfo;
         }
@@ -194,6 +204,7 @@
                      }
                      $q.all(removePromises).then(function(data){
                          saveDetails($scope.vm.order.id);
+                         basket.clear();
                          $mdDialog.cancel();
                      }, function(error){
                          toastsPresenter.error('Ошибка удаления заказа');
@@ -224,19 +235,31 @@
             for(var i=0; i<$scope.basketItems.length; i++){
                 var basketItem = $scope.basketItems[i];
 
-                saleOrderItems.push({
+                var orderItemData = {
                     saleItemId: basketItem.id,
                     count: basketItem.count
-                });
+                };
+
+                if ($scope.vm.userData.isAdmin){
+                    orderItemData.customPrice = basketItem.customPrice;
+                }
+
+                saleOrderItems.push(orderItemData);
 
                 if(basketItem.childrens){
                     for(var j=0; j<basketItem.childrens.length; j++)
                     {
                         var childItem = basketItem.childrens[j];
-                        saleOrderItems.push({
-                            saleItemId:childItem.id,
+                        var saleOrderItemData = {
+                            saleItemId: childItem.id,
                             count: childItem.count
-                        });
+                        };
+
+                        if ($scope.vm.userData.isAdmin){
+                            saleOrderItemData.customPrice = childItem.customPrice;
+                        }
+
+                        saleOrderItems.push(saleOrderItemData);
                     }
                 }
             }
@@ -247,18 +270,25 @@
                     uniqueItemsMap[item.saleItemId].count += item.count;
                 }
                 else{
-                    uniqueItemsMap[item.saleItemId] = {
+
+                    var uniqueItemsMapItem = {
                         saleOrderId:orderId,
                         saleItemId:item.saleItemId,
                         count: item.count
                     };
+
+                    if ($scope.vm.userData.isAdmin){
+                        uniqueItemsMapItem.customPrice = item.customPrice;
+                    }
+
+                    uniqueItemsMap[item.saleItemId] = uniqueItemsMapItem;
                 }
             });
 
             for(var saleItemKey in uniqueItemsMap){
                 var saleItem = uniqueItemsMap[saleItemKey];
+                debugger;
                 repository.createModelItem(modelNames.SALE_ORDER_DTL, saleItem).then(function(){
-
                 }, function(error){
                     console.error(error);
                     saleOrderDtlCreateCompleted = false;
@@ -270,7 +300,6 @@
             }
 
             if (saleOrderDtlCreateCompleted){
-
                 $scope.vm.details.id = orderId;
                 repository.createModelItem(modelNames.SALE_ORDER_HEADER, $scope.vm.details).catch(function (error) {
                     console.log('SALE_ORDER_HEADER');
@@ -292,11 +321,9 @@
                 return;
             }
 
-            var userData = signIn.getUserData();
-
             var salesOrder = {
                 date: new Date(),
-                userId: userData.id,
+                userId: $scope.vm.userData.id,
                 price: $scope.total.toFixed(2),
                 priceDollars: $scope.totalUsd.toFixed(2),
                 isApproved: false,

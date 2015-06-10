@@ -79,7 +79,9 @@
                 toastsPresenter.info('Выберите заказ');
                 return;
             }
+
             basket.fillBasket($scope.selectedOrder, true);
+
             $mdDialog.show({
                 templateUrl:'app/templates/basket.html',
                 controller:'basketController'

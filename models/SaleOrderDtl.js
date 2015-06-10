@@ -8,6 +8,7 @@ var SaleOrderDtl = mongoose.Schema({
     saleOrderDtlId: {type:String, required: true},
     saleOrderId: {type:String, required: true},
     saleItemId: {type:String, required: true},
+    customPrice: {type:Number, required: false},
     count: {type:Number, required: true}
 });
 
@@ -22,6 +23,7 @@ module.exports = {
             id: item.saleOrderDtlId,
             saleOrderId: item.saleOrderId,
             saleItemId: item.saleItemId,
+            customPrice: item.customPrice,
             count: item.count
         };
     },
@@ -30,6 +32,7 @@ module.exports = {
             saleOrderDtlId: id,
             saleOrderId: data.saleOrderId,
             saleItemId: data.saleItemId,
+            customPrice: data.customPrice,
             count: data.count
         });
     },
@@ -43,6 +46,10 @@ module.exports = {
 
         if (data.count){
             updateData.count = data.count;
+        }
+
+        if (data.customPrice){
+            updateData.customPrice = data.customPrice;
         }
 
         return updateData;

@@ -384,9 +384,13 @@ table{
   width: 700px;
   height: 600px;
 
+  md-content{
+    padding-bottom: 0px;
+  }
+
   .basket-items__container{
-    max-height: 270px;
-    height: 270px;
+    max-height: 295px;
+    height: 295px;
     overflow: auto;
   }
 
@@ -394,34 +398,26 @@ table{
 
     max-height: 355px;
 
+    .basket-item__price-editor{
+      text-align: right;
+      width: 60px;
+    }
+
     .basket-items--children{
       background-color: lightcyan;
     }
 
-    .basket-item__name{
-      width: 270px
-    }
-    .basket-item__code{
-      width: 30px;
-    }
-    .basket-item__cost{
-      width: 100px;
+    .basket-item--center{
       text-align: center;
-      margin-right: 10px;
-    }
-    .basket-item__count{
-      width: 50px;
-      text-align: center;
-    }
-    .basket-item__action{
-      width: 125px;
-      text-align: center;
-    }
-    .basket-item__total{
-      text-align: center;
-      width: 125px;
     }
 
+    .basket-item--right{
+      text-align: right;
+    }
+
+    .basket-item__cost{
+      margin-right: 10px;
+    }
   }
   .basket-total{
     span{

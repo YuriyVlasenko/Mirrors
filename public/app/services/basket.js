@@ -80,12 +80,13 @@
 
             lastUpdateDate = new Date();
 
-            localStorageService.set(storageKeys.BASKET_ORDER,currentOrder);
+            localStorageService.set(storageKeys.BASKET_ORDER, currentOrder);
 
             var orderItems = order._saleOrderDtl.map(function(item){
                 return{
                     id: item.saleItemId,
-                    count: item.count
+                    count: item.count,
+                    customPrice: item.customPrice
                 }
             });
             // Add items
@@ -103,13 +104,13 @@
                 bsk[item.id].count += item.count || 0;
                 if (item.childItemsMap){
                     bsk[item.id].childItemsMap = angular.extend(bsk[item.id].childItemsMap, item.childItemsMap);
-
                 }
             }
             else{
                 // Create items.
                 bsk[item.id] = {
                     count: item.count || 1,
+                    customPrice:item.customPrice,
                     childItemsMap: item.childItemsMap || {}
                 };
             }
@@ -139,7 +140,7 @@
             var allCount = 0;
             var bsk = localStorageService.get(storageKeys.BASKET);
             for(var prop in bsk){
-                allCount+= bsk[prop].count;
+                allCount += bsk[prop].count;
             }
             return {
                 itemsCount: allCount,

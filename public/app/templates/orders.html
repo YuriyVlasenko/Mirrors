@@ -51,11 +51,11 @@
                         <table class="order-item-details">
                             <tr>
                                 <th class="td_5"></th>
-                                <th class="td_30">Товар</th>
-                                <th class="td_15">Код</th>
+                                <th class="td_25">Товар</th>
+                                <th class="td_10">Код</th>
                                 <th class="td_20">Категория</th>
                                 <th class="td_10">К-во</th>
-                                <th class="td_10">Цена</th>
+                                <th class="td_20">Цена</th>
                                 <th class="td_10">Сумма</th>
                             </tr>
                         </table>
@@ -66,12 +66,16 @@
                                 <td class="td_5">
                                     <img class="order-item-details__small-img" ng-src="{{orderDetail._saleItem.pictureSrc}}" />
                                 </td>
-                                <td class="td_30">{{orderDetail._saleItem.name}}</td>
-                                <td class="td_15">{{orderDetail._saleItem.code}}</td>
+                                <td class="td_25">{{orderDetail._saleItem.name}}</td>
+                                <td class="td_10">{{orderDetail._saleItem.code}}</td>
                                 <td class="td_20">{{orderDetail._saleItem._category.name}}</td>
                                 <td class="td_10">{{orderDetail.count}}</td>
-                                <td class="td_10">{{orderDetail._saleItem._price.cost}} {{orderDetail._saleItem._price.currency}}</td>
-                                <td class="td_10">{{(orderDetail._saleItem._price.cost * orderDetail.count).toFixed(2)}} {{orderDetail._saleItem._price.currency}}</td>
+
+                                <td class="td_20" ng-if="orderDetail.customPrice"> {{orderDetail.customPrice}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_20" ng-if="!orderDetail.customPrice"> {{orderDetail._saleItem._price.cost}} {{orderDetail._saleItem._price.currency}}</td>
+
+                                <td class="td_10" ng-if="orderDetail.customPrice">{{(orderDetail.customPrice * orderDetail.count).toFixed(2)}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_10" ng-if="!orderDetail.customPrice">{{(orderDetail._saleItem._price.cost * orderDetail.count).toFixed(2)}} {{orderDetail._saleItem._price.currency}}</td>
                             </tr>
                         </table>
                     </div>

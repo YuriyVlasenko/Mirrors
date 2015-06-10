@@ -12,22 +12,26 @@
                 <md-tab label="Товары">
                     <table class="basket-items">
                         <tr>
-                            <th class="basket-item__name">Название</th>
-                            <th class="basket-item__code">Код</th>
-                            <th class="basket-item__cost">Цена</th>
-                            <th class="basket-item__count">К-во</th>
-                            <th class="basket-item__action">Действие</th>
-                            <th class="basket-item__total">Стоимость</th>
+                            <th class="td_30">Название</th>
+                            <th class="td_5">Код</th>
+                            <th class="td_20 basket-item--center basket-item__cost">Цена</th>
+                            <th class="td_10 basket-item--center">К-во</th>
+                            <th class="td_20">Действие</th>
+                            <th class="td_15 basket-item--right">Стоимость</th>
                         </tr>
                     </table>
                     <div class="basket-items__container">
                         <table class="basket-items" ng-repeat="item in basketItems">
                         <tr class="basket-item">
-                            <td class="basket-item__name">{{item.name}}</td>
-                            <td class="basket-item__code">{{item.code}}</td>
-                            <td class="basket-item__cost">{{item.price.cost}} {{item.price.currency}}</td>
-                            <td class="basket-item__count">{{item.count}}</td>
-                            <td class="basket-item__action">
+                            <td class="td_30">{{item.name}}</td>
+                            <td class="td_5">{{item.code}}</td>
+                            <td class="td_20 basket-item__cost basket-item--center" ng-if="vm.userData.isAdmin">
+                                <input ng-model="item.customPrice" ng-change="calculateTotalValues();" class="basket-item__price-editor"/>
+                                <span>{{item.price.currency}}</span>
+                            </td>
+                            <td class="td_20 basket-item__cost basket-item--center" ng-if="!vm.userData.isAdmin">{{item.price.cost}} {{item.price.currency}}</td>
+                            <td class="td_10 basket-item--center">{{item.count}}</td>
+                            <td class="td_20">
                                 <md-button class="md-primary action-button" ng-click="incrementCount(item)">
                                     <span class="glyphicon glyphicon-plus" aria-label="Increment items count"></span></md-button>
                                 <md-button class="md-primary action-button" ng-click="decrementCount(item)">
@@ -35,14 +39,19 @@
                                 <md-button class="md-warn action-button" aria-label="Remove item from set" ng-click="removeItem(item)">
                                     <span class="glyphicon glyphicon-remove"></span></md-button>
                             </td>
-                            <td class="basket-item__total">{{(item.price.cost*item.count).toFixed(2)}} {{item.price.currency}}</td>
+                            <td class="td_15 basket-item--right" ng-if="vm.userData.isAdmin">{{(item.customPrice*item.count).toFixed(2)}} {{item.price.currency}}</td>
+                            <td class="td_15 basket-item--right" ng-if="!vm.userData.isAdmin">{{(item.price.cost*item.count).toFixed(2)}} {{item.price.currency}}</td>
                         </tr>
                         <tr class="basket-items basket-items--children" ng-repeat="childitem in item.childrens">
-                            <td class="basket-item__name">{{childitem.name}}</td>
-                            <td class="basket-item__code">{{childitem.code}}</td>
-                            <td class="basket-item__cost">{{childitem.price.cost.toFixed(2)}} {{childitem.price.currency}}</td>
-                            <td class="basket-item__count">{{childitem.count}}</td>
-                            <td class="basket-item__action">
+                            <td class="td_30">{{childitem.name}}</td>
+                            <td class="td_5 ">{{childitem.code}}</td>
+                            <td class="td_20 basket-item__cost basket-item--center" ng-if="vm.userData.isAdmin">
+                                <input ng-model="childitem.customPrice" ng-change="calculateTotalValues();" class="basket-item__price-editor"/>
+                                <span>{{childitem.price.currency}}</span>
+                            </td>
+                            <td class="td_20 basket-item__cost basket-item--center" ng-if="!vm.userData.isAdmin">{{childitem.price.cost.toFixed(2)}} {{childitem.price.currency}}</td>
+                            <td class="td_10 basket-item--center">{{childitem.count}}</td>
+                            <td class="td_20">
                                 <md-button class="md-primary action-button" ng-click="incrementCount(childitem)">
                                     <span class="glyphicon glyphicon-plus" aria-label="Increment items count"></span></md-button>
                                 <md-button class="md-primary action-button" ng-click="decrementCount(childitem)">
@@ -50,7 +59,8 @@
                                 <md-button class="md-warn action-button" ari a-label="Remove item from set" ng-click="removeItem(childitem, item)">
                                     <span class="glyphicon glyphicon-remove"></span></md-button>
                             </td>
-                            <td class="basket-item__total">{{(childitem.price.cost*childitem.count).toFixed(2)}} {{childitem.price.currency}}</td>
+                            <td class="td_15 basket-item--right" ng-if="vm.userData.isAdmin">{{(childitem.customPrice*childitem.count).toFixed(2)}} {{childitem.price.currency}}</td>
+                            <td class="td_15 basket-item--right" ng-if="!vm.userData.isAdmin">{{(childitem.price.cost*childitem.count).toFixed(2)}} {{childitem.price.currency}}</td>
                         </tr>
                     </table>
                     </div>

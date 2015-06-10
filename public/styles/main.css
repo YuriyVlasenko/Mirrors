@@ -220,31 +220,25 @@ table {
 .dialog--basket {
   width: 700px;
   height: 600px; }
+  .dialog--basket md-content {
+    padding-bottom: 0px; }
   .dialog--basket .basket-items__container {
-    max-height: 270px;
-    height: 270px;
+    max-height: 295px;
+    height: 295px;
     overflow: auto; }
   .dialog--basket .basket-items {
     max-height: 355px; }
+    .dialog--basket .basket-items .basket-item__price-editor {
+      text-align: right;
+      width: 60px; }
     .dialog--basket .basket-items .basket-items--children {
       background-color: lightcyan; }
-    .dialog--basket .basket-items .basket-item__name {
-      width: 270px; }
-    .dialog--basket .basket-items .basket-item__code {
-      width: 30px; }
+    .dialog--basket .basket-items .basket-item--center {
+      text-align: center; }
+    .dialog--basket .basket-items .basket-item--right {
+      text-align: right; }
     .dialog--basket .basket-items .basket-item__cost {
-      width: 100px;
-      text-align: center;
       margin-right: 10px; }
-    .dialog--basket .basket-items .basket-item__count {
-      width: 50px;
-      text-align: center; }
-    .dialog--basket .basket-items .basket-item__action {
-      width: 125px;
-      text-align: center; }
-    .dialog--basket .basket-items .basket-item__total {
-      text-align: center;
-      width: 125px; }
   .dialog--basket .basket-total span {
     display: block;
     margin-right: 5px;
