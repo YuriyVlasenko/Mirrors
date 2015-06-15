@@ -44,7 +44,7 @@
                 var basketItem =  $scope.basketItems[i];
                 // Calculate for root items.
                 if (basketItem.price.inDollars){
-                    $scope.totalUsd+=basketItem.customPrice*basketItem.count;
+                    $scope.totalUsd += basketItem.customPrice*basketItem.count;
                 }
                 else{
                     $scope.total+=basketItem.customPrice*basketItem.count;
@@ -87,6 +87,8 @@
                     for(var itemKey in basketItem.childItemsMap){
                         var childItem = basketItem.childItemsMap[itemKey];
                         var childItemInfo = getItemInfo(itemKey);
+                        childItemInfo.customPrice = childItemInfo.customPrice || childItemInfo.price.cost;
+
                         if (!childItemInfo){
                             continue;
                         }
@@ -131,7 +133,7 @@
         };
 
         $scope.decrementCount = function(item){
-            if(item.count > 0) {
+            if(item.count > 1) {
                 item.count--;
                 if (item.childrens) {
                     for (var i = 0; i < item.childrens.length; i++) {

@@ -69,13 +69,14 @@
             var costInDollars = 0;
             for(var bskItemKey in basketInfo.itemsMap){
                 var count = basketInfo.itemsMap[bskItemKey].count;
+                var customPrice = basketInfo.itemsMap[bskItemKey].customPrice;
 
                 var saleItem = saleItemsMap[bskItemKey];
                 if(saleItem.priceInDollars){
-                    costInDollars += saleItem.priceValue*count;
+                    costInDollars += (customPrice || saleItem.priceValue) *  count;
                 }
                 else{
-                    cost += saleItem.priceValue*count;
+                    cost += (saleItem.priceValue || customPrice) * count;
                 }
 
                 var bskItem = basketInfo.itemsMap[bskItemKey];
