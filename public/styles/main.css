@@ -54,8 +54,8 @@ h1, h2, h3 {
   .category-item .category-item__name {
     height: 50px; }
   .category-item .category-item__photo img {
-    height: 230px;
-    width: 230px; }
+    max-height: 230px;
+    max-width: 230px; }
   .category-item:hover {
     background-color: lightblue; }
   .category-item.category-item--active {
@@ -150,8 +150,6 @@ h1, h2, h3 {
   width: 700px;
   height: 700px; }
   .dialog--picture-preview img {
-    height: 100%;
-    width: 100%;
     max-height: 500px;
     max-width: 500px; }
 

@@ -100,8 +100,8 @@ $category-item-width: 280px;
 
     .category-item__photo{
        img{
-         height: ($category-item-width)-50;
-         width: ($category-item-width)-50;
+         max-height: ($category-item-width)-50;
+         max-width: ($category-item-width)-50;
        }
     }
 
