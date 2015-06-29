@@ -7,8 +7,6 @@
 
     PriceController.$inject = ['$scope','$mdDialog','$filter','toastsPresenter','dialogData','repository', 'modelNames','utils'];
     function PriceController($scope, $mdDialog,$filter,toastsPresenter, dialogData,repository, modelNames,utils){
-        console.log('price controller load');
-
         $scope.modelData = {};
 
         var searchParams = {
@@ -95,9 +93,7 @@
         };
 
         function reloadPrices(){
-
-            repository.loadFilteredModelItems(modelNames.PRICE, {params:searchParams}).then(function (data) {
-                console.log('load prices');
+            repository.loadFilteredModelItems(modelNames.PRICE, searchParams).then(function (data) {
                 $scope.gridOptions.data = data;
             }, function(){
                 toastsPresenter.error('Ошибка при загрузке цен');

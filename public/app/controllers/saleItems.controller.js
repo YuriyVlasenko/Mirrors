@@ -190,7 +190,7 @@
         $scope.vm.gridOptions = {
             columnDefs: [
                 {field: 'name',displayName:'Название'},
-                {field: 'code',displayName:'Код'},
+                {field: 'code',displayName:'Код', width: 80},
                 {field: '_category.name',displayName:'Категория'},
                 {field: '_set.name',displayName:'Комплект'},
                 {field: 'comment',displayName:'Комментарий', enableColumnMenu: false},

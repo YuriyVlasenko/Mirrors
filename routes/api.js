@@ -178,7 +178,9 @@ module.exports.init = function(app){
             var url_parts = url.parse(req.url, true);
             var query = url_parts.query;
 
+            console.log(query);
             var searchConditions = itemModel.searchConditions(query);
+            console.log(searchConditions);
 
              // Only current user sale orders details
              if ((itemModel.name == saleOrderDtlModel.name || itemModel.name == saleOrderHeaderModel.name) && isPartnerRole(req.user.roleId)){

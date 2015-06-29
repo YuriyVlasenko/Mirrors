@@ -7,9 +7,17 @@ angular.module('app.services').filter('name', function() {
         if (!nameValue){
             return input;
         }
+        if (angular.isUndefined(input) || input.length === 0){
+            return [];
+        }
+
         nameValue = nameValue.toLowerCase();
         return input.filter(function(item){
-            return item.name.toLowerCase().indexOf(nameValue) > -1;
+            var filterString = item.name.toLowerCase();
+            if (angular.isDefined(item.code)){
+                filterString += item.code.toLowerCase();
+            }
+            return filterString.indexOf(nameValue) > -1;
         });
     };
 });
