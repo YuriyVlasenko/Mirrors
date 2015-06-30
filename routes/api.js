@@ -178,9 +178,7 @@ module.exports.init = function(app){
             var url_parts = url.parse(req.url, true);
             var query = url_parts.query;
 
-            console.log(query);
             var searchConditions = itemModel.searchConditions(query);
-            console.log(searchConditions);
 
              // Only current user sale orders details
              if ((itemModel.name == saleOrderDtlModel.name || itemModel.name == saleOrderHeaderModel.name) && isPartnerRole(req.user.roleId)){
@@ -332,6 +330,7 @@ module.exports.init = function(app){
 
             console.log('create');
             console.log(newItem);
+            console.log(Date());
 
             newItem.save(function(err) {
                 if (!err) {
@@ -397,11 +396,10 @@ module.exports.init = function(app){
             }
 
             console.log('remove server:' + itemId);
+            console.log(Date());
 
             var conditions = {};
             conditions[itemModel.idField] = itemId;
-
-            console.log(conditions);
 
             // Can not remove approved or confirmed orders
             if(itemModel.name === saleOrderModel.name){
@@ -440,8 +438,6 @@ module.exports.init = function(app){
 
         // Update item
         app.post(pathManager.buildPath(itemModel.name,'update'), ensureAuthenticated, jsonParser, function (req, res) {
-            console.log('update '+itemModel.name);
-
             if (isGuestRole(req.user.roleId)){
                 switch (itemModel.name)
                 {
@@ -486,8 +482,9 @@ module.exports.init = function(app){
 
             var updatedValues = itemModel.updateDataBuilder(req.body.data);
 
-            console.log('update');
+            console.log('update '+itemModel.name);
             console.log(updatedValues);
+            console.log(Date());
 
             itemModel.dbModel.findOneAndUpdate(conditions, updatedValues , function(err) {
                 if (!err) {
