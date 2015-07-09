@@ -20,7 +20,7 @@
 
         function buildPictureSrc(modelName, itemId, formatName){
             formatName = formatName || 'png';
-            return '/images/'+modelName+'/'+itemId+'.'+formatName+'?'+ Math.random();
+            return '/images/'+modelName+'/'+itemId+'.'+formatName;
         };
 
         function getItemById(items, id, idFieldName)
