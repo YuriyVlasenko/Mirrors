@@ -1,17 +1,26 @@
 <div class="print">
-    <div class="no-print">
-            <input type="checkbox" ng-model="showPrices" ng-checked="showPrices"/>
-            <span>показывать цены</span>
-            <br/>
-            <span>группировка</span>
-            <select ng-model="accessoryId">
+    <div class="no-print print-options" layout="column">
+        <div class="print-price-options">
+            <input type="checkbox" ng-model="showPrices" ng-checked="showPrices" id="showPrices">
+            <label for="showPrices">показывать цены</label>
+        </div>
+        <div class="print-group-options">
+            <label for="accessoryId">группировать по:</label>
+            <select ng-model="accessoryId" id="accessoryId">
                 <option value="null">нет</option>
                 <option value="{{category.id}}" ng-repeat="category in categories"
                         ng-selected="category.id == accessoryId">{{category.name}}</option>
             </select>
+        </div>
+        <div class="print-header-options">
+            <label for="orderId">Номер накладной</label>
+            <input ng-model="orderId" id="orderId">
+            <label for="orderDate">Дата</label>
+            <input ng-model="orderDate" id="orderDate">
+        </div>
     </div>
     <h1>
-        Накладная № {{order.id.substr(0,6)}} от {{order.date | date:'dd-MM-yyyy hh-mm-ss'}}
+        Накладная № {{orderId}} от {{orderDate}}
     </h1>
     <table>
         <tr>

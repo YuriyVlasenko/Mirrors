@@ -25,6 +25,8 @@
 
         $scope.showPrices = true;
         $scope.order = print.getOrder();
+        $scope.orderId = $scope.order.id.substr(0,6);
+        $scope.orderDate = $filter('date')($scope.order.date, 'dd-MM-yyyy hh-mm-ss');
 
         if (!$scope.order){
             $state.go('main');

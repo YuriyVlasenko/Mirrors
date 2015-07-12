@@ -54,10 +54,6 @@ h1, h2, h3{
   }
 }
 
-.l-main__content {
-  overflow: overlay;
-}
-
 .l-main__footer {
   border-top: 1px solid lightgray;
   padding: 5px 0;
@@ -162,7 +158,12 @@ $sale-item-width: 280px;
 
 }
 
+.content{
+  overflow: auto;
+}
+
 .content-header{
+  min-height: 50px;
   border-bottom: 1px solid lightgray;
 
   .breadcrumb-container{
@@ -178,6 +179,12 @@ $sale-item-width: 280px;
         cursor: pointer;
         font-weight: 700;
       }
+
+      .breadcrumb-item__name--last{
+        cursor: default;
+        font-weight: 500;
+      }
+
       .breadcrumb-item__icon{
         margin-left: 5px;
       }
@@ -576,6 +583,29 @@ table{
 }
 
 .print{
+
+  .print-options{
+    margin: 10px 0 0 0;
+
+    input, select{
+      margin: 0;
+      padding: 0;
+      height: 25px;
+    }
+  }
+
+  .print-price-options, .print-group-options, .print-header-options {
+    margin-top: 10px;
+      height: 25px;
+      line-height: 25px;
+  }
+
+  .print-price-options{
+    label{
+      vertical-align: top;
+    }
+  }
+
   table{
     tr{
       background-color: transparent !important;

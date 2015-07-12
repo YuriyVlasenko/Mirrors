@@ -1,8 +1,8 @@
-<div>
     <div layout="row" layout-align="space-between center" class="content-header">
         <div class="breadcrumb-container" ng-if="breadcrumbItems.length" layout="row" layout-align="start center" layout-wrap>
-            <div class="breadcrumb-item"  ng-repeat="breadcrumbItem in breadcrumbItems" ng-click="loadBreadcrumbItem(breadcrumbItem)">
-                <span class="breadcrumb-item__name">{{breadcrumbItem.name}}</span>
+            <div class="breadcrumb-item"  ng-repeat="breadcrumbItem in breadcrumbItems">
+                <span class="breadcrumb-item__name" ng-if="!$last" ng-click="loadBreadcrumbItem(breadcrumbItem)";>{{breadcrumbItem.name}}</span>
+                <span class="breadcrumb-item__name breadcrumb-item__name--last" ng-if="$last">{{breadcrumbItem.name}}</span>
                 <span ng-class="breadcrumb-item__icon" ng-if="!$last" class="glyphicon glyphicon-menu-right"></span>
             </div>
         </div>
@@ -10,32 +10,32 @@
             <md-input class="filter" placeholder="Фильтр" ng-model="filterValue"></md-input>
         </div>
     </div>
-    <div layout="row" layout-align="center center" layout-wrap>
-        <div class="category-item" layout="column" layout-align="center center"
-             ng-repeat="categoryItem in categories| name:filterValue"
-             ng-click="selectCategoryItem(categoryItem)">
-            <div class="category-item__name" layout="column" layout-align="center center">{{categoryItem.name}}</div>
-            <div class="category-item__photo" flex>
-                <img ng-src="{{categoryItem.pictureSrc}}">
+    <div class="content">
+        <div layout="row" layout-align="center center" layout-wrap>
+            <div class="category-item" layout="column" layout-align="center center"
+                 ng-repeat="categoryItem in categories| name:filterValue"
+                 ng-click="selectCategoryItem(categoryItem)">
+                <div class="category-item__name" layout="column" layout-align="center center">{{categoryItem.name}}</div>
+                <div class="category-item__photo" flex>
+                    <img ng-src="{{categoryItem.pictureSrc}}">
+                </div>
             </div>
         </div>
-    </div>
-    <div>
         <div layout="row" layout-align="center center" layout-wrap layout-fill>
             <div class="sale-item" layout="column" layout-align="center center"
                  ng-repeat="saleItem in saleItems| name:filterValue">
                 <div class="sale-item__header" layout="row" layout-align="space-between center">
                     <div>{{saleItem.name}} {{saleItem.code}}</div>
-                        <span class="glyphicon glyphicon-zoom-in" ng-click="showPhoto(saleItem);"></span>
+                    <span class="glyphicon glyphicon-zoom-in" ng-click="showPhoto(saleItem);"></span>
                 </div>
                 <div class="sale-item__photo" flex>
                     <img ng-src="{{saleItem.pictureSrc}}">
                 </div>
                 <div class="sale-item__footer" layout="row" layout-align="space-between center" ng-if="vm.userData.isAdmin || vm.userData.isPartner">
                     <div class="sale-item__price">
-                        <span ng-if="saleItem._price.cost">
-                            {{saleItem._price.cost}} <span class="sale-item__currency">{{saleItem._price.currency}}</span>
-                        </span>
+                    <span ng-if="saleItem._price.cost">
+                        {{saleItem._price.cost}} <span class="sale-item__currency">{{saleItem._price.currency}}</span>
+                    </span>
                     </div>
                     <md-button ng-click="addToBasket(saleItem);">В корзину
                         <span class="glyphicon glyphicon-shopping-cart"></span>
@@ -44,4 +44,3 @@
             </div>
         </div>
     </div>
-</div>
