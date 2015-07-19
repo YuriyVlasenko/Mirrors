@@ -1,16 +1,16 @@
 <div class="orders">
     <div layout="row" layout-align="space-between center" class="actions-block">
         <div class="actions">
-            <md-button class="action-button md-primary" ng-click="copyToBasket()">Добавить в корзину</md-button>
-            <md-button class="action-button md-primary" ng-click="copyOrderItems()">Изменить заказ</md-button>
-            <md-button class="action-button md-primary" ng-click="print();">Печать</md-button>
+            <md-button class="action-button md-primary glyphicon glyphicon-shopping-cart" title="Добавить в корзину" ng-click="copyToBasket()"></md-button>
+            <md-button class="action-button md-primary glyphicon glyphicon-edit" title="Изменить заказ" ng-click="copyOrderItems()"></md-button>
+            <md-button class="action-button md-primary glyphicon glyphicon-print" title="Печать" ng-click="print();"></md-button>
         </div>
         <div class="actions">
-            <md-button class="action-button md-warn" ng-click="removeOrder();">Удалить</md-button>
+            <md-button class="action-button md-warn glyphicon glyphicon-remove" title="Удалить" ng-click="removeOrder();"></md-button>
         </div>
     </div>
 
-    <div>
+    <div class="main-content">
         <div class="order-items">
         <div class="order-item--header">
             <table class="order-item">
@@ -43,7 +43,7 @@
             </table>
         </div>
     </div>
-        <md-tabs md-dynamic-height md-border-bottom ng-if="selectedOrder">
+        <md-tabs md-dynamic-height md-border-bottom ng-if="selectedOrder" class="order-tabs">
         <md-tab label="товары">
             <md-content>
                 <div class="order-item-details" ng-if="selectedOrder._saleOrderDtl">

@@ -34,11 +34,14 @@ h1, h2, h3{
 }
 
 .l-main {
+  min-width: $l-main_min-width;
   max-width: $l-main_min-width;
   width: $l-main_min-width;
   padding: 5px;
 }
-
+.l-main__content{
+  position: relative;
+}
 .l-main__header {
   border-bottom: 1px solid lightgray;
   padding: 5px 0;
@@ -260,12 +263,15 @@ $sale-item-width: 280px;
   margin: 5px 0;
 }
 
+
 .action-button{
+  display: inline-block;
   padding: 2px;
   margin: 2px;
   height: 26px;
   min-width: 26px;
 }
+
 // dialog elements
 
 .dialog_header{
@@ -436,6 +442,26 @@ table{
 }
 
 // order styles
+md-tabs{
+  overflow: hidden !important;
+}
+
+.order-item-details-content{
+  overflow: overlay;
+  min-height: 100px;
+  max-height: 400px;
+}
+
+.md-tab-content{
+  height: calc(100% - 50px) !important;
+}
+
+.main-content{
+  height: calc(100% - 45px);
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
 
 .orders{
   md-input-container{
@@ -447,6 +473,11 @@ table{
     min-height: 40px;
     height: 40px;
   }
+}
+
+.order-tabs{
+  position: absolute;
+  height: calc(100% - 350px);
 }
 
 .order-items{
