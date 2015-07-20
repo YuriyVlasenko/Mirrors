@@ -6,8 +6,8 @@
     angular.module('app').controller('ordersController', OrdersController);
 
     OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print', '$q', 'utils', 'basket',
-        '$mdDialog'];
-    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils, basket, $mdDialog){
+        '$state'];
+    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils, basket, $state){
 
         var saleOrderDtl = [];
         $scope.saleOrders = [];
@@ -86,10 +86,7 @@
 
             basket.fillBasket($scope.selectedOrder, true);
 
-            $mdDialog.show({
-                templateUrl:'app/templates/basket.html',
-                controller:'basketController'
-            });
+            $state.go('main');
         };
 
         function saveManagement(){
@@ -146,7 +143,6 @@
         }
 
         function setCurrentOrder(order){
-            console.log(order);
             $scope.selectedOrder = order;
             $scope.selectedOrder._saleOrderHeader = $scope.selectedOrder._saleOrderHeader || {};
         };

@@ -21,7 +21,6 @@
             initialize(modelName);
 
             this.create = function(item){
-                console.log('start create');
                 var defer = $q.defer();
 
                 $http.post(paths.create, item).success(function (data) {
@@ -66,7 +65,6 @@
             this.getOne = function(id) {
                 var defer =  $q.defer();
                 var path = paths.getOne + id;
-
                 $http.get(path).success(function(data){
                     defer.resolve(data);
                 }).error(function(error){
@@ -77,7 +75,7 @@
             };
 
             this.update = function(id, data) {
-                console.log('start update');
+                console.log('start update: ' + id);
                 var defer =  $q.defer();
 
                 $http.post(paths.update, { id: id, data:data}).success(function(data){
@@ -85,13 +83,11 @@
                 }).error(function(error){
                     defer.reject(error);
                 });
-
                 return defer.promise;
             };
 
             this.remove = function(id) {
                 var defer =  $q.defer();
-
                 $http.post(paths.remove, { id: id }).success(function (data) {
                     console.log('remove client:'+id);
                     defer.resolve(data);

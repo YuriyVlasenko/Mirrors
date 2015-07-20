@@ -1,14 +1,27 @@
 <div class="orders">
     <div layout="row" layout-align="space-between center" class="actions-block" ng-show="selectedOrder">
         <div class="actions">
-            <md-button class="action-button md-primary glyphicon glyphicon-shopping-cart" title="Добавить в корзину" ng-click="copyToBasket()"></md-button>
-            <md-button class="action-button md-primary glyphicon glyphicon-edit" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
-                       title="Изменить заказ" ng-click="copyOrderItems()"></md-button>
-            <md-button class="action-button md-primary glyphicon glyphicon-print" title="Печать" ng-click="print();"></md-button>
+            <md-button class="action-button md-primary"
+                       ng-show="vm.userData.isAdmin"
+                       title="Добавить в корзину"
+                       ng-click="copyToBasket()">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span>Добавить в корзину</span>
+            </md-button>
+            <md-button class="action-button md-primary" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
+                       title="Изменить заказ" ng-click="copyOrderItems()"><span class="glyphicon glyphicon-edit"></span> <span>Изменить заказ</span>
+            </md-button>
+            <md-button class="action-button md-primary" title="Печать" ng-click="print();">
+                <span class="glyphicon glyphicon-print"></span>
+                <span>Печать</span>
+            </md-button>
         </div>
         <div class="actions">
-            <md-button class="action-button md-warn glyphicon glyphicon-remove" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
-                       title="Удалить" ng-click="removeOrder();"></md-button>
+            <md-button class="action-button md-warn" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
+                       title="Удалить" ng-click="removeOrder();">
+                <span class="glyphicon glyphicon-remove"></span>
+                <span>Удалить</span>
+            </md-button>
         </div>
     </div>
 
@@ -134,7 +147,7 @@
                 <md-button class="md-primary" ng-click="saveComments();">Сохранить</md-button>
             </md-content>
         </md-tab>
-        <md-tab label="управление" ng-if="vm.userData.isAdmin">
+        <md-tab label="управление">
             <md-content>
                 <div layout="row" layout-align="start center">
                     <md-input-container flex>

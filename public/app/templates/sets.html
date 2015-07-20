@@ -1,6 +1,9 @@
 <div class="sets" layout="column" flex>
     <div class="actions">
-        <md-button class="action-button md-primary glyphicon glyphicon-plus" title="Добавить" ng-click="addItem();"></md-button>
+        <md-button class="action-button md-primary" title="Добавить" ng-click="addItem();">
+            <span class="glyphicon glyphicon-plus"></span>
+            <span>Добавить</span>
+        </md-button>
     </div>
     <div id="grid" ui-grid="vm.gridOptions" class="grid" ui-grid-auto-resize flex></div>
 </div>

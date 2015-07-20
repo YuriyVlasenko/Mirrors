@@ -49,6 +49,7 @@ h1, h2, h3{
   min-height: 40px;
   height: 40px;
   .user-data{
+    height: 40px;
     width: 130px;
     text-align: right;
 
@@ -214,6 +215,7 @@ $sale-item-width: 280px;
 }
 
 .basket-container{
+  height: 40px;
   margin-left: 20px;
 
   .basket-icon{

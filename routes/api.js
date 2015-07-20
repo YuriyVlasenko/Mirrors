@@ -471,7 +471,6 @@ module.exports.init = function(app){
                 }
             }
 
-
             if (!req.body || !req.body.id || !req.body.data) {
                 return res.sendStatus(400);
             }
@@ -488,9 +487,11 @@ module.exports.init = function(app){
 
             itemModel.dbModel.findOneAndUpdate(conditions, updatedValues , function(err) {
                 if (!err) {
+                    console.log('update complete');
                     return res.send({status: 'OK'});
                 }
                 else {
+                    console.log('update error');
                     res.statusCode = 500;
                     res.send({error: 'Server error'});
                     //log.error(ERROR_TEMPLATE, res.statusCode, err.message);

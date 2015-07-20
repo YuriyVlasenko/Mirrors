@@ -27,6 +27,7 @@ h1, h2, h3 {
   min-height: 40px;
   height: 40px; }
   .l-main__header .user-data {
+    height: 40px;
     width: 130px;
     text-align: right; }
     .l-main__header .user-data .user-data__name {
@@ -113,6 +114,7 @@ h1, h2, h3 {
       border: 1px solid lightgray; }
 
 .basket-container {
+  height: 40px;
   margin-left: 20px; }
   .basket-container .basket-icon {
     cursor: pointer;

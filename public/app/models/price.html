@@ -21,8 +21,14 @@
                         <md-checkbox md-no-ink aria-label="Is cost in dollars" ng-model="modelData.inDollars" class="md-primary">
                             В долларах
                         </md-checkbox>
-                        <md-button class="action-button md-primary glyphicon glyphicon-plus" title="Добавить" ng-click="addItem();"></md-button>
-                        <md-button ng-click="saveItem();">Сохранить</md-button>
+                        <md-button class="action-button md-primary" title="Добавить" ng-click="addItem();">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span>Добавить</span>
+                        </md-button>
+                        <md-button ng-click="saveItem();">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            <span>Сохранить</span>
+                        </md-button>
                     </div>
                 </ng-form>
             </div>
