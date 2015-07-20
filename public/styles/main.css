@@ -34,7 +34,11 @@ h1, h2, h3 {
 
 .l-main__footer {
   border-top: 1px solid lightgray;
-  padding: 5px 0; }
+  padding: 5px 0;
+  position: relative; }
+  .l-main__footer .developer-info {
+    position: absolute;
+    right: 0; }
 
 .grid .cell-item md-checkbox {
   margin: 0; }
