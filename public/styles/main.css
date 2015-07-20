@@ -18,10 +18,16 @@ h1, h2, h3 {
   padding: 5px; }
 
 .l-main__content {
-  position: relative;
+  width: 1200px;
+  top: 40px;
+  bottom: 45px;
+  position: absolute;
   overflow: auto; }
 
 .l-main__header {
+  width: 1200px;
+  position: absolute;
+  top: 0;
   border-bottom: 1px solid lightgray;
   padding: 5px 0;
   min-height: 40px;
@@ -34,9 +40,12 @@ h1, h2, h3 {
       font-weight: 700; }
 
 .l-main__footer {
+  width: 1200px;
+  bottom: 0;
+  position: absolute;
+  height: 40px;
   border-top: 1px solid lightgray;
-  padding: 5px 0;
-  position: relative; }
+  padding: 5px 0; }
   .l-main__footer .developer-info {
     position: absolute;
     right: 0; }

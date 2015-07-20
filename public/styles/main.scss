@@ -40,10 +40,16 @@ h1, h2, h3{
   padding: 5px;
 }
 .l-main__content{
-  position: relative;
+  width: $l-main_min-width;
+  top: 40px;
+  bottom: 40px;
+  position: absolute;
   overflow: auto;
 }
 .l-main__header {
+  width: $l-main_min-width;
+  position: absolute;
+  top:0;
   border-bottom: 1px solid lightgray;
   padding: 5px 0;
   min-height: 40px;
@@ -60,9 +66,13 @@ h1, h2, h3{
 }
 
 .l-main__footer {
+  width: $l-main_min-width;
+  bottom: 0;
+  position: absolute;
+  height: 40px;
   border-top: 1px solid lightgray;
   padding: 5px 0;
-  position: relative;
+
 
   .developer-info{
     position: absolute;
