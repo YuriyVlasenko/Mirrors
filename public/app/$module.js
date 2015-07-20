@@ -51,6 +51,9 @@
             url: "/signIn",
             templateUrl:'app/templates/signIn.html',
             controller:'signInController'
+        }).state('contacts', {
+            url: "/contacts",
+            templateUrl:'app/templates/contacts.html'
         });
 
         $httpProvider.interceptors.push('responseObserver');

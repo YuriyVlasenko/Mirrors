@@ -5,8 +5,8 @@
 (function(angular) {
     angular.module('app').controller('mainController', MainController);
 
-    MainController.$inject = ['$scope','$mdDialog','modelNames','utils','repository','basket'];
-    function MainController($scope,$mdDialog,modelNames,utils,repository,basket) {
+    MainController.$inject = ['$scope','$mdDialog','modelNames','utils','repository','basket', 'toastsPresenter'];
+    function MainController($scope,$mdDialog,modelNames,utils,repository,basket, toastsPresenter) {
 
         var rootBreadcrumb = {
             name:'Все категории',
@@ -60,7 +60,6 @@
         });
 
         function addToBasket(item){
-            console.log(allSetItems);
             if (!item){
                 return;
             }
@@ -78,10 +77,8 @@
                 }
                 item.childItemsMap = childItemsMap;
             }
-
-            console.log('addToBasket');
-            console.log(item);
             basket.addItem(item);
+            toastsPresenter.info('Товар добавлен.');
         };
 
         function showPhoto(salesItem){

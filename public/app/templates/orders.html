@@ -2,11 +2,13 @@
     <div layout="row" layout-align="space-between center" class="actions-block">
         <div class="actions">
             <md-button class="action-button md-primary glyphicon glyphicon-shopping-cart" title="Добавить в корзину" ng-click="copyToBasket()"></md-button>
-            <md-button class="action-button md-primary glyphicon glyphicon-edit" title="Изменить заказ" ng-click="copyOrderItems()"></md-button>
+            <md-button class="action-button md-primary glyphicon glyphicon-edit" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
+                       title="Изменить заказ" ng-click="copyOrderItems()"></md-button>
             <md-button class="action-button md-primary glyphicon glyphicon-print" title="Печать" ng-click="print();"></md-button>
         </div>
         <div class="actions">
-            <md-button class="action-button md-warn glyphicon glyphicon-remove" title="Удалить" ng-click="removeOrder();"></md-button>
+            <md-button class="action-button md-warn glyphicon glyphicon-remove" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
+                       title="Удалить" ng-click="removeOrder();"></md-button>
         </div>
     </div>
 
@@ -102,14 +104,15 @@
                                 <input type="text" name="overWhom" ng-model="selectedOrder._saleOrderHeader.overWhom">
                             </md-input-container>
                             <md-input-container flex>
-                                <label>Доверенность</label>
-                                <input type="text" name="attornay" ng-model="selectedOrder._saleOrderHeader.attornay">
+                                <label>На основании</label>
+                                <input type="text" name="cause" ng-model="selectedOrder._saleOrderHeader.cause">
                             </md-input-container>
                         </div>
                         <div layout="row" layout-align="start center">
                             <md-input-container flex>
-                                <label>На основании</label>
-                                <input type="text" name="cause" ng-model="selectedOrder._saleOrderHeader.cause">
+                                <label>Адрес получателя</label>
+                                <input type="text" name="attornay" ng-model="selectedOrder._saleOrderHeader.attornay">
+
                             </md-input-container>
                         </div>
 

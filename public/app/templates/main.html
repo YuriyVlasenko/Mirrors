@@ -26,9 +26,8 @@
                  ng-repeat="saleItem in saleItems| name:filterValue">
                 <div class="sale-item__header" layout="row" layout-align="space-between center">
                     <div>{{saleItem.name}} {{saleItem.code}}</div>
-                    <span class="glyphicon glyphicon-zoom-in" ng-click="showPhoto(saleItem);"></span>
                 </div>
-                <div class="sale-item__photo" flex>
+                <div class="sale-item__photo" flex ng-click="showPhoto(saleItem)">
                     <img ng-src="{{saleItem.pictureSrc}}">
                 </div>
                 <div class="sale-item__footer" layout="row" layout-align="space-between center" ng-if="vm.userData.isAdmin || vm.userData.isPartner">

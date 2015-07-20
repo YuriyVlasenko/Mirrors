@@ -53,6 +53,9 @@
                 <li class="menu-item" ui-sref-active="menu-item--active" ng-if="vm.userData.isAdmin">
                     <a href ui-sref="sets">Комплекты</a>
                 </li>
+                <li class="menu-item" ui-sref-active="menu-item--active">
+                    <a href ui-sref="contacts">Контакты</a>
+                </li>
             </ul>
             <div layout="row">
                 <div class="user-data">
@@ -72,7 +75,11 @@
             </div>
         </header>
         <div class="l-main__content" ui-view layout="column" flex></div>
-        <footer class="l-main__footer no-print" ng-show="vm.userData" >footer</footer>
+        <footer class="l-main__footer no-print" ng-show="vm.userData" layout="row" layout-align="center center">
+            <span>
+                Разработчик <b>yuriyvlasenko89@gmail.com</b>
+            </span>
+        </footer>
     </div>
 </body>
 </html>

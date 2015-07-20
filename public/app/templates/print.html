@@ -35,12 +35,12 @@
             <td class="td_70">{{order._saleOrderHeader.overWhom}}</td>
         </tr>
         <tr>
-            <td class="td_30"> Доверенность</td>
-            <td class="td_70">{{order._saleOrderHeader.attornay}}</td>
-        </tr>
-        <tr>
             <td class="td_30">На основании</td>
             <td class="td_70">{{order._saleOrderHeader.cause}}</td>
+        </tr>
+        <tr>
+            <td class="td_30"> Адрес получателя</td>
+            <td class="td_70">{{order._saleOrderHeader.attornay}}</td>
         </tr>
     </table>
     <table ng-if="saleOrderDtl && saleOrderDtl.length > 0">

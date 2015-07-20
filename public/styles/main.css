@@ -18,7 +18,8 @@ h1, h2, h3 {
   padding: 5px; }
 
 .l-main__content {
-  position: relative; }
+  position: relative;
+  overflow: auto; }
 
 .l-main__header {
   border-bottom: 1px solid lightgray;
@@ -73,9 +74,11 @@ h1, h2, h3 {
     background-color: lightblue; }
   .sale-item .sale-item__header .glyphicon {
     cursor: pointer; }
-  .sale-item .sale-item__photo img {
-    max-height: 230px;
-    max-width: 230px; }
+  .sale-item .sale-item__photo {
+    cursor: pointer; }
+    .sale-item .sale-item__photo img {
+      max-height: 230px;
+      max-width: 230px; }
   .sale-item .sale-item__price {
     font-weight: bold; }
 
@@ -158,8 +161,6 @@ h1, h2, h3 {
   width: 700px;
   height: 700px; }
   .dialog--picture-preview img {
-    height: 100%;
-    width: 100%;
     max-height: 500px;
     max-width: 500px; }
 

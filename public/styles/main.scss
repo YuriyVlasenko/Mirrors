@@ -22,6 +22,7 @@ $table-items-bg: lightcyan;
 
 body{
   overflow: hidden;
+  //background-image: url("../images/background.png");
 }
 
 ul{
@@ -34,13 +35,13 @@ h1, h2, h3{
 }
 
 .l-main {
-  min-width: $l-main_min-width;
   max-width: $l-main_min-width;
   width: $l-main_min-width;
   padding: 5px;
 }
 .l-main__content{
   position: relative;
+  overflow: auto;
 }
 .l-main__header {
   border-bottom: 1px solid lightgray;
@@ -145,6 +146,7 @@ $sale-item-width: 280px;
   }
 
   .sale-item__photo{
+    cursor: pointer;
     img{
       max-height: ($category-item-width)-50;
       max-width: ($category-item-width)-50;
@@ -291,8 +293,6 @@ $sale-item-width: 280px;
   height: 700px;
 
   img{
-    height: 100%;
-    width: 100%;
     max-height: 500px;
     max-width: 500px;
   }

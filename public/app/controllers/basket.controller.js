@@ -17,6 +17,7 @@
         $scope.vm.details = basket.getBasketDetails();
         $scope.vm.comment = basket.getBasketComment();
         $scope.vm.order = basket.getBasketOrder();
+        $scope.saveOrder = saveOrder;
 
         $scope.basketItems = [];
         $scope.total = 0;
@@ -184,42 +185,6 @@
             $mdDialog.cancel();
         };
 
-        $scope.updateItems = function(){
-            if($scope.basketItems.length == 0){
-                toastsPresenter.info('Корзина пуста');
-                return;
-            }
-
-            var salesOrder = {
-                date: new Date(),
-                price: $scope.total.toFixed(2),
-                priceDollars: $scope.totalUsd.toFixed(2),
-                comment: $scope.vm.comment
-            };
-            repository.updateModelItem(modelNames.SALE_ORDER, $scope.vm.order.id, salesOrder).then(
-                 function(){
-                     var removePromises = [];
-                     for(var i=0; i <$scope.vm.order._saleOrderDtl.length; i++ )
-                     {
-                         var detail = $scope.vm.order._saleOrderDtl[i];
-                         removePromises.push(repository.removeModelItem(modelNames.SALE_ORDER_DTL, detail.id));
-                     }
-                     $q.all(removePromises).then(function(data){
-                         saveDetails($scope.vm.order.id);
-                         basket.clear();
-                         $mdDialog.cancel();
-                     }, function(error){
-                         toastsPresenter.error('Ошибка удаления заказа');
-                         console.log(error);
-                     });
-                 },
-                 function(error){
-                     console.log('error');
-                     console.log(error);
-                 }
-            );
-        };
-
         $scope.clearBasket = function(){
             basket.clear();
             $mdDialog.cancel();
@@ -289,7 +254,6 @@
 
             for(var saleItemKey in uniqueItemsMap){
                 var saleItem = uniqueItemsMap[saleItemKey];
-                debugger;
                 repository.createModelItem(modelNames.SALE_ORDER_DTL, saleItem).then(function(){
                 }, function(error){
                     console.error(error);
@@ -316,13 +280,55 @@
 
         }
 
-        $scope.orderItems = function(){
 
-            if($scope.basketItems.length == 0){
+        function saveOrder() {
+            if ($scope.basketItems.length == 0) {
                 toastsPresenter.info('Корзина пуста');
                 return;
             }
 
+            if ($scope.vm.order && $scope.vm.order.id) {
+                // Update order items
+                updateItems();
+            }
+            else {
+                // Create new order
+                orderItems();
+            }
+        };
+
+        function updateItems(){
+            var salesOrder = {
+                date: new Date(),
+                price: $scope.total.toFixed(2),
+                priceDollars: $scope.totalUsd.toFixed(2),
+                comment: $scope.vm.comment
+            };
+            repository.updateModelItem(modelNames.SALE_ORDER, $scope.vm.order.id, salesOrder).then(
+                function(){
+                    var removePromises = [];
+                    for(var i=0; i <$scope.vm.order._saleOrderDtl.length; i++ )
+                    {
+                        var detail = $scope.vm.order._saleOrderDtl[i];
+                        removePromises.push(repository.removeModelItem(modelNames.SALE_ORDER_DTL, detail.id));
+                    }
+                    $q.all(removePromises).then(function(data){
+                        saveDetails($scope.vm.order.id);
+                        basket.clear();
+                        $mdDialog.cancel();
+                    }, function(error){
+                        toastsPresenter.error('Ошибка удаления заказа');
+                        console.log(error);
+                    });
+                },
+                function(error){
+                    console.log('error');
+                    console.log(error);
+                }
+            );
+        };
+
+        function orderItems(){
             var salesOrder = {
                 date: new Date(),
                 userId: $scope.vm.userData.id,

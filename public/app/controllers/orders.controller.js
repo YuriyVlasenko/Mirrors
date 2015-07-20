@@ -80,6 +80,10 @@
                 return;
             }
 
+            if ($scope.selectedOrder.isApproved){
+                toastsPresenter.info('Заказ подтвержден - только просмотр.');
+            }
+
             basket.fillBasket($scope.selectedOrder, true);
 
             $mdDialog.show({
@@ -142,6 +146,7 @@
         }
 
         function setCurrentOrder(order){
+            console.log(order);
             $scope.selectedOrder = order;
             $scope.selectedOrder._saleOrderHeader = $scope.selectedOrder._saleOrderHeader || {};
         };

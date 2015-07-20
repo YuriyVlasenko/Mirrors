@@ -5,8 +5,10 @@
         </header>
         <div class="dialog_content" layout="column" layout-align="start start">
             <div layout="row" layout-align="end center" layout-fill>
-                <md-button ng-click="clearBasket();">Очистить</md-button>
-                <md-button ng-click="saveToBasket();">Применить</md-button>
+                <md-button class="action-button glyphicon glyphicon-trash" ng-click="clearBasket();" title="Очистить"></md-button>
+                <!--
+                <md-button class="action-button glyphicon glyphicon-floppy-disk" title="Сохранить изменения" ng-click="saveToBasket();"></md-button>
+                -->
             </div>
             <md-tabs md-dynamic-height md-border-bottom class="basket-info-container">
                 <md-tab label="Товары">
@@ -88,12 +90,12 @@
                                 <input type="text" name="overWhom" ng-model="vm.details.overWhom">
                             </md-input-container>
                             <md-input-container>
-                                <label>Довепенность</label>
-                                <input type="text" name="attornay" ng-model="vm.details.attornay">
-                            </md-input-container>
-                            <md-input-container>
                                 <label>На основании</label>
                                 <input type="text" name="cause" ng-model="vm.details.cause">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Адрес получателя</label>
+                                <input type="text" name="attornay" ng-model="vm.details.attornay">
                             </md-input-container>
                         </ng-form>
                 </md-tab>
@@ -101,8 +103,7 @@
         </div>
     </md-content>
     <footer class="md-actions dialog_footer">
-        <md-button class="md-primary" ng-click="updateItems();" ng-if="vm.order">Обновить текущий заказ</md-button>
-        <md-button class="md-primary" ng-click="orderItems();">Оформить новый заказ</md-button>
+        <md-button class="md-primary" ng-click="saveOrder();">Сохранить заказ</md-button>
         <md-button ng-click="cancel()">Закрыть</md-button>
     </footer>
 </md-dialog>
