@@ -1,5 +1,5 @@
 <div class="orders">
-    <div layout="row" layout-align="space-between center" class="actions-block" ng-if="selectedOrder">
+    <div layout="row" layout-align="space-between center" class="actions-block" ng-show="selectedOrder">
         <div class="actions">
             <md-button class="action-button md-primary glyphicon glyphicon-shopping-cart" title="Добавить в корзину" ng-click="copyToBasket()"></md-button>
             <md-button class="action-button md-primary glyphicon glyphicon-edit" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
