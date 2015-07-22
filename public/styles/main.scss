@@ -1,7 +1,7 @@
 $l-main_min-width: 1200px;
 $hover-bg-color: lightblue;
 $active-bg-color: lightskyblue;
-
+$main-background-color: #ededed;
 $table-selected-items-bg: lightskyblue;
 $table-odd-items-bg: transparent;
 $table-items-bg: lightcyan;
@@ -20,9 +20,10 @@ $table-items-bg: lightcyan;
   padding: 0;
 }
 
-body{
-  overflow: hidden;
+html,  body{
   //background-image: url("../images/background.png");
+  overflow: hidden;
+  //background-color: $main-background-color;
 }
 
 ul{
@@ -337,14 +338,14 @@ table{
     @include user-select(none);
 
     &:nth-child(2n){
-      background-color: $table-items-bg;
+      background-color: $table-items-bg !important;
     }
     &:nth-child(2n+1){
-      background-color: $table-odd-items-bg;
+      background-color: $table-odd-items-bg !important;
     }
     &.is-selected{
       transition: background-color 0.2s linear;
-      background-color: $table-selected-items-bg;
+      background-color: $table-selected-items-bg !important;
     }
   }
 
@@ -464,10 +465,21 @@ md-tabs{
   overflow: hidden !important;
 }
 
+.md-tabs-content{
+  height: calc(100% - 10px);
+
+  md-content{
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
 .order-item-details-content{
-  overflow: overlay;
+  position: absolute;
+  width: 100%;
   min-height: 100px;
-  max-height: 400px;
+  height: calc(100% - 30px);
+  overflow: overlay;
 }
 
 .md-tab-content{
@@ -488,6 +500,9 @@ md-tabs{
 
 
   .orders__actions-block{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
     min-height: 40px;
     height: 40px;
   }
@@ -495,20 +510,19 @@ md-tabs{
 
 .order-tabs{
   position: absolute;
-  height: calc(100% - 350px);
+  height: 100%
 }
 
 .order-items{
-  max-height: 360px;
-  overflow: auto;
+  height: 100%;
 }
 .order-item--header {
   height: 25px;
 }
 
 .order-item--content{
-  max-height: 325px;
-  overflow: auto;
+  height: calc(100% - 25px);
+  overflow: overlay;
 }
 
   .order-item{
@@ -547,6 +561,7 @@ md-tabs{
   }
 
 .order-item-details{
+
   .order-item-details{
 
     .order-item-details__small-img{

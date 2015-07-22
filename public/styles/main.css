@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0; }
 
-body {
+html, body {
   overflow: hidden; }
 
 ul {
@@ -20,7 +20,7 @@ h1, h2, h3 {
 .l-main__content {
   width: 1200px;
   top: 40px;
-  bottom: 45px;
+  bottom: 40px;
   position: absolute;
   overflow: auto; }
 
@@ -195,12 +195,12 @@ table {
     -webkit-user-select: none;
     -ms-user-select: none; }
     table tr:nth-child(2n) {
-      background-color: lightcyan; }
+      background-color: lightcyan !important; }
     table tr:nth-child(2n+1) {
-      background-color: transparent; }
+      background-color: transparent !important; }
     table tr.is-selected {
       transition: background-color 0.2s linear;
-      background-color: lightskyblue; }
+      background-color: lightskyblue !important; }
   table .td_5 {
     width: 5%; }
   table .td_10 {
@@ -271,10 +271,18 @@ table {
 md-tabs {
   overflow: hidden !important; }
 
+.md-tabs-content {
+  height: calc(100% - 10px); }
+  .md-tabs-content md-content {
+    height: 100%;
+    overflow: hidden; }
+
 .order-item-details-content {
-  overflow: overlay;
+  position: absolute;
+  width: 100%;
   min-height: 100px;
-  max-height: 400px; }
+  height: calc(100% - 30px);
+  overflow: overlay; }
 
 .md-tab-content {
   height: calc(100% - 50px) !important; }
@@ -288,23 +296,25 @@ md-tabs {
 .orders md-input-container {
   padding: 2px; }
 .orders .orders__actions-block {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
   min-height: 40px;
   height: 40px; }
 
 .order-tabs {
   position: absolute;
-  height: calc(100% - 350px); }
+  height: 100%; }
 
 .order-items {
-  max-height: 360px;
-  overflow: auto; }
+  height: 100%; }
 
 .order-item--header {
   height: 25px; }
 
 .order-item--content {
-  max-height: 325px;
-  overflow: auto; }
+  height: calc(100% - 25px);
+  overflow: overlay; }
 
 .order-item {
   width: 100%;

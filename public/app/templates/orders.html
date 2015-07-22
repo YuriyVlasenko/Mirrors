@@ -1,65 +1,43 @@
 <div class="orders">
-    <div layout="row" layout-align="space-between center" class="actions-block" ng-show="selectedOrder">
-        <div class="actions">
-            <md-button class="action-button md-primary"
-                       ng-show="vm.userData.isAdmin"
-                       title="Добавить в корзину"
-                       ng-click="copyToBasket()">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                <span>Добавить в корзину</span>
-            </md-button>
-            <md-button class="action-button md-primary" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
-                       title="Изменить заказ" ng-click="copyOrderItems()"><span class="glyphicon glyphicon-edit"></span> <span>Изменить заказ</span>
-            </md-button>
-            <md-button class="action-button md-primary" title="Печать" ng-click="print();">
-                <span class="glyphicon glyphicon-print"></span>
-                <span>Печать</span>
-            </md-button>
-        </div>
-        <div class="actions">
-            <md-button class="action-button md-warn" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
-                       title="Удалить" ng-click="removeOrder();">
-                <span class="glyphicon glyphicon-remove"></span>
-                <span>Удалить</span>
-            </md-button>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="order-items">
-        <div class="order-item--header">
-            <table class="order-item">
-                <tr>
-                    <th class="td_5">Код</th>
-                    <th class="td_10">Дата</th>
-                    <th class="td_20">Кто/Кому</th>
-                    <th class="td_10">Стоимость</th>
-                    <th class="td_10">Подтв.</th>
-                    <th class="td_25">Комментарий/Отзыв</th>
-                    <th class="td_10">Доставка</th>
-                    <th class="td_15">Выполнен</th>
-                </tr>
-            </table>
-        </div>
-        <div class="order-item--content">
-            <table class="order-item">
-                <tr ng-repeat="order in saleOrders | orderBy:'date':true" ng-click="setCurrentOrder(order);" ng-class="{'is-selected':selectedOrder.id == order.id}">
-                    <td class="td_5">{{order.id.substr(0,6)}} </td>
-                    <td class="td_10">{{order.date |date:'dd-MM-yyyy'}} <br/> {{order.date |date:'hh-mm-ss'}} </td>
-                    <td class="td_20">{{order._user.fio}}</td>
-                    <td class="td_10">{{order.price}} грн. <br/> {{order.priceDollars}} usd.</td>
-                    <td class="td_10">
-                        <md-checkbox aria-label="is Approved" ng-disabled="true" ng-model="order.isApproved" />
-                    </td>
-                    <td class="td_25">{{order.comment|limitTo:25}} <br/> {{order.response|limitTo:25}}</td>
-                    <td class="td_10">{{order.deliveryCost}}</td>
-                    <td class="td_15"><md-checkbox aria-label="is Completed" ng-disabled="true" ng-model="order.isCompleted" /></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-        <md-tabs md-dynamic-height md-border-bottom ng-if="selectedOrder" class="order-tabs">
-        <md-tab label="товары">
+        <div class="main-content">
+        <md-tabs md-dynamic-height md-border-bottom class="order-tabs">
+            <md-tab label="Заказы">
+                <md-content>
+                    <div class="order-items">
+                        <div class="order-item--header">
+                            <table class="order-item">
+                                <tr>
+                                    <th class="td_5">Код</th>
+                                    <th class="td_10">Дата</th>
+                                    <th class="td_20">Кто/Кому</th>
+                                    <th class="td_10">Стоимость</th>
+                                    <th class="td_10">Подтв.</th>
+                                    <th class="td_25">Комментарий/Отзыв</th>
+                                    <th class="td_10">Доставка</th>
+                                    <th class="td_15">Выполнен</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="order-item--content">
+                            <table class="order-item">
+                                <tr ng-repeat="order in saleOrders | orderBy:'date':true" ng-click="setCurrentOrder(order);" ng-class="{'is-selected':selectedOrder.id == order.id}">
+                                    <td class="td_5">{{order.id.substr(0,6)}} </td>
+                                    <td class="td_10">{{order.date |date:'dd-MM-yyyy'}} <br/> {{order.date |date:'hh-mm-ss'}} </td>
+                                    <td class="td_20">{{order._user.fio}}</td>
+                                    <td class="td_10">{{order.price}} грн. <br/> {{order.priceDollars}} usd.</td>
+                                    <td class="td_10">
+                                        <md-checkbox aria-label="is Approved" ng-disabled="true" ng-model="order.isApproved" />
+                                    </td>
+                                    <td class="td_25">{{order.comment|limitTo:25}} <br/> {{order.response|limitTo:25}}</td>
+                                    <td class="td_10">{{order.deliveryCost}}</td>
+                                    <td class="td_15"><md-checkbox aria-label="is Completed" ng-disabled="true" ng-model="order.isCompleted" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+        <md-tab label="товары" ng-show="selectedOrder">
             <md-content>
                 <div class="order-item-details" ng-if="selectedOrder._saleOrderDtl">
                     <div class="order-item-details-header">
@@ -97,8 +75,7 @@
                 </div>
             </md-content>
         </md-tab>
-
-        <md-tab label="детали">
+        <md-tab label="детали" ng-show="selectedOrder">
             <md-content>
                     <ng-form name="itemForm" novalidate>
                         <div layout="row" layout-align="start center">
@@ -106,6 +83,8 @@
                                 <label>Поставщик</label>
                                 <input type="text" name="supplier" ng-model="selectedOrder._saleOrderHeader.supplier">
                             </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start center">
                             <md-input-container flex>
                                 <label>Кому</label>
                                 <input type="text" name="whom" ng-model="selectedOrder._saleOrderHeader.whom">
@@ -116,11 +95,12 @@
                                 <label>Через кого</label>
                                 <input type="text" name="overWhom" ng-model="selectedOrder._saleOrderHeader.overWhom">
                             </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start center">
                             <md-input-container flex>
                                 <label>На основании</label>
                                 <input type="text" name="cause" ng-model="selectedOrder._saleOrderHeader.cause">
-                            </md-input-container>
-                        </div>
+                            </md-input-container>                        </div>
                         <div layout="row" layout-align="start center">
                             <md-input-container flex>
                                 <label>Адрес получателя</label>
@@ -134,7 +114,7 @@
                 <md-button class="md-primary" ng-click="copyHeader();">Скопировать в корзину</md-button>
             </md-content>
         </md-tab>
-        <md-tab label="примечания">
+        <md-tab label="примечания" ng-show="selectedOrder">
             <md-content>
                     <md-input-container>
                         <label>Коментарий</label>
@@ -147,7 +127,7 @@
                 <md-button class="md-primary" ng-click="saveComments();">Сохранить</md-button>
             </md-content>
         </md-tab>
-        <md-tab label="управление">
+        <md-tab label="управление" ng-show="selectedOrder">
             <md-content>
                 <div layout="row" layout-align="start center">
                     <md-input-container flex>
@@ -168,5 +148,30 @@
                 </md-content>
         </md-tab>
     </md-tabs>
+    </div>
+    <div layout="row" layout-align="space-between center" class="orders__actions-block" ng-show="selectedOrder">
+        <div class="actions">
+            <md-button class="action-button md-primary"
+                       ng-show="vm.userData.isAdmin"
+                       title="Добавить в корзину"
+                       ng-click="copyToBasket()">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span>Добавить в корзину</span>
+            </md-button>
+            <md-button class="action-button md-primary" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
+                       title="Изменить заказ" ng-click="copyOrderItems()"><span class="glyphicon glyphicon-edit"></span> <span>Изменить заказ</span>
+            </md-button>
+            <md-button class="action-button md-primary" title="Печать" ng-click="print();">
+                <span class="glyphicon glyphicon-print"></span>
+                <span>Печать</span>
+            </md-button>
+        </div>
+        <div class="actions">
+            <md-button class="action-button md-warn" ng-hide="selectedOrder.isApproved || selectedOrder.isCompleted"
+                       title="Удалить" ng-click="removeOrder();">
+                <span class="glyphicon glyphicon-remove"></span>
+                <span>Удалить</span>
+            </md-button>
+        </div>
     </div>
 </div>
