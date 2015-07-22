@@ -9,12 +9,12 @@
                                 <tr>
                                     <th class="td_5">Код</th>
                                     <th class="td_10">Дата</th>
-                                    <th class="td_20">Кто/Кому</th>
-                                    <th class="td_10">Стоимость</th>
-                                    <th class="td_10">Подтв.</th>
-                                    <th class="td_25">Комментарий/Отзыв</th>
-                                    <th class="td_10">Доставка</th>
-                                    <th class="td_15">Выполнен</th>
+                                    <th class="td_40">Кто/Кому</th>
+                                    <th class="td_10 text-center">Стоимость</th>
+                                    <th class="td_5">Подтв.</th>
+                                    <th class="td_20">Комментарий/Отзыв</th>
+                                    <th class="td_5 text-center">Дост.</th>
+                                    <th class="td_5">Вып.</th>
                                 </tr>
                             </table>
                         </div>
@@ -23,14 +23,14 @@
                                 <tr ng-repeat="order in saleOrders | orderBy:'date':true" ng-click="setCurrentOrder(order);" ng-class="{'is-selected':selectedOrder.id == order.id}">
                                     <td class="td_5">{{order.id.substr(0,6)}} </td>
                                     <td class="td_10">{{order.date |date:'dd-MM-yyyy'}} <br/> {{order.date |date:'hh-mm-ss'}} </td>
-                                    <td class="td_20">{{order._user.fio}}</td>
-                                    <td class="td_10">{{order.price}} грн. <br/> {{order.priceDollars}} usd.</td>
-                                    <td class="td_10">
+                                    <td class="td_40">{{order._user.fio}}</td>
+                                    <td class="td_10 text-center">{{order.price}} грн. <br/> {{order.priceDollars}} usd.</td>
+                                    <td class="td_5">
                                         <md-checkbox aria-label="is Approved" ng-disabled="true" ng-model="order.isApproved" />
                                     </td>
-                                    <td class="td_25">{{order.comment|limitTo:25}} <br/> {{order.response|limitTo:25}}</td>
-                                    <td class="td_10">{{order.deliveryCost}}</td>
-                                    <td class="td_15"><md-checkbox aria-label="is Completed" ng-disabled="true" ng-model="order.isCompleted" /></td>
+                                    <td class="td_20">{{order.comment|limitTo:25}} <br/> {{order.response|limitTo:25}}</td>
+                                    <td class="td_5 text-center">{{order.deliveryCost}}</td>
+                                    <td class="td_5"><md-checkbox aria-label="is Completed" ng-disabled="true" ng-model="order.isCompleted" /></td>
                                 </tr>
                             </table>
                         </div>
@@ -45,11 +45,11 @@
                             <tr>
                                 <th class="td_5"></th>
                                 <th class="td_25">Товар</th>
-                                <th class="td_10">Код</th>
+                                <th class="td_10 text-center">Код</th>
                                 <th class="td_20">Категория</th>
-                                <th class="td_10">К-во</th>
-                                <th class="td_20">Цена</th>
-                                <th class="td_10">Сумма</th>
+                                <th class="td_10 text-center">К-во</th>
+                                <th class="td_20 text-center">Цена</th>
+                                <th class="td_10 text-center">Сумма</th>
                             </tr>
                         </table>
                     </div>
@@ -57,18 +57,19 @@
                         <table class="order-item-details">
                             <tr ng-repeat="orderDetail in selectedOrder._saleOrderDtl">
                                 <td class="td_5">
-                                    <img class="order-item-details__small-img" ng-src="{{orderDetail._saleItem.pictureSrc}}" />
+                                    <img class="order-item-details__small-img" ng-src="{{orderDetail._saleItem.pictureSrc}}"
+                                         ng-click="showPhoto(orderDetail._saleItem.name, orderDetail._saleItem.pictureSrc);" />
                                 </td>
                                 <td class="td_25">{{orderDetail._saleItem.name}}</td>
-                                <td class="td_10">{{orderDetail._saleItem.code}}</td>
+                                <td class="td_10 text-center">{{orderDetail._saleItem.code}}</td>
                                 <td class="td_20">{{orderDetail._saleItem._category.name}}</td>
-                                <td class="td_10">{{orderDetail.count}}</td>
+                                <td class="td_10 text-center">{{orderDetail.count}}</td>
 
-                                <td class="td_20" ng-if="orderDetail.customPrice"> {{orderDetail.customPrice}} {{orderDetail._saleItem._price.currency}}</td>
-                                <td class="td_20" ng-if="!orderDetail.customPrice"> {{orderDetail._saleItem._price.cost}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_20 text-center" ng-if="orderDetail.customPrice"> {{orderDetail.customPrice}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_20 text-center" ng-if="!orderDetail.customPrice"> {{orderDetail._saleItem._price.cost}} {{orderDetail._saleItem._price.currency}}</td>
 
-                                <td class="td_10" ng-if="orderDetail.customPrice">{{(orderDetail.customPrice * orderDetail.count).toFixed(2)}} {{orderDetail._saleItem._price.currency}}</td>
-                                <td class="td_10" ng-if="!orderDetail.customPrice">{{(orderDetail._saleItem._price.cost * orderDetail.count).toFixed(2)}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_10 text-center" ng-if="orderDetail.customPrice">{{(orderDetail.customPrice * orderDetail.count).toFixed(2)}} {{orderDetail._saleItem._price.currency}}</td>
+                                <td class="td_10 text-center" ng-if="!orderDetail.customPrice">{{(orderDetail._saleItem._price.cost * orderDetail.count).toFixed(2)}} {{orderDetail._saleItem._price.currency}}</td>
                             </tr>
                         </table>
                     </div>

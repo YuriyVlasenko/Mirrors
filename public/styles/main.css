@@ -338,6 +338,7 @@ md-label {
   display: none; }
 
 .order-item-details .order-item-details .order-item-details__small-img {
+  cursor: pointer;
   height: 50px;
   width: 50px;
   padding: 5px; }

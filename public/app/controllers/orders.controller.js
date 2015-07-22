@@ -6,8 +6,8 @@
     angular.module('app').controller('ordersController', OrdersController);
 
     OrdersController.$inject = ['$scope','toastsPresenter','repository','modelNames', 'print', '$q', 'utils', 'basket',
-        '$state'];
-    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils, basket, $state){
+        '$state', '$mdDialog'];
+    function OrdersController($scope, toastsPresenter,repository,modelNames, print, $q, utils, basket, $state, $mdDialog){
 
         var saleOrderDtl = [];
         $scope.saleOrders = [];
@@ -21,12 +21,27 @@
         $scope.copyHeader = copyHeader;
         $scope.copyOrderItems = copyOrderItems;
         $scope.copyToBasket =  copyToBasket;
+        $scope.showPhoto = showPhoto;
+
 
         function printOrder(){
             if (!$scope.selectedOrder){
                 toastsPresenter.info('Выберите заказ');
             }
             print.printOrder($scope.selectedOrder);
+        };
+
+        function showPhoto(imageTitle, imageSrc){
+            var dialogPromise = $mdDialog.show({
+                templateUrl:'app/models/photoView.html',
+                locals: { item: {title: imageTitle, photoSrc: imageSrc }},
+                controller: function(scope, $mdDialog, item){
+                    scope.item = item;
+                    scope.closeDialog = function() {
+                        $mdDialog.hide();
+                    }
+                }
+            });
         };
 
         function copyToBasket(){
