@@ -393,6 +393,16 @@ md-label {
   .form-element md-select {
     width: 100%; }
 
+.print .only-print {
+  display: none; }
+.print .page-content {
+  vertical-align: top; }
+.print .order-header {
+  padding: 5px;
+  display: block;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500; }
 .print .print-options {
   margin: 10px 0 0 0; }
   .print .print-options input, .print .print-options select {
@@ -409,7 +419,14 @@ md-label {
   background-color: transparent !important;
   border-bottom: 1px solid lightgray; }
 
+.no-border {
+  border: none !important; }
+
 @media print {
+  .order-header {
+    padding: 0;
+    font-size: 16px; }
+
   html, body, h1, .print, .l-main__header, .l-main__footer, .l-main {
     margin: 0 !important;
     padding: 0 !important; }
@@ -421,8 +438,11 @@ md-label {
     min-width: 1080px; }
 
   .print {
+    border: none;
     width: 1050px;
-    font-size: 18px; }
+    font-size: 10px; }
+    .print .only-print {
+      display: block; }
 
   .no-print {
     display: none; }

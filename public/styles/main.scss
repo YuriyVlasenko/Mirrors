@@ -649,6 +649,22 @@ md-tabs{
 
 .print{
 
+  .only-print{
+    display: none;
+  }
+
+  .page-content{
+    vertical-align: top;
+  }
+
+  .order-header{
+    padding: 5px;
+    display: block;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+  }
+
   .print-options{
     margin: 10px 0 0 0;
 
@@ -680,7 +696,16 @@ md-tabs{
 }
 
 
+.no-border{
+  border: none !important;
+}
+
 @media print {
+
+  .order-header{
+    padding: 0;
+    font-size: 16px;
+  }
 
   html, body, h1, .print, .l-main__header, .l-main__footer, .l-main {
     margin: 0 !important;
@@ -695,8 +720,15 @@ md-tabs{
   }
 
   .print {
+
+    border: none;
+
+    .only-print{
+      display: block;
+    }
+
     width: 1050px;
-    font-size: 18px;
+    font-size: 10px;
   }
 
   .no-print {

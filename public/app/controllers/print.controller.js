@@ -23,6 +23,8 @@
             $scope.saleOrderDtlAcc = $filter('saleAccessoryFilter')($scope.order._saleOrderDtl, value);
         });
 
+        $scope.singlePageNormalCount = 25;
+        $scope.itemsOnPage = 30;
         $scope.showPrices = true;
         $scope.order = print.getOrder();
         $scope.orderId = $scope.order.id.substr(0,6);
