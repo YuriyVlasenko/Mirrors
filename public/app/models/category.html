@@ -18,6 +18,10 @@
                                        ng-repeat="category in categories track by $index">{{category.name}}</md-option>
                         </md-select>
                     </div>
+                    <md-input-container>
+                        <label>Комментарий</label>
+                        <input type="text" name="comment" ng-model="modelData.comment" required>
+                    </md-input-container>
                 </div>
                 <div flex>
                     <div layout="row" flex layout-align="center start">

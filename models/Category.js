@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var Category = mongoose.Schema({
     categoryId: { type: String, required: true},
     name: { type: String, required: true},
+    comment: { type: String},
     parentId: { type: String}
 });
 
@@ -20,6 +21,7 @@ module.exports = {
         return {
             id: item.categoryId,
             name: item.name,
+            comment: item.comment,
             parentId: item.parentId
         };
     },
@@ -27,6 +29,7 @@ module.exports = {
         return new model({
             categoryId: id,
             name: data.name,
+            comment: data.comment,
             parentId: data.parentId
         });
     },
@@ -39,7 +42,11 @@ module.exports = {
         var updateData = {};
 
         if (data.name){
-            updateData.name = data.name;
+            updateData.name = data.name.substr(0, 250);
+        }
+
+        if (data.comment){
+            updateData.comment = data.comment.substr(0, 250);
         }
 
         updateData.parentId = data.parentId?data.parentId:'';

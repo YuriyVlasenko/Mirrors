@@ -335,7 +335,7 @@ table{
 
   tr{
     width: 100%;
-    @include user-select(none);
+    //@include user-select(none);
 
     &:nth-child(2n){
       background-color: $table-items-bg !important;
@@ -660,7 +660,7 @@ md-tabs{
   }
 
   .print-price-options, .print-group-options, .print-header-options {
-    margin-top: 10px;
+      margin-top: 10px;
       height: 25px;
       line-height: 25px;
   }
@@ -679,20 +679,35 @@ md-tabs{
   }
 }
 
-@media print{
-  .no-print{
+
+@media print {
+
+  html, body, h1, .print, .l-main__header, .l-main__footer, .l-main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body {
+    margin-left: 20px !important;
+    width: 1080px;
+    max-width: 1080px;
+    min-width: 1080px;
+  }
+
+  .print {
+    width: 1050px;
+    font-size: 18px;
+  }
+
+  .no-print {
     display: none;
   }
 
-  .l-main__header, .l-main__footer{
-
+  .l-main__header, .l-main__footer, .l-main, .l-main__content {
+    float: none;
+    width: 1080px;
+    min-width: 1080px;
   }
-  .l-main {
-    max-width: 650px;
-    width: 650px;
-    padding: 0;
-  }
-
 }
 
 

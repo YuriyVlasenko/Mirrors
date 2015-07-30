@@ -95,6 +95,7 @@
         $scope.vm.gridOptions = {
             columnDefs: [
                 {field: 'name', displayName:'Название категории'},
+                {field: 'comment', displayName:'Комментарий'},
                 {field: '_category.name', displayName:'Принадлежит'},
                 {
                     field: ' ',

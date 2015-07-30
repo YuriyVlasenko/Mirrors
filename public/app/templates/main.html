@@ -15,7 +15,10 @@
             <div class="category-item" layout="column" layout-align="center center"
                  ng-repeat="categoryItem in categories| name:filterValue"
                  ng-click="selectCategoryItem(categoryItem)">
-                <div class="category-item__name" layout="column" layout-align="center center">{{categoryItem.name}}</div>
+                <div class="category-item__name" layout="column" layout-align="center center">
+                    <span><strong>{{categoryItem.name}}</strong></span>
+                    <span>{{categoryItem.comment}}</span>
+                </div>
                 <div class="category-item__photo" flex>
                     <img ng-src="{{categoryItem.pictureSrc}}">
                 </div>
