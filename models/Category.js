@@ -45,7 +45,7 @@ module.exports = {
             updateData.name = data.name.substr(0, 250);
         }
 
-        if (data.comment){
+        if (data.comment !== undefined){
             updateData.comment = data.comment.substr(0, 250);
         }
 
