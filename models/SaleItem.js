@@ -56,7 +56,7 @@ module.exports = {
         }
 
         if (data.name !== undefined){
-            updateData.name = data.name;
+            updateData.name = data.name.substr(0, 250);
         }
 
         if (data.code !== undefined){
@@ -64,7 +64,7 @@ module.exports = {
         }
 
         if (data.comment !== undefined){
-            updateData.comment = data.comment;
+            updateData.comment = data.comment.substr(0, 250);;
         }
 
         return updateData;

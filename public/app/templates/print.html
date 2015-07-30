@@ -45,22 +45,22 @@
     </table>
     <table ng-if="saleOrderDtl && saleOrderDtl.length > 0">
         <tr>
-            <th class="td_5">№</th>
-            <th>Наименование товара</th>
+            <th class="td_10">№</th>
+            <th class="td_40">Наименование товара</th>
             <th class="td_10">Код</th>
             <th class="td_10 number-field">К-во</th>
-            <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
+            <th class="td_10 number-field" ng-show="showPrices">Цена, ед.</th>
             <th class="td_20 number-field" ng-show="showPrices">Сумма</th>
         </tr>
     </table>
     <table>
         <tr ng-repeat="detailItem in saleOrderDtl">
-            <td class="td_5">{{$index + 1}}</td>
-            <td>{{detailItem._saleItem.name}}</td>
+            <td class="td_10">{{$index + 1}}</td>
+            <td class="td_40">{{detailItem._saleItem.name}}</td>
             <td class="td_10">{{detailItem._saleItem.code}}</td>
             <td class="td_10 number-field">{{detailItem.count}}</td>
-            <td class="td_15 number-field" ng-show="showPrices" ng-if="detailItem.customPrice">{{detailItem.customPrice}} {{detailItem._saleItem._price.currency}}</td>
-            <td class="td_15 number-field" ng-show="showPrices" ng-if="!detailItem.customPrice">{{detailItem._saleItem._price.cost}} {{detailItem._saleItem._price.currency}}</td>
+            <td class="td_10 number-field" ng-show="showPrices" ng-if="detailItem.customPrice">{{detailItem.customPrice}} {{detailItem._saleItem._price.currency}}</td>
+            <td class="td_10 number-field" ng-show="showPrices" ng-if="!detailItem.customPrice">{{detailItem._saleItem._price.cost}} {{detailItem._saleItem._price.currency}}</td>
 
             <td class="td_20 number-field" ng-show="showPrices" ng-if="detailItem.customPrice">{{(detailItem.customPrice * detailItem.count).toFixed(2)}} {{detailItem._saleItem._price.currency}}</td>
             <td class="td_20 number-field" ng-show="showPrices" ng-if="!detailItem.customPrice">{{(detailItem._saleItem._price.cost * detailItem.count).toFixed(2)}} {{detailItem._saleItem._price.currency}}</td>
@@ -68,28 +68,27 @@
     </table>
     <table ng-if="saleOrderDtlAcc && saleOrderDtlAcc.length > 0">
         <tr>
-            <th class="td_5">№</th>
-            <th>Наименование</th>
+            <th class="td_10">№</th>
+            <th class="td_40">Наименование</th>
             <th class="td_10">Код</th>
             <th class="td_10 number-field">К-во</th>
-            <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
+            <th class="td_10 number-field" ng-show="showPrices">Цена, ед.</th>
             <th class="td_20 number-field" ng-show="showPrices">Сумма</th>
         </tr>
     </table>
     <table>
         <tr ng-repeat="detailItem in saleOrderDtlAcc">
-            <td class="td_5">{{$index + 1}}</td>
-            <td>{{detailItem._saleItem.name}}</td>
+            <td class="td_10">{{$index + 1}}</td>
+            <td class="td_40">{{detailItem._saleItem.name}}</td>
             <td class="td_10">{{detailItem._saleItem.code}}</td>
             <td class="td_10 number-field">{{detailItem.count}}</td>
-            <td class="td_15 number-field" ng-show="showPrices" ng-if="detailItem.customPrice">{{detailItem.customPrice}} {{detailItem._saleItem._price.currency}}</td>
-            <td class="td_15 number-field" ng-show="showPrices" ng-if="!detailItem.customPrice">{{detailItem._saleItem._price.cost}} {{detailItem._saleItem._price.currency}}</td>
+            <td class="td_10 number-field" ng-show="showPrices" ng-if="detailItem.customPrice">{{detailItem.customPrice}} {{detailItem._saleItem._price.currency}}</td>
+            <td class="td_10 number-field" ng-show="showPrices" ng-if="!detailItem.customPrice">{{detailItem._saleItem._price.cost}} {{detailItem._saleItem._price.currency}}</td>
 
             <td class="td_20 number-field" ng-show="showPrices" ng-if="detailItem.customPrice">{{(detailItem.customPrice * detailItem.count).toFixed(2)}} {{detailItem._saleItem._price.currency}}</td>
             <td class="td_20 number-field" ng-show="showPrices" ng-if="!detailItem.customPrice">{{(detailItem._saleItem._price.cost * detailItem.count).toFixed(2)}} {{detailItem._saleItem._price.currency}}</td>
         </tr>
     </table>
-
     <table>
         <tr>
             <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Вместе с ПДВ прописью:</td>

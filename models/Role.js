@@ -37,7 +37,7 @@ module.exports = {
         var updateData = {};
 
         if (data.name){
-            updateData.name = data.name;
+            updateData.name = data.name.substr(0, 250);
         }
 
         return updateData;

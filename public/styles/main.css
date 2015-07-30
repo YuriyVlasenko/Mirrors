@@ -189,11 +189,7 @@ table {
   table td {
     padding: 0px 2px; }
   table tr {
-    width: 100%;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none; }
+    width: 100%; }
     table tr:nth-child(2n) {
       background-color: lightcyan !important; }
     table tr:nth-child(2n+1) {
@@ -414,12 +410,26 @@ md-label {
   border-bottom: 1px solid lightgray; }
 
 @media print {
+  html, body, h1, .print, .l-main__header, .l-main__footer, .l-main {
+    margin: 0 !important;
+    padding: 0 !important; }
+
+  body {
+    margin-left: 20px !important;
+    width: 1080px;
+    max-width: 1080px;
+    min-width: 1080px; }
+
+  .print {
+    width: 1050px;
+    font-size: 18px; }
+
   .no-print {
     display: none; }
 
-  .l-main {
-    max-width: 650px;
-    width: 650px;
-    padding: 0; } }
+  .l-main__header, .l-main__footer, .l-main, .l-main__content {
+    float: none;
+    width: 1080px;
+    min-width: 1080px; } }
 
 /*# sourceMappingURL=main.css.map */
