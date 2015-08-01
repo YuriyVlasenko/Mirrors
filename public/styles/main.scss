@@ -700,6 +700,53 @@ md-tabs{
   border: none !important;
 }
 
+.contact{
+  table{
+    border: none;
+    tr{
+
+      border: none;
+      background-color: transparent !important;
+
+      td{
+        border: none;
+
+        &:first-child{
+          width: 40px;
+        }
+      }
+    }
+
+  }
+  .contact-person{
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 24px;
+  }
+  .contact-number{
+    font-size: 18px;
+    margin-top: 5px;
+  }
+
+  .contact-number--kyivstar, .contact-number--mts, .contact-number--email{
+    display: inline-block;
+    background-size: contain;
+    width: 24px;
+    height: 24px;
+    margin: 5px;
+  }
+  .contact-number--kyivstar{
+     background-image: url("../images/kievstar.png");
+  }
+  .contact-number--mts{
+    background-image: url("../images/mts.png");
+  }
+  .contact-number--email{
+    background-image: url("../images/mail.png");
+  }
+}
+
+
 @media print {
 
   .order-header{

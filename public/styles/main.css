@@ -422,6 +422,35 @@ md-label {
 .no-border {
   border: none !important; }
 
+.contact table {
+  border: none; }
+  .contact table tr {
+    border: none;
+    background-color: transparent !important; }
+    .contact table tr td {
+      border: none; }
+      .contact table tr td:first-child {
+        width: 40px; }
+.contact .contact-person {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 24px; }
+.contact .contact-number {
+  font-size: 18px;
+  margin-top: 5px; }
+.contact .contact-number--kyivstar, .contact .contact-number--mts, .contact .contact-number--email {
+  display: inline-block;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  margin: 5px; }
+.contact .contact-number--kyivstar {
+  background-image: url("../images/kievstar.png"); }
+.contact .contact-number--mts {
+  background-image: url("../images/mts.png"); }
+.contact .contact-number--email {
+  background-image: url("../images/mail.png"); }
+
 @media print {
   .order-header {
     padding: 0;
