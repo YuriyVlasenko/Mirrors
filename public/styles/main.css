@@ -393,8 +393,6 @@ md-label {
   .form-element md-select {
     width: 100%; }
 
-.print .only-print {
-  display: none; }
 .print .page-content {
   vertical-align: top; }
 .print .order-header {
@@ -409,7 +407,7 @@ md-label {
     margin: 0;
     padding: 0;
     height: 25px; }
-.print .print-price-options, .print .print-group-options, .print .print-header-options {
+.print .print-price-options, .print .print-group-options, .print .print-header-options, .print .print-other-options {
   margin-top: 10px;
   height: 25px;
   line-height: 25px; }
@@ -452,13 +450,23 @@ md-label {
   background-image: url("../images/mail.png"); }
 
 @media print {
-  .order-header {
-    padding: 0;
-    font-size: 16px; }
-
   html, body, h1, .print, .l-main__header, .l-main__footer, .l-main {
     margin: 0 !important;
     padding: 0 !important; }
+
+  html, body, .l-main, .l-main__content, .print {
+    display: block !important;
+    float: none !important;
+    clear: both !important;
+    overflow: visible !important; }
+
+  .l-main__content {
+    top: 0;
+    bottom: 0; }
+
+  .order-header {
+    padding: 0;
+    font-size: 16px; }
 
   body {
     margin-left: 20px !important;
@@ -470,8 +478,6 @@ md-label {
     border: none;
     width: 1050px;
     font-size: 10px; }
-    .print .only-print {
-      display: block; }
 
   .no-print {
     display: none; }

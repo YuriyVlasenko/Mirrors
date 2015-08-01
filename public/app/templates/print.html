@@ -1,32 +1,64 @@
 <div class="print">
-    <div class="no-print print-options" layout="column">
-        <div class="print-price-options">
-            <input type="checkbox" ng-model="showPrices" ng-checked="showPrices" id="showPrices">
-            <label for="showPrices">показывать цены</label>
-        </div>
-        <div class="print-group-options">
-            <label for="accessoryId">группировать по:</label>
-            <select ng-model="accessoryId" id="accessoryId">
-                <option value="null">нет</option>
-                <option value="{{category.id}}" ng-repeat="category in categories"
-                        ng-selected="category.id == accessoryId">{{category.name}}
-                </option>
-            </select>
-            <label>Позиций на странице:</label>
-            <input type="number" ng-model="itemsOnPage">
-        </div>
-        <div class="print-header-options">
-            <label for="orderId">Номер накладной</label>
-            <input ng-model="orderId" id="orderId">
-            <label for="orderDate">Дата</label>
-            <input ng-model="orderDate" id="orderDate">
-        </div>
-    </div>
+    <table class="no-print no-border">
+        <tr class="no-border">
+            <td class="td_15">
+                <label for="accessoryId">группировать по:</label>
+            </td>
+            <td class="td_35">
+                <select ng-model="accessoryId" id="accessoryId">
+                    <option value="null">нет</option>
+                    <option value="{{category.id}}" ng-repeat="category in categories"
+                            ng-selected="category.id == accessoryId">{{category.name}}
+                    </option>
+                </select>
+            </td>
+            <td colspan="2">
+                <div class="print-price-options">
+                    <input type="checkbox" ng-model="showPrices" ng-checked="showPrices" id="showPrices">
+                    <label for="showPrices">показывать цены</label>
+                </div>
+            </td>
+        </tr>
+        <tr class="no-border">
+            <td class="td_15">
+                <label for="orderId">Номер накладной</label>
 
-    <div class="no-print">
-            <span class="order-header">
-                Накладная № {{orderId}} от {{orderDate}}
-            </span>
+            </td>
+            <td class="td_35">
+                <input ng-model="orderId" id="orderId">
+            </td>
+            <td class="td_15">
+                <label for="orderDate">Дата</label>
+
+            </td>
+            <td class="td_35">
+                <input ng-model="orderDate" id="orderDate">
+            </td>
+        </tr>
+        <tr class="no-border">
+            <td class="td_15">
+                <label>Позиций на странице:</label>
+            </td>
+            <td class="td_35">
+                <input type="number" ng-model="itemsOnPage">
+            </td>
+            <td class="td_15">
+                <label>Шрифт:</label>
+            </td>
+            <td class="td_35">
+                <input type="number" ng-model="fontSize">
+            </td>
+            <td class="td_15">
+                <input type="checkbox" ng-model="printAsSummary" ng-checked="printAsSummary" id="printAsSummary"
+                        ng-change="fontSize=printAsSummary?18:10;">
+                <label for="printAsSummary">общий отчет</label>
+            </td>
+        </tr>
+    </table>
+    <div ng-show="printAsSummary" style="font-size: {{fontSize}}px !important;">
+        <span class="order-header">
+            Накладная № {{orderId}} от {{orderDate}}
+        </span>
         <table>
             <tr>
                 <td class="td_30">Поставщик</td>
@@ -48,7 +80,9 @@
                 <td class="td_70">{{order._saleOrderHeader.attornay}}</td>
             </tr>
         </table>
+
         <table ng-if="saleOrderDtl && saleOrderDtl.length > 0">
+            <thead>
             <tr>
                 <th class="td_5">№</th>
                 <th>Наименование товара</th>
@@ -57,6 +91,7 @@
                 <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
                 <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
             </tr>
+            </thead>
         </table>
         <table>
             <tr ng-repeat="detailItem in saleOrderDtl">
@@ -82,6 +117,7 @@
         </table>
 
         <table ng-if="saleOrderDtl.length > itemsOnPage">
+            <thead>
             <tr>
                 <th class="td_5">№</th>
                 <th>Наименование товара</th>
@@ -90,6 +126,7 @@
                 <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
                 <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
             </tr>
+            </thead>
         </table>
         <table>
             <tr ng-repeat="detailItem in saleOrderDtlAcc">
@@ -148,7 +185,7 @@
             </tr>
         </table>
     </div>
-    <div class="only-print">
+    <div ng-hide="printAsSummary" style="font-size: {{fontSize}}px !important;">
         <table class="no-border">
             <tr class="no-border">
 

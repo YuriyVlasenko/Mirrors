@@ -649,10 +649,6 @@ md-tabs{
 
 .print{
 
-  .only-print{
-    display: none;
-  }
-
   .page-content{
     vertical-align: top;
   }
@@ -675,7 +671,7 @@ md-tabs{
     }
   }
 
-  .print-price-options, .print-group-options, .print-header-options {
+  .print-price-options, .print-group-options, .print-header-options, .print-other-options {
       margin-top: 10px;
       height: 25px;
       line-height: 25px;
@@ -749,14 +745,27 @@ md-tabs{
 
 @media print {
 
-  .order-header{
-    padding: 0;
-    font-size: 16px;
-  }
-
   html, body, h1, .print, .l-main__header, .l-main__footer, .l-main {
     margin: 0 !important;
     padding: 0 !important;
+  }
+
+  html, body, .l-main, .l-main__content, .print {
+    display: block !important;
+    float: none !important;
+    clear: both !important;
+
+    overflow: visible !important;
+  }
+
+  .l-main__content{
+    top: 0;
+    bottom: 0;
+  }
+
+  .order-header{
+    padding: 0;
+    font-size: 16px;
   }
 
   body {
@@ -767,13 +776,7 @@ md-tabs{
   }
 
   .print {
-
     border: none;
-
-    .only-print{
-      display: block;
-    }
-
     width: 1050px;
     font-size: 10px;
   }
