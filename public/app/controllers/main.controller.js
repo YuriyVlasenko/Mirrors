@@ -77,8 +77,16 @@
                 }
                 item.childItemsMap = childItemsMap;
             }
+
+            var basketItemsMap =  basket.getBasketInfo().itemsMap;
+
+            if (angular.isDefined(basketItemsMap[item.id])){
+                toastsPresenter.info('Товар уже был добавлен.');
+                return;
+            }
+
             basket.addItem(item);
-            toastsPresenter.info('Товар добавлен.');
+            toastsPresenter.success('Товар добавлен.');
         };
 
         function showPhoto(salesItem){
