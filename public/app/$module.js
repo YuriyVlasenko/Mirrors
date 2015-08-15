@@ -54,6 +54,9 @@
         }).state('contacts', {
             url: "/contacts",
             templateUrl:'app/templates/contacts.html'
+        }).state('admin', {
+            url: "/admin",
+            templateUrl:'app/templates/admin.html'
         });
 
         $httpProvider.interceptors.push('responseObserver');

@@ -393,6 +393,9 @@ md-label {
   .form-element md-select {
     width: 100%; }
 
+.admin-page {
+  padding: 10px; }
+
 .print .page-content {
   vertical-align: top; }
 .print .order-header {

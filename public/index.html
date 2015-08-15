@@ -57,6 +57,9 @@
                 <li class="menu-item" ui-sref-active="menu-item--active">
                     <a href ui-sref="contacts">Контакты</a>
                 </li>
+                <li class="menu-item" ui-sref-active="menu-item--active" ng-if="vm.userData.isAdmin">
+                    <a href ui-sref="admin">Админка</a>
+                </li>
             </ul>
             <div layout="row">
                 <div class="user-data">

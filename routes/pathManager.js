@@ -5,7 +5,6 @@
 var API_PREFIX = 'api';
 
 function buildPath(modelName, operation){
-    // TODO: improve
     if (operation){
         return "/"+API_PREFIX+"/"+modelName+"/"+operation;
     }

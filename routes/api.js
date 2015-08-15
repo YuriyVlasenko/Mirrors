@@ -7,9 +7,11 @@ var pathManager = require('./pathManager');
 var bodyParser = require('body-parser');
 var url = require('url');
 var path = require('path');
+var fileSystem = require('fs');
 var multiparty = require('multiparty');
 var uuid = require('node-uuid');
 var fs = require('fs');
+var execFile = require('child_process').execFile;
 
 var roleModel = require('../models/Role');
 var userModel = require('../models/User');
@@ -74,6 +76,33 @@ module.exports.init = function(app){
     createRoutes(saleOrderModel);
     createRoutes(saleOrderDtlModel);
     createRoutes(saleOrderHeaderModel);
+
+    app.get('/api/admin/getBackup', function (req, res) {
+
+        if(!isAdminRole(req.user.roleId)){
+            res.sendStatus(403);
+        }
+
+        console.log('getBackup');
+        console.log(Date());
+
+        execFile('mongoDbDump.bat', function(error){
+            if (error){
+                res.sendStatus(404);
+            }
+
+            var filePath = path.join(__dirname, '../dump/archive.zip');
+            var stat = fileSystem.statSync(filePath);
+
+            res.writeHead(200, {
+                'Content-Type': 'application/zip',
+                'Content-Length': stat.size
+            });
+
+            var readStream = fileSystem.createReadStream(filePath);
+            readStream.pipe(res);
+        });
+    });
 
     function accessFilter(modelName, req, items){
         // Only current user
