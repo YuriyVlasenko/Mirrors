@@ -81,6 +81,7 @@ module.exports.init = function(app){
 
         if(!isAdminRole(req.user.roleId)){
             res.sendStatus(403);
+            return;
         }
 
         console.log('getBackup');
@@ -88,7 +89,9 @@ module.exports.init = function(app){
 
         execFile('mongoDbDump.bat', function(error){
             if (error){
+                console.log(error);
                 res.sendStatus(404);
+                return;
             }
 
             var filePath = path.join(__dirname, '../dump/archive.zip');
@@ -98,6 +101,8 @@ module.exports.init = function(app){
                 'Content-Type': 'application/zip',
                 'Content-Length': stat.size
             });
+
+            console.log(filePath);
 
             var readStream = fileSystem.createReadStream(filePath);
             readStream.pipe(res);
