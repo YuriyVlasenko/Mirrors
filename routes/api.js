@@ -87,15 +87,14 @@ module.exports.init = function(app){
         console.log('getBackup');
         console.log(Date());
 
-        execFile('/mongoDbDump.bat', function(error){
+        execFile('C:/Project/Git/mongoDbDump.bat', function(error){
             if (error){
                 console.log(error);
                 res.sendStatus(404);
                 return;
             }
 
-            var filePath = path.join(__dirname, '../dump/archive.zip');
-            var stat = fileSystem.statSync(filePath);
+            var stat = fileSystem.statSync('C:/Project/Git/dump/archive.zip');
 
             res.writeHead(200, {
                 'Content-Type': 'application/zip',
