@@ -94,7 +94,8 @@ module.exports.init = function(app){
                 return;
             }
 
-            var stat = fileSystem.statSync('C:/Project/Git/dump/archive.zip');
+            var filePath = 'C:/Project/Git/dump/archive.zip';
+            var stat = fileSystem.statSync(filePath);
 
             res.writeHead(200, {
                 'Content-Type': 'application/zip',
