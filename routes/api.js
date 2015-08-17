@@ -87,7 +87,7 @@ module.exports.init = function(app){
         console.log('getBackup');
         console.log(Date());
 
-        execFile('mongoDbDump.bat', function(error){
+        execFile('/mongoDbDump.bat', function(error){
             if (error){
                 console.log(error);
                 res.sendStatus(404);
