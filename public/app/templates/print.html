@@ -59,7 +59,7 @@
         <span class="order-header">
             Накладная № {{orderId}} от {{orderDate}}
         </span>
-        <table>
+        <table ng-show="showPrices">
             <tr>
                 <td class="td_30">Поставщик</td>
                 <td class="td_70">{{order._saleOrderHeader.supplier}}</td>
@@ -93,7 +93,7 @@
             </tr>
             </thead>
         </table>
-        <table>
+        <table class="bordered-table">
             <tr ng-repeat="detailItem in saleOrderDtl">
                 <td class="td_5">{{$index + 1}}</td>
                 <td>{{detailItem._saleItem.name}}</td>
@@ -128,7 +128,7 @@
             </tr>
             </thead>
         </table>
-        <table>
+        <table class="bordered-table">
             <tr ng-repeat="detailItem in saleOrderDtlAcc">
                 <td class="td_5">{{$index + 1}}</td>
                 <td>{{detailItem._saleItem.name}}</td>
@@ -183,6 +183,13 @@
                 <td class="td_10"><b>Принял:</b></td>
                 <td class="td_40 input-field"></td>
             </tr>
+            <tr>
+                <td colspan="4">
+                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Уважаемые заказчики. </span>
+                    <span class="note-text" style="font-size: {{fontSize}}px !important;">В случае ненадлежащего качества товара (бой, брак, сколы) просьба уведомить поставщика не позднее
+                        3х календарных дней с момента поставки. По истечению данного срока претензии не принимаются.</span>
+                </td>
+            </tr>
         </table>
     </div>
     <div ng-hide="printAsSummary" style="font-size: {{fontSize}}px !important;">
@@ -193,7 +200,7 @@
             <span class="order-header">
                 Накладная № {{orderId}} от {{orderDate}}
             </span>
-                    <table>
+                    <table ng-show="showPrices">
                         <tr>
                             <td class="td_30">Поставщик</td>
                             <td class="td_70">{{order._saleOrderHeader.supplier}}</td>
@@ -224,7 +231,7 @@
                             <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
                         </tr>
                     </table>
-                    <table>
+                    <table class="bordered-table">
                         <tr ng-repeat="detailItem in saleOrderDtl | limitTo:itemsOnPage">
                             <td class="td_5">{{$index + 1}}</td>
                             <td>{{detailItem._saleItem.name}}</td>
@@ -258,7 +265,7 @@
                                 <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
                             </tr>
                         </table>
-                        <table>
+                        <table class="bordered-table">
                             <tr ng-repeat="detailItem in saleOrderDtlAcc">
                                 <td class="td_5">{{$index + 1}}</td>
                                 <td>{{detailItem._saleItem.name}}</td>
@@ -317,6 +324,13 @@
                                 <td class="td_10"><b>Принял:</b></td>
                                 <td class="td_40 input-field"></td>
                             </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Уважаемые заказчики. </span>
+                                    <span class="note-text" style="font-size: {{fontSize}}px !important;">В случае ненадлежащего качества товара (бой, брак, сколы) просьба уведомить поставщика не позднее
+                                        3х календарных дней с момента поставки. По истечению данного срока претензии не принимаются.</span>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </td>
@@ -334,7 +348,7 @@
                                 <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
                             </tr>
                         </table>
-                        <table ng-if="saleOrderDtl.length > itemsOnPage">
+                        <table ng-if="saleOrderDtl.length > itemsOnPage" class="bordered-table">
                             <tr ng-repeat="detailItem in saleOrderDtl | limitTo:(saleOrderDtl.length-itemsOnPage):itemsOnPage">
                                 <td class="td_5">{{$index + 1 + itemsOnPage}}</td>
                                 <td>{{detailItem._saleItem.name}}</td>
@@ -368,7 +382,7 @@
                                 <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
                             </tr>
                         </table>
-                        <table>
+                        <table class="bordered-table">
                             <tr ng-repeat="detailItem in saleOrderDtlAcc">
                                 <td class="td_5">{{$index + 1}}</td>
                                 <td>{{detailItem._saleItem.name}}</td>
@@ -427,6 +441,13 @@
                                 <td class="td_40 input-field"></td>
                                 <td class="td_10"><b>Принял:</b></td>
                                 <td class="td_40 input-field"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Уважаемые заказчики. </span>
+                                    <span class="note-text" style="font-size: {{fontSize}}px !important;">В случае ненадлежащего качества товара (бой, брак, сколы) просьба уведомить поставщика не позднее
+                                        3х календарных дней с момента поставки. По истечению данного срока претензии не принимаются.</span>
+                                </td>
                             </tr>
                         </table>
                     </div>

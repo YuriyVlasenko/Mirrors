@@ -396,6 +396,14 @@ md-label {
 .admin-page {
   padding: 10px; }
 
+.bordered-table tr {
+  border: 1px solid #000000 !important; }
+
+.print .note-title {
+  font-weight: 600;
+  font-size: 14px; }
+.print .note-text, .print .note-title {
+  font-size: 12px; }
 .print .page-content {
   vertical-align: top; }
 .print .order-header {

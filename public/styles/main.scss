@@ -651,7 +651,20 @@ md-tabs{
   padding: 10px;
 }
 
+.bordered-table {
+  tr {
+    border: 1px solid #000000 !important;
+  }
+}
+
 .print{
+
+  .note-title{
+    font-weight: 600;
+  }
+  .note-text, .note-title{
+    font-size: 12px;
+  }
 
   .page-content{
     vertical-align: top;
