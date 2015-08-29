@@ -80,8 +80,7 @@ module.exports.init = function(app){
     app.get('/api/admin/getBackup', function (req, res) {
 
         if(!isAdminRole(req.user.roleId)){
-            res.sendStatus(403);
-            return;
+            return res.sendStatus(403);
         }
 
         console.log('getBackup');
@@ -90,8 +89,7 @@ module.exports.init = function(app){
         execFile('C:/Project/Git/mongoDbDump.bat', function(error){
             if (error){
                 console.log(error);
-                res.sendStatus(404);
-                return;
+                return res.sendStatus(404);
             }
 
             var filePath = 'C:/Project/Git/dump/archive.zip';
@@ -138,14 +136,13 @@ module.exports.init = function(app){
                 form.parse(req, function(err, fields, files) {
                     if (!files || files.file.length == 0)
                     {
-                        res.send({status:'ERROR', message:'Can\'t find files.'});
-                        return;
+                        return res.send({status:'ERROR', message:'Can\'t find files.'});
                     }
                     var file = files.file[0];
                     var fileNamePaths =  file.originalFilename.split('.');
                     if (fileNamePaths.length == 0)
                     {
-                        res.send({status:'ERROR', message:'Can\'t parse filename.'});
+                        return res.send({status:'ERROR', message:'Can\'t parse filename.'});
                     }
                     var fileType = fileNamePaths[fileNamePaths.length-1];
                     var filePath ="../public/images/"+itemModel.name+'/'+itemId+'.'+fileType;
@@ -156,9 +153,9 @@ module.exports.init = function(app){
                     }
                     catch(error)
                     {
-                        res.send({status:'ERROR', message:error.message});
+                        return res.send({status:'ERROR', message:error.message});
                     }
-                    res.send({status:'OK'});
+                    return res.send({status:'OK'});
                 });
             });
             var apiPathDelete = '/api/upload/delete/'+itemModel.name+'/:id';
@@ -182,7 +179,7 @@ module.exports.init = function(app){
                        }
                     });
                 }
-                res.send({status:'OK'});
+                return res.send({status:'OK'});
             });
         }
 
@@ -440,12 +437,13 @@ module.exports.init = function(app){
                 itemModel.dbModel.find(conditions, function(error, data){
                    if(error){
                        res.statusCode = 500;
-                       res.send({error: 'Server error'});
+                       return res.send({error: 'Server error'});
+
                    }
                     var item = data[0];
                     if(item.isApproved || item.isCompleted){
                         res.statusCode = 500;
-                        res.send({error: 'Can not remove approved or confirmed orders.'});
+                        return res.send({error: 'Can not remove approved or confirmed orders.'});
                     }
                     else{
                         removeItem();
@@ -463,7 +461,7 @@ module.exports.init = function(app){
                     }
                     else {
                         res.statusCode = 500;
-                        res.send({error: 'Server error'});
+                        return res.send({error: 'Server error'});
                     }
                 });
             }
@@ -527,7 +525,7 @@ module.exports.init = function(app){
                 else {
                     console.log('update error');
                     res.statusCode = 500;
-                    res.send({error: 'Server error'});
+                    return res.send({error: 'Server error'});
                     //log.error(ERROR_TEMPLATE, res.statusCode, err.message);
                 }
             });
