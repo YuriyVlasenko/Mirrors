@@ -21,9 +21,9 @@ $table-items-bg: lightcyan;
 }
 
 html,  body{
-  //background-image: url("../images/background.png");
+  background-image: url("../images/background.jpg");
+  background-size: cover;
   overflow: hidden;
-  //background-color: $main-background-color;
 }
 
 ul{
@@ -62,6 +62,9 @@ h1, h2, h3{
 
     .user-data__name{
       font-weight: 700;
+    }
+    a{
+      color: #ffffff;
     }
   }
 }
@@ -229,6 +232,10 @@ $sale-item-width: 280px;
   height: 40px;
   margin-left: 20px;
 
+  .basket-container__data{
+    color: #ffffff;
+  }
+
   .basket-icon{
     cursor: pointer;
     margin-right: 10px;
@@ -263,6 +270,7 @@ $sale-item-width: 280px;
  .menu-item{
    display:inline-block;
 
+
    &:hover{
      background-color: $hover-bg-color;
    }
@@ -272,7 +280,8 @@ $sale-item-width: 280px;
    }
 
    a{
-     display: block;
+      display: block;
+      color: #000000;
       margin-right: 1px;
       padding: 5px;
       text-decoration: none;
@@ -326,7 +335,7 @@ table{
   margin: 5px 0;
 
   th{
-    background-color: lightskyblue;
+    background-color: transparent;
   }
 
   td{

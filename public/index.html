@@ -70,8 +70,8 @@
                 <div class="basket-container" layout="row" layout-align="center center" ng-if="vm.userData.isAdmin || vm.userData.isPartner">
                     <span class="glyphicon glyphicon-shopping-cart basket-icon" ng-click="openBasket();"></span>
                     <div layout="column" layout-align="center start" class="basket-info">
-                        <div><span>Товаров:</span><span><b>{{basketInfo.itemsCount}}</b></span></div>
-                        <div><span>Сумма: </span><span><b>{{basketInfo.cost}} грн.
+                        <div class="basket-container__data"><span>Товаров:</span><span><b>{{basketInfo.itemsCount}}</b></span></div>
+                        <div class="basket-container__data"><span>Сумма: </span><span ><b>{{basketInfo.cost}} грн.
                             <span ng-if="basketInfo.costInDollars">(+{{basketInfo.costInDollars}}$)</span></b>
                     </span></div>
                     </div>

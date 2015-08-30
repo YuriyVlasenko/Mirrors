@@ -82,11 +82,15 @@ md-toast{
 md-tabs{
   margin-top: 5px;
 
+  md-content{
+    background-color: transparent !important;
+  }
+
   md-tabs-ink-bar{
     color: #0040D0 !important;
     background-color: #0040D0 !important;
   }
   .md-header-items-container{
-    background-color: lightskyblue;
+    background-color: transparent !important;
   }
 }
