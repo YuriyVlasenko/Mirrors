@@ -335,9 +335,7 @@
                     </div>
                 </td>
                 <td class="td_50 page-content">
-
-                    <div ng-if="saleOrderDtl.length > singlePageNormalCount">
-
+                    <div ng-if="saleOrderDtl.length >= singlePageNormalCount">
                         <table ng-if="saleOrderDtl.length > itemsOnPage">
                             <tr>
                                 <th class="td_5">№</th>
@@ -405,7 +403,6 @@
                                 </td>
                             </tr>
                         </table>
-
                         <table>
                             <tr>
                                 <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Вместе с ПДВ
