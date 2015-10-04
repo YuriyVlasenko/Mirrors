@@ -128,7 +128,7 @@
                 <md-button class="md-primary" ng-click="saveComments();">Сохранить</md-button>
             </md-content>
         </md-tab>
-        <md-tab label="управление" ng-show="selectedOrder">
+        <md-tab label="управление" ng-show="selectedOrder && vm.userData.isAdmin">
             <md-content>
                 <div layout="row" layout-align="start center">
                     <md-input-container flex>
