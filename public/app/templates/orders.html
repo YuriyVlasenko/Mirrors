@@ -76,7 +76,7 @@
                 </div>
             </md-content>
         </md-tab>
-        <md-tab label="детали" ng-show="selectedOrder">
+        <md-tab label="детали" ng-show="selectedOrder && vm.userData.isAdmin">
             <md-content>
                     <ng-form name="itemForm" novalidate>
                         <div layout="row" layout-align="start center">
