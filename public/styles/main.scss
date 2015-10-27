@@ -487,7 +487,7 @@ md-tabs{
   width: 100%;
   min-height: 100px;
   height: calc(100% - 30px);
-  overflow: overlay;
+  overflow: auto;
 }
 
 .md-tab-content{
