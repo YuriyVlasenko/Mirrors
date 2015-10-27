@@ -278,7 +278,8 @@ md-tabs {
   height: calc(100% - 10px); }
   .md-tabs-content md-content {
     height: 100%;
-    overflow: hidden; }
+    overflow: auto;
+  }
 
 .order-item-details-content {
   position: absolute;
@@ -310,7 +311,9 @@ md-tabs {
   height: 100%; }
 
 .order-items {
-  height: 100%; }
+  height: 100%;
+  overflow: hidden;
+}
 
 .order-item--header {
   height: 25px; }

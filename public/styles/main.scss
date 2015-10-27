@@ -13,8 +13,6 @@ $table-items-bg: lightcyan;
   -ms-user-select: $value;
 }
 
-
-
 *{
   margin: 0;
   padding: 0;
@@ -479,7 +477,7 @@ md-tabs{
 
   md-content{
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
   }
 }
 
@@ -524,6 +522,7 @@ md-tabs{
 
 .order-items{
   height: 100%;
+  overflow: hidden;
 }
 .order-item--header {
   height: 25px;
