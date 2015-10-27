@@ -275,10 +275,11 @@ md-tabs {
   overflow: hidden !important; }
 
 .md-tabs-content {
+  overflow: hidden !important;
   height: calc(100% - 10px); }
   .md-tabs-content md-content {
     height: 100%;
-    overflow: auto;
+    overflow: visible;
   }
 
 .order-item-details-content {
@@ -312,7 +313,7 @@ md-tabs {
 
 .order-items {
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .order-item--header {
@@ -320,7 +321,7 @@ md-tabs {
 
 .order-item--content {
   height: calc(100% - 25px);
-  overflow: overlay; }
+  overflow: auto; }
 
 .order-item {
   width: 100%;
