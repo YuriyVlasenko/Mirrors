@@ -36,7 +36,7 @@ module.exports = {
             comment: item.comment,
             response: item.response,
             deliveryCost: item.deliveryCost,
-            orderNumber: item.orderNumber
+            orderNumber: item.orderNumber || 0
         };
     },
     createItem: function(id, data){
@@ -51,7 +51,7 @@ module.exports = {
             comment: data.comment,
             response: data.response,
             deliveryCost: data.deliveryCost,
-            orderNumber: data.orderNumber
+            orderNumber: data.orderNumber || 0
         });
     },
     searchConditions: function(data){
