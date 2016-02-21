@@ -14,7 +14,8 @@ var SaleOrder = mongoose.Schema({
     isCompleted: {type: Boolean, default:false},
     comment: {type: String},
     response: {type: String},
-    deliveryCost: {type:String}
+    deliveryCost: {type:String},
+    orderNumber: {type:Number, default: 0}
 });
 
 var model = mongoose.model('SaleOrder', SaleOrder);
@@ -34,7 +35,8 @@ module.exports = {
             isCompleted: item.isCompleted,
             comment: item.comment,
             response: item.response,
-            deliveryCost: item.deliveryCost
+            deliveryCost: item.deliveryCost,
+            orderNumber: item.orderNumber
         };
     },
     createItem: function(id, data){
@@ -48,7 +50,8 @@ module.exports = {
             isCompleted: data.isCompleted,
             comment: data.comment,
             response: data.response,
-            deliveryCost: data.deliveryCost
+            deliveryCost: data.deliveryCost,
+            orderNumber: data.orderNumber
         });
     },
     searchConditions: function(data){
@@ -91,7 +94,9 @@ module.exports = {
             updateData.deliveryCost = data.deliveryCost;
         }
 
+        if (data.orderNumber){
+            updateData.orderNumber = data.orderNumber;
+        }
         return updateData;
     }
-
-}
+};

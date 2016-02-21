@@ -7,9 +7,10 @@
                         <div class="order-item--header">
                             <table class="order-item">
                                 <tr>
+                                    <th class="td_5"></th>
                                     <th class="td_5">Код</th>
                                     <th class="td_10">Дата</th>
-                                    <th class="td_40">Кто/Кому</th>
+                                    <th class="td_35">Кто/Кому</th>
                                     <th class="td_10 text-center">Стоимость</th>
                                     <th class="td_5">Подтв.</th>
                                     <th class="td_20">Комментарий/Отзыв</th>
@@ -20,10 +21,13 @@
                         </div>
                         <div class="order-item--content">
                             <table class="order-item">
-                                <tr ng-repeat="order in saleOrders | orderBy:'date':true" ng-click="setCurrentOrder(order);" ng-class="{'is-selected':selectedOrder.id == order.id}">
+                                <tr ng-repeat="order in saleOrders | orderBy:'orderNumber':false"
+                                        ng-click="setCurrentOrder(order);"
+                                        ng-class="{'is-selected':selectedOrder.id == order.id}">
+                                    <td class="td_5">{{order.orderNumber}} </td>
                                     <td class="td_5">{{order.id.substr(0,6)}} </td>
                                     <td class="td_10">{{order.date |date:'dd-MM-yyyy'}} <br/> {{order.date |date:'hh-mm-ss'}} </td>
-                                    <td class="td_40">{{order._user.fio}}</td>
+                                    <td class="td_35">{{order._user.fio}}</td>
                                     <td class="td_10 text-center">{{order.price}} грн. <br/> {{order.priceDollars}} usd.</td>
                                     <td class="td_5">
                                         <md-checkbox aria-label="is Approved" ng-disabled="true" ng-model="order.isApproved" />
@@ -165,6 +169,16 @@
             <md-button class="action-button md-primary" title="Печать" ng-click="print();">
                 <span class="glyphicon glyphicon-print"></span>
                 <span>Печать</span>
+            </md-button>
+
+            <md-button class="action-button md-primary" title="Вниз" ng-click="changeOrderDown();"
+                       layout="column" layout-align="center center">
+                <span class="glyphicon glyphicon-download"></span>
+            </md-button>
+
+            <md-button class="action-button md-primary" title="Вверх" ng-click="changeOrderUp();"
+                       layout="column" layout-align="center center">
+                <span class="glyphicon glyphicon-upload"></span>
             </md-button>
         </div>
         <div class="actions">
