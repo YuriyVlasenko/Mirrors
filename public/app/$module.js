@@ -47,7 +47,16 @@
             url: "/print",
             templateUrl:'app/templates/print.html',
             controller:'printController'
-        }).state('signIn', {
+        }).state('ttn', {
+            url: "/ttn",
+            templateUrl:'app/templates/ttn.html',
+            params: {
+                order: null,
+                items: []
+            },
+            controller:'ttnController'
+        })
+        .state('signIn', {
             url: "/signIn",
             templateUrl:'app/templates/signIn.html',
             controller:'signInController'

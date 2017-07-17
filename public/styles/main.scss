@@ -709,14 +709,51 @@ md-tabs{
     }
   }
 
+  
   table{
-    tr{
+    tr, td{
       background-color: transparent !important;
       border-bottom: 1px solid lightgray;
     }
+    
   }
 }
 
+
+.ttn{
+    max-width: 600px;
+      table{
+        border: 0;
+        padding: 5px;
+        tr:nth-child(2n){
+          background: transparent !important;
+        }
+        td,th{
+              &.td-60{
+                width: 60%;
+              }
+      }
+
+      &.bordered{
+        td,th{
+          border: 1px solid gray;
+        }
+      }
+    }
+}
+
+.center{
+  text-align: center;
+}
+.left{
+  text-align: left;
+}
+.right{
+  text-align: right;
+}
+.smaller-text{
+  font-size: smaller;
+}
 
 .no-border{
   border: none !important;

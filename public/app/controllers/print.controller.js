@@ -8,8 +8,9 @@
     function PrintOrdersController($scope, print, $state, repository, modelNames, utils, $filter){
 
         var accessoryCategoryName = 'Аксессуары';
+        var saleOrderHeaders;
 
-        repository.reloadModelItems(modelNames.CATEGORY).then(function(){
+        repository.reloadModelItems([modelNames.CATEGORY, modelNames.SALE_ORDER_HEADER]).then(function(){
             $scope.categories =  repository.getModelItems(modelNames.CATEGORY);
 
             var accCat = utils.getItemById($scope.categories, accessoryCategoryName, 'name');
@@ -18,8 +19,9 @@
             }
         });
 
+        var saleOrderDtl = [];
         $scope.$watch('accessoryId', function (value) {
-            $scope.saleOrderDtl = $filter('saleItemFilter')($scope.order._saleOrderDtl, value);
+            $scope.saleOrderDtl = saleOrderDtl = $filter('saleItemFilter')($scope.order._saleOrderDtl, value);
             $scope.saleOrderDtlAcc = $filter('saleAccessoryFilter')($scope.order._saleOrderDtl, value);
         });
 
@@ -32,8 +34,16 @@
         $scope.orderId = $scope.order.id.substr(0,6);
         $scope.orderDate = $filter('date')($scope.order.date, 'dd-MM-yyyy hh-mm-ss');
 
+        
+
+        $scope.gotoTTN = gotoTTN;
+
         if (!$scope.order){
             $state.go('main');
+        }
+
+        function gotoTTN(){
+            $state.go('ttn', { order: $scope.order, items: saleOrderDtl });
         }
     }
 })(angular);

@@ -1,0 +1,106 @@
+<div class="ttn">
+    <table>
+        <tr>
+            <td colspan="4" class="center"><h2>Товарно-транспортна накладна</h2></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="center">
+                № <strong>{{order.number}}</strong> "{{order.day}}" {{order.month}}  {{order.year}}р.			
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                Автомобіль _______________________________________________________________</br>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="center smaller-text">
+                (марка, модель, тип, реєстраційний номер)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                Вид перевезень _______________<strong>вантажоперевезення</strong>_________________________
+            </td>
+        </tr>
+        <tr>
+            <td>Автомобільний перевізник _____________________</td>
+            <td>Водій__________________</td>
+        </tr>
+        <tr class="smaller-text center">
+            <td>(найменування/П.І.Б.)</td>
+            <td>(П.І.Б., номер посвідчення водія)</td>
+        </tr>
+        <tr>
+            <td colspan="4">Замовник: _____________________<strong>ФО-П Шумний Ю. В.</strong>________________________
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="smaller-text center">
+                (повне найменування, місцезнаходження/П.І.Б., місце проживання)				
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                Вантажоодержувач:  <strong>{{order.whom}}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="smaller-text center">
+                (найменування, місцезнахоження)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                  Пункт навантаження___________________<strong>Харків</strong>______________________________
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="smaller-text center">
+                (місцезнаходження)                                                                           				
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                Пункт розвантаження:  <strong>{{order.attornay}}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="smaller-text center">
+                (місцезнаходження)                                                                           				
+            </td>
+        </tr>
+    </table>				
+    <table class="bordered">
+        <tr>
+            <th>№ з/п</th>
+            <th>Найменування вантажу</th>
+            <th>Одиниця вимиру</th>
+            <th>Кількість</th>
+        </tr>
+        <tr ng-repeat="item in order.items">
+            <td>{{$index + 1}}</td>
+            <td>{{item._saleItem.name}}&nbsp{{item._saleItem.code}}</td>
+            <td>шт.</td>
+            <td>{{item.count}}</td>
+        </tr>
+    </table>
+<table>
+    <tr>
+        <td class="td-60">Здав (відповідальна особа вантажовідправника)</td>
+        <td>_______________________________</td>
+    </tr>
+    <tr>
+        <td class="td-60">Прийняв водій/експедитор </td>
+        <td>_______________________________</td>
+    </tr>
+    <tr>
+        <td class="td-60">Здав водій/експедитор</td>
+        <td>_______________________________</td>
+    </tr>
+    <tr>
+        <td class="td-60">Прийняв(відповідальна особа вантажоодержувача)</td>
+        <td>_______________________________</td>
+    </tr>
+</table>
+</div>
