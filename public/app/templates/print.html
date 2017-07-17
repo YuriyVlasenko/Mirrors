@@ -58,11 +58,11 @@
     </table>
     <div ng-show="printAsSummary" style="font-size: {{fontSize}}px !important;">
         <span class="order-header">
-            Накладная № {{orderId}} от {{orderDate}}
+            Накладна № {{orderId}} від {{orderDate}}
         </span>
         <table ng-show="showPrices">
             <tr>
-                <td class="td_30">Поставщик</td>
+                <td class="td_30">Постачальник</td>
                 <td class="td_70">{{order._saleOrderHeader.supplier}}</td>
             <tr>
                 <td class="td_30">Кому</td>
@@ -73,11 +73,11 @@
                 <td class="td_70">{{order._saleOrderHeader.overWhom}}</td>
             </tr>
             <tr>
-                <td class="td_30">На основании</td>
+                <td class="td_30">На підставі</td>
                 <td class="td_70">{{order._saleOrderHeader.cause}}</td>
             </tr>
             <tr>
-                <td class="td_30"> Адрес получателя</td>
+                <td class="td_30"> Адреса одержувача</td>
                 <td class="td_70">{{order._saleOrderHeader.attornay}}</td>
             </tr>
         </table>
@@ -86,11 +86,11 @@
             <thead>
             <tr>
                 <th class="td_5">№</th>
-                <th>Наименование товара</th>
+                <th>Назва товару</th>
                 <th class="td_10">Код</th>
-                <th class="td_10 number-field">К-во</th>
-                <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
-                <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
+                <th class="td_10 number-field">К-ть</th>
+                <th class="td_15 number-field" ng-show="showPrices">Ціна, од.</th>
+                <th class="td_25 number-field" ng-show="showPrices">Сума</th>
             </tr>
             </thead>
         </table>
@@ -121,11 +121,11 @@
             <thead>
             <tr>
                 <th class="td_5">№</th>
-                <th>Наименование товара</th>
+                <th>Назва товару</th>
                 <th class="td_10">Код</th>
-                <th class="td_10 number-field">К-во</th>
-                <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
-                <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
+                <th class="td_10 number-field">К-ть</th>
+                <th class="td_15 number-field" ng-show="showPrices">Ціна, од.</th>
+                <th class="td_25 number-field" ng-show="showPrices">Сума</th>
             </tr>
             </thead>
         </table>
@@ -153,8 +153,8 @@
         </table>
         <table>
             <tr>
-                <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Вместе с ПДВ прописью:</td>
-                <td class="td_20">Всего, грн.</td>
+                <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Разом с ПДВ прописом:</td>
+                <td class="td_20">Всього, грн.</td>
                 <td class="td_30 input-field number-field">
                     <span ng-show="showPrices">{{order.price}} грн. </span>
                     <span ng-show="showPrices" ng-if="order.priceDollars"> (+{{order.priceDollars}} usd.)</span>
@@ -167,7 +167,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="td_20">Вместе с ПДВ:</td>
+                <td class="td_20">Разом с ПДВ:</td>
                 <td class="td_30 input-field">
                     <span ng-show="showPrices"></span>
                 </td>
@@ -179,16 +179,15 @@
                 <td class="td_40 input-field"></td>
             </tr>
             <tr>
-                <td class="td_10"><b>Сдал:</b></td>
+                <td class="td_10"><b>Здав:</b></td>
                 <td class="td_40 input-field"></td>
-                <td class="td_10"><b>Принял:</b></td>
+                <td class="td_10"><b>Прийняв:</b></td>
                 <td class="td_40 input-field"></td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Уважаемые заказчики. </span>
-                    <span class="note-text" style="font-size: {{fontSize}}px !important;">В случае ненадлежащего качества товара (бой, брак, сколы) просьба уведомить поставщика не позднее
-                        3х календарных дней с момента поставки. По истечению данного срока претензии не принимаются.</span>
+                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Шановні замовникі.</span>
+                    <span class="note-text" style="font-size: {{fontSize}}px !important;">У разі неналежної якості товару(бій,брак,відколи) прохання повідомити постачальника не пізніше 3-х календарних днів з моменту поставкі. По закінченню данного терміну претензії не приймаються.</span>
                 </td>
             </tr>
         </table>
@@ -199,11 +198,11 @@
 
                 <td class="td_50 page-content">
             <span class="order-header">
-                Накладная № {{orderNumber}} от {{orderDate}}
+                Накладна № {{orderNumber}} від {{orderDate}}
             </span>
                     <table ng-show="showPrices">
                         <tr>
-                            <td class="td_30">Поставщик</td>
+                            <td class="td_30">Постачальник</td>
                             <td class="td_70">{{order._saleOrderHeader.supplier}}</td>
                         <tr>
                             <td class="td_30">Кому</td>
@@ -214,22 +213,22 @@
                             <td class="td_70">{{order._saleOrderHeader.overWhom}}</td>
                         </tr>
                         <tr>
-                            <td class="td_30">На основании</td>
+                            <td class="td_30">На підставі</td>
                             <td class="td_70">{{order._saleOrderHeader.cause}}</td>
                         </tr>
                         <tr>
-                            <td class="td_30"> Адрес получателя</td>
+                            <td class="td_30"> Адреса отримувача</td>
                             <td class="td_70">{{order._saleOrderHeader.attornay}}</td>
                         </tr>
                     </table>
                     <table ng-if="saleOrderDtl && saleOrderDtl.length > 0">
                         <tr>
                             <th class="td_5">№</th>
-                            <th>Наименование товара</th>
+                            <th>Назва товару</th>
                             <th class="td_10">Код</th>
-                            <th class="td_10 number-field">К-во</th>
-                            <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
-                            <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
+                            <th class="td_10 number-field">К-ть</th>
+                            <th class="td_15 number-field" ng-show="showPrices">Ціна, од.</th>
+                            <th class="td_25 number-field" ng-show="showPrices">Сума</th>
                         </tr>
                     </table>
                     <table class="bordered-table">
@@ -259,11 +258,11 @@
                         <table ng-if="saleOrderDtlAcc && saleOrderDtlAcc.length > 0">
                             <tr>
                                 <th class="td_5">№</th>
-                                <th>Наименование</th>
+                                <th>Назва</th>
                                 <th class="td_10">Код</th>
-                                <th class="td_10 number-field">К-во</th>
-                                <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
-                                <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
+                                <th class="td_10 number-field">К-ть</th>
+                                <th class="td_15 number-field" ng-show="showPrices">Ціна, од.</th>
+                                <th class="td_25 number-field" ng-show="showPrices">Сума</th>
                             </tr>
                         </table>
                         <table class="bordered-table">
@@ -291,10 +290,9 @@
                         </table>
                         <table>
                             <tr>
-                                <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Вместе с ПДВ
-                                    прописью:
+                                <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Разом з ПДВ прописом:
                                 </td>
-                                <td class="td_20">Всего, грн.</td>
+                                <td class="td_20">Всього, грн.</td>
                                 <td class="td_30 input-field number-field">
                                     <span ng-show="showPrices">{{order.price}} грн. </span>
                                 <span ng-show="showPrices"
@@ -308,7 +306,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_20">Вместе с ПДВ:</td>
+                                <td class="td_20">Разом з ПДВ:</td>
                                 <td class="td_30 input-field">
                                     <span ng-show="showPrices"></span>
                                 </td>
@@ -320,16 +318,15 @@
                                 <td class="td_40 input-field"></td>
                             </tr>
                             <tr>
-                                <td class="td_10"><b>Сдал:</b></td>
+                                <td class="td_10"><b>Здал:</b></td>
                                 <td class="td_40 input-field"></td>
-                                <td class="td_10"><b>Принял:</b></td>
+                                <td class="td_10"><b>Прийняв:</b></td>
                                 <td class="td_40 input-field"></td>
                             </tr>
                             <tr>
                                 <td colspan="4">
-                                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Уважаемые заказчики. </span>
-                                    <span class="note-text" style="font-size: {{fontSize}}px !important;">В случае ненадлежащего качества товара (бой, брак, сколы) просьба уведомить поставщика не позднее
-                                        3х календарных дней с момента поставки. По истечению данного срока претензии не принимаются.</span>
+                                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Шановні замовникі. </span>
+                                    <span class="note-text" style="font-size: {{fontSize}}px !important;">В разі неналежної якості товару(бій,брак,відколи) прохання повідомити постачальника не пізніше 3-х календарних днів з моменту поставкі. По закінченню данного терміну претензії не приймаються.</span>
                                 </td>
                             </tr>
                         </table>
@@ -340,11 +337,11 @@
                         <table ng-if="saleOrderDtl.length > itemsOnPage">
                             <tr>
                                 <th class="td_5">№</th>
-                                <th>Наименование товара</th>
+                                <th>Назва товару</th>
                                 <th class="td_10">Код</th>
-                                <th class="td_10 number-field">К-во</th>
-                                <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
-                                <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
+                                <th class="td_10 number-field">К-ть</th>
+                                <th class="td_15 number-field" ng-show="showPrices">Ціна, од.</th>
+                                <th class="td_25 number-field" ng-show="showPrices">Сума</th>
                             </tr>
                         </table>
                         <table ng-if="saleOrderDtl.length > itemsOnPage" class="bordered-table">
@@ -374,11 +371,11 @@
                         <table ng-if="saleOrderDtlAcc && saleOrderDtlAcc.length > 0">
                             <tr>
                                 <th class="td_5">№</th>
-                                <th>Наименование</th>
+                                <th>Назва</th>
                                 <th class="td_10">Код</th>
-                                <th class="td_10 number-field">К-во</th>
-                                <th class="td_15 number-field" ng-show="showPrices">Цена, ед.</th>
-                                <th class="td_25 number-field" ng-show="showPrices">Сумма</th>
+                                <th class="td_10 number-field">К-ть</th>
+                                <th class="td_15 number-field" ng-show="showPrices">Ціна, од.</th>
+                                <th class="td_25 number-field" ng-show="showPrices">Сума</th>
                             </tr>
                         </table>
                         <table class="bordered-table">
@@ -406,10 +403,9 @@
                         </table>
                         <table>
                             <tr>
-                                <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Вместе с ПДВ
-                                    прописью:
+                                <td colspan="2" class="td_50" rowspan="3" style="vertical-align: top">Разом з ПДВ прописом:
                                 </td>
-                                <td class="td_20">Всего, грн.</td>
+                                <td class="td_20">Всього, грн.</td>
                                 <td class="td_30 input-field number-field">
                                     <span ng-show="showPrices">{{order.price}} грн. </span>
                                 <span ng-show="showPrices"
@@ -423,7 +419,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_20">Вместе с ПДВ:</td>
+                                <td class="td_20">Разом з ПДВ:</td>
                                 <td class="td_30 input-field">
                                     <span ng-show="showPrices"></span>
                                 </td>
@@ -435,16 +431,15 @@
                                 <td class="td_40 input-field"></td>
                             </tr>
                             <tr>
-                                <td class="td_10"><b>Сдал:</b></td>
+                                <td class="td_10"><b>Здал:</b></td>
                                 <td class="td_40 input-field"></td>
-                                <td class="td_10"><b>Принял:</b></td>
+                                <td class="td_10"><b>Прийняв:</b></td>
                                 <td class="td_40 input-field"></td>
                             </tr>
                             <tr>
                                 <td colspan="4">
-                                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Уважаемые заказчики. </span>
-                                    <span class="note-text" style="font-size: {{fontSize}}px !important;">В случае ненадлежащего качества товара (бой, брак, сколы) просьба уведомить поставщика не позднее
-                                        3х календарных дней с момента поставки. По истечению данного срока претензии не принимаются.</span>
+                                    <span class="note-title" style="font-size: {{fontSize}}px !important;">Шановні замовники. </span>
+                                    <span class="note-text" style="font-size: {{fontSize}}px !important;">У разі неналежної якості товару(бій,брак,відколи) прохання повідомити постачальника не пізніше 3-х календарних днів з моменту поставкі. По закінченню данного терміну претензії не приймаються.</span>
                                 </td>
                             </tr>
                         </table>
