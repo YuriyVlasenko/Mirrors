@@ -25,7 +25,7 @@
 
             </td>
             <td class="td_35">
-                <input ng-model="orderId" id="orderId">
+                <input ng-model="orderNumber" id="orderId" ng-change="updateOrderNumber(orderNumber)">
             </td>
             <td class="td_15">
                 <label for="orderDate">Дата</label>
@@ -199,7 +199,7 @@
 
                 <td class="td_50 page-content">
             <span class="order-header">
-                Накладная № {{orderId}} от {{orderDate}}
+                Накладная № {{orderNumber}} от {{orderDate}}
             </span>
                     <table ng-show="showPrices">
                         <tr>

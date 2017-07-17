@@ -31,9 +31,18 @@
         $scope.fontSize = 10;
         $scope.showPrices = true;
         $scope.order = print.getOrder();
-        $scope.orderId = $scope.order.id.substr(0,6);
+        $scope.orderNumber = $scope.order.orderNumber;
         $scope.orderDate = $filter('date')($scope.order.date, 'dd-MM-yyyy hh-mm-ss');
+        $scope.updateOrderNumber = function (newOrderNumber){
 
+        var orderNumber = parseInt(newOrderNumber);
+        if (orderNumber > 0){
+            repository.updateModelItem(modelNames.SALE_ORDER, 
+                $scope.order.id, {
+                    orderNumber: orderNumber
+                });
+        }
+        }
         
 
         $scope.gotoTTN = gotoTTN;

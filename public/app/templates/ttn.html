@@ -79,10 +79,10 @@
             <th>Кількість</th>
         </tr>
         <tr ng-repeat="item in order.items">
-            <td>{{$index + 1}}</td>
+            <td class="right">{{$index + 1}}</td>
             <td>{{item._saleItem.name}}&nbsp{{item._saleItem.code}}</td>
-            <td>шт.</td>
-            <td>{{item.count}}</td>
+            <td class="right">шт.</td>
+            <td class="right">{{item.count}}</td>
         </tr>
     </table>
 <table>
