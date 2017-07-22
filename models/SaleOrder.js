@@ -36,7 +36,8 @@ module.exports = {
             comment: item.comment,
             response: item.response,
             deliveryCost: item.deliveryCost,
-            orderNumber: item.orderNumber || 0
+            orderNumber: item.orderNumber || 0, 
+            routeNumber: item.routeNumber || 0
         };
     },
     createItem: function(id, data){
@@ -51,7 +52,8 @@ module.exports = {
             comment: data.comment,
             response: data.response,
             deliveryCost: data.deliveryCost,
-            orderNumber: data.orderNumber || 0
+            orderNumber: data.orderNumber || 0,
+            routeNumber: data.routeNumber || 0
         });
     },
     searchConditions: function(data){
@@ -94,9 +96,14 @@ module.exports = {
             updateData.deliveryCost = data.deliveryCost;
         }
 
-        if (data.orderNumber){
+        if (data.orderNumber!=undefined){
             updateData.orderNumber = data.orderNumber;
         }
+
+        if (data.routeNumber!=undefined){
+            updateData.routeNumber =data.routeNumber;
+        }
+
         return updateData;
     }
 };

@@ -22,27 +22,27 @@
         $scope.copyOrderItems = copyOrderItems;
         $scope.copyToBasket = copyToBasket;
         $scope.showPhoto = showPhoto;
-        $scope.changeOrderDown = changeOrderDown;
-        $scope.changeOrderUp = changeOrderUp;
+        $scope.changeRouteDown = changeRouteDown;
+        $scope.changeRouteUp = changeRouteUp;
 
-        function changeOrderDown(){
+        function changeRouteDown(){
             var order = $scope.selectedOrder;
-            order.orderNumber++;
+            order.routeNumber++;
 
-            changeOrderNumber(order.id, order.orderNumber);
+            changeRouteNumber(order.id, order.routeNumber);
         }
 
-        function changeOrderUp(){
+        function changeRouteUp(){
             var order = $scope.selectedOrder;
-            if (order.orderNumber > 0) {
-                order.orderNumber--;
-                changeOrderNumber(order.id, order.orderNumber);
+            if (order.routeNumber > 0) {
+                order.routeNumber--;
+                changeRouteNumber(order.id, order.routeNumber);
             }
         }
 
-        function changeOrderNumber(orderId, newOrderNumber){
+        function changeRouteNumber(orderId, newRouteNumber){
             repository.updateModelItem(modelNames.SALE_ORDER, orderId, {
-                orderNumber: newOrderNumber
+                routeNumber: newRouteNumber
             }).then(function () {
                 toastsPresenter.info('Позиция обновлена.');
             });

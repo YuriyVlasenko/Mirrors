@@ -21,10 +21,11 @@
                         </div>
                         <div class="order-item--content">
                             <table class="order-item">
-                                <tr ng-repeat="order in saleOrders | orderBy:'orderNumber':false"
+                                <tr ng-repeat="order in saleOrders | orderBy:'routeNumber':false"
                                         ng-click="setCurrentOrder(order);"
                                         ng-class="{'is-selected':selectedOrder.id == order.id}">
-                                    <td class="td_5">{{order.orderNumber}} </td>
+
+                                    <td class="td_5">{{order.routeNumber}}({{order.orderNumber}})</td>
                                     <td class="td_5">{{order.id.substr(0,6)}} </td>
                                     <td class="td_10">{{order.date |date:'dd-MM-yyyy'}} <br/> {{order.date |date:'hh-mm-ss'}} </td>
                                     <td class="td_35">{{order._user.fio}}</td>
@@ -171,12 +172,12 @@
                 <span>Печать</span>
             </md-button>
 
-            <md-button class="action-button md-primary" title="Вниз" ng-click="changeOrderDown();"
+            <md-button class="action-button md-primary" title="Вниз" ng-click="changeRouteDown();"
                        layout="column" layout-align="center center">
                 <span class="glyphicon glyphicon-download"></span>
             </md-button>
 
-            <md-button class="action-button md-primary" title="Вверх" ng-click="changeOrderUp();"
+            <md-button class="action-button md-primary" title="Вверх" ng-click="changeRouteUp();"
                        layout="column" layout-align="center center">
                 <span class="glyphicon glyphicon-upload"></span>
             </md-button>
