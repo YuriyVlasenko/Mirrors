@@ -15,7 +15,8 @@ var SaleOrder = mongoose.Schema({
     comment: {type: String},
     response: {type: String},
     deliveryCost: {type:String},
-    orderNumber: {type:Number, default: 0}
+    orderNumber: {type:Number, default: 0},
+    routeNumber: {type:Number, default: 0}
 });
 
 var model = mongoose.model('SaleOrder', SaleOrder);
