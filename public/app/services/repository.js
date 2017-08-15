@@ -28,10 +28,22 @@
         };
 
         this.getModelItems = function(modelName){
+
+            var items = [];
+
             if (dataHolder[modelName] !== undefined && dataHolder[modelName].itemsList != undefined){
-                return dataHolder[modelName].itemsList;
+                items = dataHolder[modelName].itemsList;
             }
-            return [];
+
+            if (modelName === modelNames.SALE_ORDER){
+                items.map(function (item){
+                    item.routeOrderNumber = function (){
+                        return item.routeNumber * 10000 + item.orderNumber;
+                    } 
+                })
+            }
+
+            return items;
         };
 
         this.loadFilteredModelItems = function(modelName, filter){

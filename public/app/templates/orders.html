@@ -21,7 +21,7 @@
                         </div>
                         <div class="order-item--content">
                             <table class="order-item">
-                                <tr ng-repeat="order in saleOrders | orderBy:'routeNumber':false"
+                                <tr ng-repeat="order in saleOrders | orderBy:'routeOrderNumber()':false"
                                         ng-click="setCurrentOrder(order);"
                                         ng-class="{'is-selected':selectedOrder.id == order.id}">
 
