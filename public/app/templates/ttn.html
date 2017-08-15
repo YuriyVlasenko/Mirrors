@@ -1,4 +1,4 @@
-<div>
+<div class="no-print">
     <table>
         <tr style="background-color: transparent !important">
             <td>
@@ -154,7 +154,7 @@
             <th>Кількість</th>
         </tr>
         <tr ng-repeat="item in order.items | limitTo:(order.items.length-itemsOnPage):itemsOnPage">
-            <td class="right">{{$index + 1}}</td>
+            <td class="right">{{$index + 1 + itemsOnPage}}</td>
             <td>{{item._saleItem.name}}&nbsp{{item._saleItem.code}}</td>
             <td class="right">шт.</td>
             <td class="right">{{item.count}}</td>
