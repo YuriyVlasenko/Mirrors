@@ -20,6 +20,7 @@
 
         console.log(order);
 
+        $scope.itemsOnPage = 30;
         // TODO: implement
         $scope.order = {
             items: orderItems,

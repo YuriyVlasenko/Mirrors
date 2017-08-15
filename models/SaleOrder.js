@@ -38,7 +38,8 @@ module.exports = {
             response: item.response,
             deliveryCost: item.deliveryCost,
             orderNumber: item.orderNumber || 0, 
-            routeNumber: item.routeNumber || 0
+            routeNumber: item.routeNumber || 0,
+            routeOrderNumber: {type:Number, default: 0},
         };
     },
     createItem: function(id, data){
